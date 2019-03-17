@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ui-grid/4.0.6/ui-grid.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ngToast/2.0.0/ngToast.min.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="css/ssp.css" type="text/css" />
+<link rel="stylesheet" href="css/ballot-template-manager.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-general-overview/css/styles.css" type="text/css" />
+<link rel="stylesheet" href="ssp/wizard/css/wizard.css" type="text/css" />
+<link rel="stylesheet" href="ssp/table-view/css/ssp-table-view.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-tooltip/css/ssp-tooltip.css" type="text/css" />
+<link rel="stylesheet" href="ssp/contextual-box/css/styles.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular/1.5.8/angular-sanitize.js"></script>
+<script src="vendor/angular/1.5.8/angular-route.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="vendor/angular-translate/2.15.1/angular-translate.min.js"></script>
+<script src="vendor/angular-translate/2.15.1/angular-translate-loader-partial.min.js"></script>
+
+<script src="vendor/angular-ui-router/1.0.5/angular-ui-router.min.js"></script>
+
+<script src="vendor/ui-grid/4.0.6/ui-grid.js"></script>
+
+<script src="vendor/ngToast/2.0.0/ngToast.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="ssp/ssp-general-overview/js/apps/ssp-general-overview-app.js"></script>
+<script src="ssp/ssp-general-overview/js/controllers/ssp-general-overview-controller.js"></script>
+<script src="ssp/wizard/js/apps/ssp-wizard-app.js"></script>
+<script src="ssp/wizard/js/controllers/ssp-wizard-controller.js"></script>
+<script src="ssp/table-view/js/apps/ssp-table-view-app.js"></script>
+<script src="ssp/table-view/js/controllers/ssp-table-view-controller.js"></script>
+<script src="ssp/ssp-popover-modal/js/apps/ssp-popover-modal-app.js"></script>
+<script src="ssp/ssp-popover-modal/js/controllers/ssp-popover-modal-controller.js"></script>
+<script src="ssp/ssp-tooltip/js/apps/ssp-tooltip-app.js"></script>
+<script src="ssp/ssp-tooltip/js/controllers/ssp-tooltip-controller.js"></script>
+<script src="ssp/contextual-box/js/main.js"></script>
+
+<script src="js/app/ballot-template-mgr-app.js"></script>
+<script src="js/controller/ballot-template-mgr-zero-controller.js"></script>
+<script src="js/controller/ballot-template-list-controller.js"></script>
+<script src="js/controller/ballot-template-wizard-controller.js"></script>
+<script src="js/controller/ballot-template-mgr-controller.js"></script>
+<script src="js/controller/template-designer-controller.js"></script>
+<script src="js/services/ballot-template-mgr-services.js"></script>
+<script src="js/services/ballot-template-mgr-services-local.js"></script>
+<script src="js/services/ballot-template-data-services.js"></script>
+<script src="js/services/ballot-template-contest-preview.js"></script>
+<script src="js/services/ballot-template-space-locator.js"></script>
+<script src="js/services/ssp-services.js"></script>
+
+
+
+
+</head>
+<body id="ballotDesignerApp" ng-app="ballotTemplateDesigner">
+    <div class="container-fluid" ng-controller="ballotTemplateZeroController as vm" style="padding-top: 10px">
+        <br />
+                
+        <!-- Title and search widget -->
+        <div class="row" id="topPanel">
+            <div class="col-xs-3">
+                <div class="row">
+                <!-- 
+                    <h4><span ssp-tooltip="{{'ems.ballot.template.manager.action.newTemplate' | translate}}" tooltip-type=2>Template Designer</span></h4>
+                     -->
+                    <h4><span ssp-tooltip tooltip-type="3"
+                        ssp-tooltip-title-value="Title for type 3" 
+                        ssp-tooltip-value="{{'ems.ballot.template.manager.action.newTemplate' | translate}}">Template Designer</span></h4>
+                    <span translate-compile="false">A{{'ems.ballot.template.manager.action.newTemplate' | translate}}Z</span>
+                </div>
+            </div>
+            <div class="col-xs-9" align="right">
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.goToView('ballot-template-list')" id="btnTemplateList">
+                    Template list
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.goToView('ballot-template-designer')" id="btnTemplateDesigner">
+                    Template manager
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.goToView('ballot-template-wizard')" id="btnWizard">
+                    Wizard
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('header')" id="btnHeaderTemplate">
+                    <span class="fa fa-save"> Header </span>
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('footer')" id="btnFooterTemplate">
+                    <span class="fa fa-undo"> Footer </span>
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('instructions')" id="btnInstructionsTemplate">
+                    <span class="fa fa-trash"> Instructions </span>
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('contest')" id="btnContestTemplate">
+                    <span class="fa fa-bomb"> Contest </span>
+                </button>
+                <button
+                    uib-popover-template="'views/designer/popupNewBallotTemplate.html'"
+                    popover-placement="auto bottom"
+                    type="button" class="btn btn-default smtt-btn-default btn-sm">New ballot
+                    template</button>
+                <!-- Single button -->
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-default smtt-btn-default btn-sm"
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" style="outline: 0">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="" ng-click="vm.changeView('header')">Header template</a></li>
+                        <li><a href="" ng-click="vm.changeView('footer')">Footer template</a></li>
+                        <li><a href="" ng-click="vm.changeView('instructions')">Instructions template</a></li>
+                        <li><a href="" ng-click="vm.changeView('pageNavigation')">Page nav template</a></li>
+                        <li><a href="" ng-click="vm.changeView('contest')">Contest template</a></li>
+                    </ul>
+                </div>
+                
+                <div style="margin-right: 15px;">
+                    <button type="button" 
+                        class="btn btn-sm btn-default smtt-btn-default"
+                        style="cursor: not-allowed; opacity: 0.40;"
+                        ssp-tooltip="Tooltip over simulated disabled button"
+                        tooltip-type="1"
+                        tooltip-placement="top"
+                        tooltip-append-to-body="true">Tooltip2
+                    </button>
+                </div>
+                
+            </div>
+            
+            <hr>
+            <hr>
+        </div>
+    </div>
+    <div ng-view></div>
+</body>
+</html>

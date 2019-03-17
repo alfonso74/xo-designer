@@ -1,0 +1,63 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/*
+
+# Webpack
+dist/emp-war/src/main/webapp/assets
+dist/emp-war/src/main/webapp/i18n
+dist/emp-war/src/main/webapp/ssp-*
+dist/emp-war/src/main/webapp/showcase
+dist/emp-war/src/main/webapp/*.js*
+dist/emp-war/src/main/webapp/*.html
+dist/emp-war/src/main/webapp/*.css*
+
+# Typically *NIX text editors, by default, append '~' to files on saving to make backups
+*~
+
+# Gradle work directory
+.gradle
+
+# Maven
+pom.xml.*Backup
+
+# Build output directies
+/target
+*/target
+*/**/target
+/build
+*/build
+testdb
+devel-pom.xml
+
+# Docker
+docker/server/ems-us/vvsg.war
+
+# IntelliJ specific files/directories
+out
+.idea
+*.ipr
+*.iws
+*.iml
+atlassian-ide-plugin.xml
+
+# Eclipse specific files/directories
+.classpath
+.project
+.settings
+.metadata
+bin
+
+# NetBeans specific files/directories
+.nbattrs
+.nb-gradle*
+
+# Miscellaneous
+*.log
+.clover
+.tern-project
+
+#JRebel Files
+**/*rebel*.xml
+**/*rebel*.bak
+
+#Binary files
+**/*.ear

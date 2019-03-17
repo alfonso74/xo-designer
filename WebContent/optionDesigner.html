@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet"
+    href="vendor/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css"
+    type="text/css" />
+<link rel="stylesheet" href="css/styles.css" type="text/css" />
+
+<!-- 
+<link rel="stylesheet" href="css/ballot-designer.css" type="text/css" />
+ -->
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="js/app/option-designer-app.js"></script>
+<script src="js/controller/option-designer-controller.js"></script>
+<script src="js/services/option-designer-services.js"></script>
+
+
+</head>
+<body id="optionDesignerApp" ng-app="optionDesigner">
+
+    <div class="container-fluid"
+        ng-controller="optionDesignerController as main">
+
+        <div class="row">
+
+            <div id="sidebar-left-container"
+                class="col-md-2 sidebar-left">
+                <div>
+
+                    <uib-accordion close-others="false">
+
+                    <!-- Shapes Group -->
+
+                    <div uib-accordion-group class="panel-default"
+                        ng-init="type01Group.open = true"
+                        is-open="type01Group.open">
+
+                        <uib-accordion-heading>
+                        CONTAINERS <i class="pull-right glyphicon"
+                            ng-class="{'glyphicon-chevron-down': type01Group.open,
+                  'glyphicon-chevron-right': !type01Group.open}">
+                        </i> </uib-accordion-heading>
+
+                        <div
+                            ng-repeat="type in main.type01Group track by type.id">
+                            <div class="media" style="margin-top: 15px">
+                                <a class="pull-left" href=""
+                                    ng-click="main.newType01(type)">
+                                    <img class="media-object"
+                                    ng-src="{{type.src}}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href=""
+                                            ng-click="main.newType01(type)">
+                                            {{type.name}} </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-repeat="element in main.group1 track by element.id"> -->
+
+
+                    </div>
+
+                    <div uib-accordion-group class="panel-default"
+                        ng-init="type02Group.open = true"
+                        is-open="type02Group.open">
+
+                        <uib-accordion-heading>
+                        COMPONENTS <i class="pull-right glyphicon"
+                            ng-class="{'glyphicon-chevron-down': type02Group.open,
+                  'glyphicon-chevron-right': !type02Group.open}">
+                        </i> </uib-accordion-heading>
+
+                        <div
+                            ng-repeat="type in main.type02Group track by type.id">
+                            <div class="media" style="margin-top: 15px">
+                                <a class="pull-left" href=""
+                                    ng-click="main.newType02(type)">
+                                    <img class="media-object"
+                                    ng-src="{{type.src}}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href=""
+                                            ng-click="main.newType02(type)">
+                                            {{type.name}} </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div ng-repeat="type in main.type02Group track by type.id"> -->
+
+                    </div>
+
+                    </uib-accordion>
+
+                </div>
+
+            </div>
+
+
+            <div id="content-container"
+                class="col-md-6 col-md-offset-3 content-container">
+                <div class="fabric-container">
+                    <canvas class="fabric-canvas" fabric="fabric"></canvas>
+                </div>
+                <div class="col-xs-12"
+                    id="content-container-action-buttons">
+                    <div class="row">
+                        <div
+                            class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                            style="padding-left: 0px; padding-top: 5px">
+                            <button class="btn btn-sm"
+                                ng-click="main.clear()">Clear
+                                canvas</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.deleteCanvasObject()">Delete 
+                                element</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.saveTemplate()">Save
+                                template</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.loadBallotTemplates()"
+                                data-target="#load-ballot-template-modal"
+                                data-toggle="modal">Load
+                                template</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.clearLocalStorage()">
+                                Clear local storage</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.ungroup()">
+                                Ungroup</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.testSomething()">
+                                Misc test</button>
+                            <button class="btn btn-sm"
+                                ng-click="main.loadTemplateFromJsonDefition()">
+                                Load from JSON</button>
+                            <!-- 
+                            <button class="btn btn-sm" ng-click="main.testCreateGroups()">Test new template</button>
+                             -->
+                        </div>
+                    </div>
+                </div>
+                <br> <br>
+                <div class="col-xs-12">vm.shape = {{main.shape}}</div>
+                <div class="col-xs-12">vm.shape = {{main.shape.strokeDashArray}}</div>
+                <div class="col-xs-12">selectedObject =
+                    {{fabric.selectedObject}}</div>
+            </div>
+
+            <!-- 
+        <div id="content-container" class="col-md-9 col-md-offset-3 content-container">
+          <div ng-include="'templates/content.html'"></div>CONTENT
+        </div>
+    
+        <div id="sidebar-right-container" class="col-md-3 col-md-offset-9 sidebar-right">
+          <div ng-include="'templates/sidebar-right.html'"></div>RB
+        </div>
+     -->
+
+
+            <div id="sidebar-right-container"
+                class="col-md-3 col-md-offset-9 sidebar-right">
+                <div>
+                    <div id="container-properties"
+                        ng-show="main.shape.type === 'rect' && main.shape.subtype !== 'mark'">
+                        <!-- 
+                        <div ng-include="'app/main/templates/format-diagram.html'"></div>
+                         -->
+                        <form name="containerPropertiesForm"
+                            class="col-md-9">
+                            <h4>Container Properties</h4>
+                            <div class="form-group">
+                                <label>Width:</label> <input
+                                    id="container-width" type="text"
+                                    ng-model="main.shape.width"
+                                    class="form-control form-content" />
+                            </div>
+                            <div class="form-group">
+                                <label>Height:</label> <input
+                                    id="container-height" type="text"
+                                    ng-model="main.shape.height"
+                                    class="form-control form-content" />
+                            </div>
+                            <div class="form-group">
+                                <label>Background color:</label> <input
+                                    type="color"
+                                    ng-model="main.shape.fill">
+                            </div>
+                        </form>
+
+                    </div>
+                    <div id="text-properties"
+                        ng-show="main.shape.type === 'text' || main.shape.type === 'textbox'">
+                        <form name="textPropertiesForm" class="col-md-9">
+                            <h4>Element Properties</h4>
+                            <div class="form-group">
+                                <label for="text-content">Text
+                                    content:</label>
+                                <textarea rows="2" id="text-content"
+                                    ng-model="main.shape.text"
+                                    class="form-control form-content"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Text color:</label> <input
+                                    type="color"
+                                    ng-model="main.shape.fill">
+                            </div>
+                            <div class="form-group">
+                                <label>Font family:</label> <select
+                                    ng-model="main.shape.fontFamily"
+                                    class="form-control form-content">
+                                    <option
+                                        ng-repeat="font in main.fontFamilies track by font.name">{{font.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Font size:</label> <select
+                                    ng-model="main.shape.fontSize"
+                                    class="form-control form-content"
+                                    ng-options="size.value as size.value for size in main.fontSizes">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Font styles:</label><br>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" 
+                                        ng-click="main.toggleBold()" 
+                                        ng-model="main.shape.styleBold"
+                                        uib-btn-checkbox>Bold</button>
+                                    <button type="button" class="btn btn-default"
+                                        ng-click="main.toggleItalic()" 
+                                        ng-model="main.shape.styleItalic" 
+                                        uib-btn-checkbox>Italic</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="page-properties"
+                        ng-show="main.shape === null">
+                        <form name="pagePropertiesForm" class="col-md-9">
+                            <h4>Ballot Option Properties</h4>
+                            <br>
+                            <div class="form-group">
+                                <label>Name:</label> <input
+                                    id="ballotOptionName" type="text"
+                                    ng-model="main.ballotOptionName"
+                                    class="form-control form-content" />
+                            </div>
+                            <div class="form-group">
+                                <label>Code (local storage):</label> <input
+                                    id="ballotOptionCode" type="number"
+                                    ng-model="main.ballotOptionCode"
+                                    class="form-control form-content" />
+                            </div>
+                            <div class="form-group">
+                                <label>Type:</label> <select
+                                    name="templateType"
+                                    id="templateType"
+                                    ng-model="main.ballotOptionType"
+                                    class="form-control form-content">
+                                    <option
+                                        ng-repeat="templateType in main.templateTypes"
+                                        value="{{templateType.name}}">{{templateType.name}}</option>
+                                </select>
+                            </div>
+                            <!-- 
+							<div class="form-group">
+                                <label>Canvas width:</label>
+                                <input id="container-width" type="text" ng-model="main.shape.width"
+                                    class="form-control form-content"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Canvas height:</label>
+                                <input id="container-height" type="text" ng-model="main.shape.height"
+                                    class="form-control form-content"/>
+                            </div>
+                             -->
+                        </form>
+                    </div>
+                    <div id="mark-properties"
+                        ng-show="main.shape.subtype === 'mark'">
+                        <form name="pagePropertiesForm" class="col-md-9">
+                            <h4>Selection Mark Properties</h4>
+                            <div class="form-group">
+                                <label>Mark type:</label> <select
+                                    ng-model="main.shape.markStyle" ng-change="main.toggleMarkType(main.shape.markStyle)"
+                                    class="form-control form-content">
+                                    <option
+                                        ng-repeat="mark in main.markTypes track by mark.name">{{mark.name}}</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="line-properties"
+                        ng-show="main.shape.type === 'line'">
+                        <!-- 
+                        <div ng-include="'app/main/templates/format-diagram.html'"></div>
+                         -->
+                        <form name="containerPropertiesForm"
+                            class="col-md-9">
+                            <h4>Line Properties</h4>
+                            <div class="form-group">
+                                <label>Position (left, top):</label>
+                                <div class="row">
+                                    <div
+                                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <input id="container-x"
+                                            type="text"
+                                            ng-model="main.shape.left"
+                                            class="form-control form-content" />
+                                    </div>
+                                    <div
+                                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <input id="container-y"
+                                            type="text"
+                                            ng-model="main.shape.top"
+                                            class="form-control form-content" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Width:</label> <input
+                                    id="container-width" type="text"
+                                    ng-model="main.shape.width"
+                                    class="form-control form-content" />
+                            </div>
+                            <div class="form-group">
+                                <label>Line type:</label>{{main.shape.strokeDashArray}}
+                                <select class="form-control form-content"
+                                    ng-model="main.shape.strokeDashArray"
+                                    ng-options="lineType.strokeDashArray as lineType.name for lineType in main.lineTypes">
+                                </select>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load ballot template modal dialog  -->
+            <div class="modal fade" id="load-ballot-template-modal"
+                role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Load ballot template</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="list"
+                                style="max-height: 125px; overflow-y: scroll">
+                                <button type="button"
+                                    class="list-group-item"
+                                    ng-repeat="ballotTemplate in main.ballotTemplates"
+                                    ng-click="main.selectBallotTemplate(ballotTemplate.code)">
+                                    <div id="{{ballotTemplate.code}}"
+                                        data-type="ballotConfiguration">{{ballotTemplate.name}}</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm"
+                                title="Cancel" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-sm"
+                                title="Ok" data-dismiss="modal"
+                                ng-click="main.loadBallotTemplate()">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save ballot modal dialog  -->
+            <div class="modal fade" tabindex="-1" role="dialog"
+                id="save-confirmation-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Save template</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>The template has been saved
+                                successfully</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

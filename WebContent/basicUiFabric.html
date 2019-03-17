@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<style>
+canvas {
+    border: 1px solid #ccc;
+}
+</style>
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="js/app/basic-ui-fabric-app.js"></script>
+<script src="js/controller/basic-ui-fabric.js"></script>
+
+</head>
+
+<body id="basicUiFabricApp" ng-app="basicUiFabric">
+
+    <div
+        ng-controller="optionDesignerController as main">
+        
+        <br>
+
+        <div class="fabric-container">
+            <canvas class="fabric-canvas" fabric="fabric"></canvas>
+        </div>
+
+    </div>
+
+</body>
+</html>

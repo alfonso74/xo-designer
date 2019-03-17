@@ -1,0 +1,1140 @@
+<div class="row">
+    <div class="col-sm-12 ballot-template-manager" ng-controller="ballotTemplateDesignerController as vm" style="padding-top: 10px">
+        <div id="main-view" ng-show="vm.currentView === 'main'">
+
+            <!-- Title and search widget -->
+            <ssp-general-overview title="ems.ballot.template.manager.title" description="ems.ballot.template.manager.instructions" elements="{{elementsCounter}}" search-adapter="vm.searchAdapter">
+            </ssp-general-overview>
+                
+
+            <top-action-bar>
+                <actions>
+                    <div class="pull-right">
+                        <button class="btn btn-sm ssp-top-action-bar-button" 
+                            style="outline: 0"
+                            ng-click="vm.changeView('newTemplate')">
+                            <i class="ssp-icon ssp-md-icon ssp-add-icon with-right-margin"></i>
+                            <span translate="ems.ballot.template.manager.action.newTemplate"></span>
+                        </button>
+                    </div>
+                </actions>
+            </top-action-bar>
+            <div style="margin-top: -20px;">
+                <ssp-table-view on-table-ready="vm.onTableReady"></ssp-table-view>
+            </div>
+        </div>
+        
+        <div id="ballot-designer-view" ng-show="vm.currentView !== 'main'">
+            <div id="ballot-designer-header">
+                <!-- Title and general instructions widget -->
+                <ssp-general-overview title="{{'ems.ballot.template.designer.' + vm.currentView + '.title'}}" 
+                    description="ems.ballot.template.designer.newTemplate.instructions">
+                </ssp-general-overview>
+                
+                <div id="bottomPanel" class="row">
+                    <div id="leftPanel" class="col-xs-3 ballot-design-no-side-padding">
+                        <div class="col-xs-12 ballot-design-gen-sidebar-header">
+                            <span translate="ems.ballot.template.designer.common.specifications"
+                                  class="text-uppercase"></span>
+                        </div>
+                        <div class="col-xs-12">
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotSize.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-paper-size"></span> 
+                                        Ballot size
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.filter.ballotSize.open, 
+                                            'fa fa-angle-down': !vm.filter.ballotSize.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="pageSize in vm.pageSizes track by pageSize.code">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentPageSize" 
+                                            ng-value="pageSize"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{pageSize.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="pageSize.iconClass"></span>
+                                        </input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotOrientation.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-paper-orientation"></span> 
+                                        Ballot orientation
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.filter.ballotOrientation.open, 
+                                            'fa fa-angle-down': !vm.filter.ballotOrientation.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Portrait"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">
+                                            <span class="custom-item-detail">Portrait&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp&nbsp
+                                            <span class="ssp-icon ssp-paper-orientation-portrait"></span>
+                                        </input>
+                                    </div>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Landscape"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">
+                                            <span class="custom-item-detail">Landscape</span>&nbsp&nbsp
+                                            <span class="ssp-icon ssp-paper-orientation-landscape"></span>
+                                        </input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotColumns.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-ballot-columns"></span>
+                                        Ballot columns
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.filter.ballotColumns.open, 
+                                            'fa fa-angle-down': !vm.filter.ballotColumns.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item"><b>Front</b></div>
+                                    <div ng-repeat="ballotColumn in vm.ballotColumns track by ballotColumn.id">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentBackColumns" 
+                                            ng-value="ballotColumn"
+                                            ng-change="vm.resizeCanvas(vm.currentballotColumn, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{ballotColumn.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="ballotColumn.iconClass"></span>
+                                        </input>
+                                    </div>
+                                    <br>
+                                    <div class="custom-item"><b>Back</b></div>
+                                    <div ng-repeat="element in vm.ballotColumns track by element.id">
+                                        <input type="checkbox" value={{element.name}} ng-model="element.selected"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-click=vm.drawElement(element)>
+                                            <span class="custom-item-detail">{{element.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="element.iconClass"></span> 
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotAreas.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-ballot-areas"></span>
+                                        Ballot areas
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.filter.ballotAreas.open, 
+                                            'fa fa-angle-down': !vm.filter.ballotAreas.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="element in vm.ballotAreas track by element.id">
+                                        <input type="checkbox" value={{element.name}} ng-model="element.selected"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-click=vm.drawElement(element)>
+                                            <span class="custom-item-detail">{{element.name}}</span> 
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.templateVariables.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-md-icon ssp-ballot-pages"></span>
+                                        Ballot pages
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.filter.templateVariables.open, 
+                                            'fa fa-angle-down': !vm.filter.templateVariables.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="ballotPage in vm.ballotPages track by ballotPage.id">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentBallotPage" 
+                                            ng-value="ballotPage"
+                                            ng-change="vm.resizeCanvas(vm.currentballotPage, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{ballotPage.name}}</span>
+                                        </input>
+                                    </div>
+                                </div>
+                            </uib-accordion>
+                        </div>
+                        
+                    </div>
+                        
+                    <div id="canvasPanel" class="col-xs-9">
+                        <div id="canvas-title" class="row">
+                            <small class="ballot-design-gen-sidebar-header" style="margin-bottom: 0px; margin-left: 10px; display: block;"
+                                translate="{{'ems.ballot.template.designer.' + vm.currentView + '.canvas.title'}}">HEADER TEMPLATE
+                            </small>
+                        </div>
+                        <!-- 
+                        <div class="cos-xs-12 fabric-container" style="background-color: white; height: calc(100vh - 275px);">
+                         -->
+                        <div id="canvas-body" class="col-xs-12 fabric-container">
+                            <div class="row" id="canvas-section">
+                                <canvas class="fabric-canvas" fabric="fabric"></canvas>
+                            </div>
+                            <div class="row" id="actions-section" ng-style="{'width': fabric.grid.width}">
+                                <div class="pull-right" style="margin-top: 5px">
+                                    <button id="template-cancel" type="button" ng-click="vm.reloadPage()"
+                                        class="btn btn-default smtt-btn-default btn-sm text-capitalize with-inner-padding"
+                                        translate="ems.ballot.template.manager.button.cancel">Cancel
+                                    </button>
+                                    <ssp-popover-modal-button disabled-on="false"
+                                              ng-if="true"
+                                              id="template-save"
+                                              adapter=""
+                                              button-type="btn-primary"
+                                              button-title="ems.ballot.template.manager.button.saveBallotTemplate"
+                                              popover-position="top-right"
+                                              popover-content-template="views/dialogs/saveBallotTemplate.html">
+                                    </ssp-popover-modal-button>
+                                    <!-- 
+                                    <ssp-popover-modal-button
+                                              id="template-save2"
+                                              adapter=""
+                                              button-type="btn btn-default btn-xs"
+                                              button-title=""
+                                              popover-position="top-right"
+                                              popover-content-template="views/dialogs/saveBallotTemplate.html"
+                                              icon="glyphicon glyphicon-floppy-disk">
+                                    </ssp-popover-modal-button>
+                                     -->
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="template-designer-view" ng-if="vm.currentView === 'mainx'">
+            <div id="header-template-designer">
+                <br />
+                <!-- Title and search widget -->
+                <div id="topPanel" class="row">
+                    <div class="col-xs-12">
+                        <h4>
+                            <strong translate="{{'ems.ballot.template.designer.' + vm.currentView + '.title'}}">
+                            </strong>
+                        </h4>
+                    </div>
+                </div>
+                <top-action-bar>
+                    <info1>
+                    <span translate="ems.ballot.template.designer.common.instructions"></span>
+                </info1>
+                </top-action-bar>
+                
+                <div id="bottomPanel" class="row">
+                    <div id="leftPanel" class="col-xs-3">
+                    
+                        <small style="margin-bottom: 10px; display: block;"
+                            translate="ems.ballot.template.designer.common.specifications">SELECT SPECIFICATIONS
+                        </small>
+                        <div class="row col-xs-12">
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotSize.open">
+                                    <uib-accordion-heading> Ballot Size <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.ballotSize.open, 
+                                        'fa fa-angle-right': !vm.filter.ballotSize.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="pageSize in vm.pageSizes track by pageSize.code">
+                                        <input type="radio" 
+                                            ng-model="vm.currentPageSize" 
+                                            ng-value="pageSize"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbsp{{pageSize.name}}</input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.ballotOrientation.open">
+                                    <uib-accordion-heading> Ballot Orientation <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.ballotOrientation.open, 
+                                        'fa fa-angle-right': !vm.filter.ballotOrientation.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Portrait"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbspPortrait</input>
+                                    </div>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Landscape"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbspLandscape</input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.genericElements.open">
+                                    <uib-accordion-heading> Template Information <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.genericElements.open, 
+                                        'fa fa-angle-right': !vm.filter.genericElements.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item" ng-if="vm.templateManager.fixedElements.length > 0">
+                                        <b>Fixed elements</b>
+                                    </div>
+                                    <div ng-repeat="element in vm.templateManager.fixedElements track by element.id">
+                                        <input type="checkbox" value={{element.name}} ng-model="element.selected"
+                                            style="left: 0; margin-left: 0; position: inherit;"
+                                            ng-click=vm.drawElement(element)> {{element.name}} 
+                                    </div>
+                                    <br ng-if="vm.templateManager.fixedElements.length > 0">
+                                    <div class="custom-item"><b>Dynamic elements</b></div>
+                                    <div ng-repeat="element in vm.templateManager.genericElements track by element.id">
+                                        <div class="media" style="margin-top: 5px">
+                                            <h5 class="media-heading">
+                                                <a href=""
+                                                    ng-click="vm.drawElement(element)">
+                                                    {{element.name}} </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.templateVariables.open">
+                                    <uib-accordion-heading> Template Variables <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.templateVariables.open, 
+                                        'fa fa-angle-right': !vm.filter.templateVariables.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="element in vm.templateManager.variables track by element.name">
+                                        <div class="media" style="margin-top: 5px">
+                                            <h5 class="media-heading" ng-class="{disabled: vm.shape.type !== 'textbox'}">
+                                                <a href=""
+                                                    ng-class="{disabled: vm.shape.type !== 'textbox'}"
+                                                    ng-click="vm.insertVariable(element.value)">
+                                                    {{element.name}} </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </uib-accordion>
+
+                            <div class="row col-xs-12" style="padding-bottom: 10px">
+                                <div class="panel panel-default" style="display: none">
+                                    <div class="panel-heading">Upload Image</div>
+                                    <div class="panel-body text-center">
+                                        <img id="testImage" 
+                                            class="images-item-upload" ng-if=vm.imageLoadUrl ng-src="{{vm.imageLoadUrl}}"
+                                            ng-click="vm.addImageOnCanvas(vm.imageLoadUrl);" />
+                                        <input type="file" id="inputSelectFile" accept=".png, .jpg" custom-on-change="vm.readUrlAsync">
+                                        <br />
+                                        <div class="btn-group btn-group-justified"
+                                            role="group" aria-label="...">
+                                            <div class="btn-group" role="group">
+                                                <button type="button"
+                                                    class="btn btn-default btn-xs"
+                                                    ng-click="vm.removeUploadImageData(vm.imageLoadUrl);">
+                                                    <i class="fa fa-times"
+                                                        aria-hidden="true"></i> Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="canvasPanel" class="col-xs-9">
+                        <div id="canvas-title" class="row">
+                            <small style="margin-bottom: 10px; display: block;"
+                                translate="{{'ems.ballot.template.designer.' + vm.currentView + '.canvas.title'}}">HEADER TEMPLATE
+                            </small>
+                        </div>
+                        <!-- 
+                        <div class="cos-xs-12 fabric-container" style="background-color: white; height: calc(100vh - 275px);">
+                         -->
+                        <div id="canvas-body" class="col-xs-8 fabric-container">
+                            <div class="row" id="toolbar-section" ng-style="{'width': fabric.grid.width}"
+                                ng-show="vm.currentView !== 'contest' && vm.currentView !== 'pageNavigation'">
+                                <div class="btn-toolbar pull-right" role="group" style="margin-bottom: 4px">
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.shape.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.shape.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.shape.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.shape.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.toggleBold(vm.shape)"
+                                            ng-model="vm.shape.styleBold"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.toggleItalic(vm.shape)"
+                                            ng-model="vm.shape.styleItalic" 
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.toggleUnderline(vm.shape)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textColorSelector')" 
+                                            ng-style="{'color': vm.shape.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textColorSelector" style="display: none" 
+                                            ng-model="vm.shape.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextAlignment(vm.shape, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextAlignment(vm.shape, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-click="vm.setTextAlignment(vm.shape, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" style="display:none">
+                                        <button type="button" 
+                                        class="btn btn-default btn-xs ballot-toolbar" 
+                                        ng-click="vm.insertVariable('${election.datex}')" 
+                                        title="Insert ballot template variable"><b>{ }</b>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.deleteCanvasObject()" 
+                                            title="Delete canvas object">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="canvas-section">
+                                <canvas class="fabric-canvas" fabric="fabric"></canvas>
+                            </div>
+                            <div class="row" id="actions-section" ng-style="{'width': fabric.grid.width}">
+                                <div class="pull-right" style="margin-top: 5px">
+                                    <button id="template-cancel" type="button" ng-click="vm.reloadPage()"
+                                        class="btn btn-default smtt-btn-default btn-sm text-capitalize with-inner-padding"
+                                        translate="ems.ballot.template.manager.button.cancel">Cancel
+                                    </button>
+                                    <ssp-popover-modal-button disabled-on="false"
+                                              ng-if="true"
+                                              id="template-save"
+                                              adapter=""
+                                              button-type="btn-primary"
+                                              button-title="ems.ballot.template.manager.button.saveBallotTemplate"
+                                              popover-position="top-right"
+                                              popover-content-template="ballot-template-manager/views/dialogs/saveBallotTemplate.html">
+                                    </ssp-popover-modal-button>
+                                    <!-- 
+                                    <ssp-popover-modal-button
+                                              id="template-save2"
+                                              adapter=""
+                                              button-type="btn btn-default btn-xs"
+                                              button-title=""
+                                              popover-position="top-right"
+                                              popover-content-template="ballot-template-manager/views/dialogs/saveBallotTemplate.html"
+                                              icon="glyphicon glyphicon-floppy-disk">
+                                    </ssp-popover-modal-button>
+                                     -->
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                        <div id="contest-template-properties" class="col-xs-4"
+                            ng-show="vm.currentView === 'contest'">
+                            <div class="panel panel-default" id="template-common-properties"
+                                ng-show="true">
+                                <div class="panel-heading">Template Properties</div>
+                                <div class="panel-body">
+                                    <div class="custom-item">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                            <b>Width</b><input
+                                                id="container-width" type="number"
+                                                ng-model="vm.templateShape.newWidthInColumns"
+                                                ng-change="vm.resizeTemplateWidth()"
+                                                onkeydown="return false"
+                                                class="form-control" /> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.contestTitle.open">
+                                    <uib-accordion-heading>
+                                        <span>Contest title</span>
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-down': vm.filter.templateType.open, 
+                                            'fa fa-angle-right': !vm.filter.templateType.open}"></i>
+                                    </uib-accordion-heading> 
+                                    <div class="custom-item">
+                                        <b>Font</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.title.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.templateShape.title.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.title.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.templateShape.title.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Font style and alignment</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.title.fontWeight === 'bold'}"
+                                            ng-click="vm.toggleBold(vm.templateShape.title)"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.title.fontStyle === 'italic'}"
+                                            ng-click="vm.toggleItalic(vm.templateShape.title)"
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.title.textDecoration === 'underline'}"
+                                            ng-click="vm.toggleUnderline(vm.templateShape.title)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textTitleColorSelector')" 
+                                            ng-style="{'color': vm.templateShape.title.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textTitleColorSelector" style="display: none" 
+                                            ng-model="vm.templateShape.title.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.title.textAlign === 'left'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.title, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.title.textAlign === 'center'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.title, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-class="{'active': vm.templateShape.title.textAlign === 'right'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.title, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Shape</b>
+                                    </div>
+                                    Background color:&nbsp&nbsp 
+                                    <div class="btn-group">
+                                        <input type="color" ng-model="vm.templateShape.titleContainer.fill">
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('title')" id="btnApplyTitle">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.contestInstructions.open">
+                                    <uib-accordion-heading> Contest instructions <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.contestInstructions.open, 
+                                        'fa fa-angle-right': !vm.filter.contestInstructions.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item">
+                                        <b>Font</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.instructions.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.templateShape.instructions.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.instructions.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.templateShape.instructions.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Font style and alignment</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.fontWeight === 'bold'}"
+                                            ng-click="vm.toggleBold(vm.templateShape.instructions)"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.fontStyle === 'italic'}"
+                                            ng-click="vm.toggleItalic(vm.templateShape.instructions)"
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textDecoration === 'underline'}"
+                                            ng-click="vm.toggleUnderline(vm.templateShape.instructions)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textTitleColorSelector')" 
+                                            ng-style="{'color': vm.templateShape.instructions.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textTitleColorSelector" style="display: none" 
+                                            ng-model="vm.templateShape.instructions.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'left'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'center'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'right'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Shape</b>
+                                    </div>
+                                    Background color:&nbsp&nbsp 
+                                    <div class="btn-group">
+                                        <input type="color" ng-model="vm.templateShape.instructionsContainer.fill">
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('instructions')" id="btnApplyInstructions">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.candidateName.open">
+                                    <uib-accordion-heading> Candidate name <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.candidateName.open, 
+                                        'fa fa-angle-right': !vm.filter.candidateName.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item">
+                                        <b>Font</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.candidate.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.templateShape.candidate.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.candidate.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.templateShape.candidate.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Font style and alignment</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.candidate.fontWeight === 'bold'}"
+                                            ng-click="vm.toggleBold(vm.templateShape.candidate)"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.candidate.fontStyle === 'italic'}"
+                                            ng-click="vm.toggleItalic(vm.templateShape.candidate)"
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.candidate.textDecoration === 'underline'}"
+                                            ng-click="vm.toggleUnderline(vm.templateShape.candidate)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textTitleColorSelector')" 
+                                            ng-style="{'color': vm.templateShape.candidate.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textTitleColorSelector" style="display: none" 
+                                            ng-model="vm.templateShape.candidate.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.candidate.textAlign === 'left'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.candidate, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.candidate.textAlign === 'center'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.candidate, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-class="{'active': vm.templateShape.candidate.textAlign === 'right'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.candidate, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Shape</b>
+                                    </div>
+                                    Background color:&nbsp&nbsp 
+                                    <div class="btn-group">
+                                        <input type="color" ng-model="vm.templateShape.ballotOptionContainer.fill">
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('candidate')" id="btnApplyCandidate">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.partyName.open">
+                                    <uib-accordion-heading> Party name <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.partyName.open, 
+                                        'fa fa-angle-right': !vm.filter.partyName.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item">
+                                        <b>Font</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.party.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.templateShape.party.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.party.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.templateShape.party.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Font style and alignment</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.party.fontWeight === 'bold'}"
+                                            ng-click="vm.toggleBold(vm.templateShape.party)"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.party.fontStyle === 'italic'}"
+                                            ng-click="vm.toggleItalic(vm.templateShape.party)"
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.party.textDecoration === 'underline'}"
+                                            ng-click="vm.toggleUnderline(vm.templateShape.party)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textTitleColorSelector')" 
+                                            ng-style="{'color': vm.templateShape.party.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textTitleColorSelector" style="display: none" 
+                                            ng-model="vm.templateShape.party.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.party.textAlign === 'left'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.party, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.party.textAlign === 'center'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.party, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-class="{'active': vm.templateShape.party.textAlign === 'right'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.party, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Shape</b>
+                                    </div>
+                                    Background color:&nbsp&nbsp 
+                                    <div class="btn-group">
+                                        <input type="color" ng-model="vm.templateShape.ballotOptionContainer.fill">
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('party')" id="btnApplyParty">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                            </uib-accordion> 
+                        </div>
+                        
+                        <div id="pageNav-template-properties" class="col-xs-4"
+                            ng-show="vm.currentView === 'pageNavigation'">
+                            <div class="panel panel-default" id="navTemplate-common-properties"
+                                ng-show="true">
+                                <div class="panel-heading">Template Properties</div>
+                                <div class="panel-body">
+                                    <div class="custom-item">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                            <b>Width</b><input
+                                                id="container-width" type="number"
+                                                ng-model="vm.templateShape.newWidthInColumns"
+                                                ng-change="vm.resizeTemplateWidth()"
+                                                onkeydown="return false"
+                                                class="form-control" /> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.pageNavInstructions.open">
+                                    <uib-accordion-heading>
+                                        <span>Instructions</span>
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-down': vm.filter.pageNavInstructions.open, 
+                                            'fa fa-angle-right': !vm.filter.pageNavInstructions.open}"></i>
+                                    </uib-accordion-heading> 
+                                    <div class="custom-item">
+                                        <b>Font</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.instructions.fontFamily">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                                    <a href="" ng-click="vm.templateShape.instructions.fontFamily = font.name">{{font.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.templateShape.instructions.fontSize" size="2">
+                                            <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li ng-repeat="size in vm.fontSizes track by size.value">
+                                                    <a href="" ng-click="vm.templateShape.instructions.fontSize = size.value">{{size.value}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Font style and alignment</b>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.fontWeight === 'bold'}"
+                                            ng-click="vm.toggleBold(vm.templateShape.instructions)"
+                                            title="Bold - Ctrl+B">
+                                            <i class="glyphicon glyphicon-bold"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.fontStyle === 'italic'}"
+                                            ng-click="vm.toggleItalic(vm.templateShape.instructions)"
+                                            title="Italic - Ctrl+I">
+                                            <i class="glyphicon glyphicon-italic"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textDecoration === 'underline'}"
+                                            ng-click="vm.toggleUnderline(vm.templateShape.instructions)" 
+                                            title="Underline - Ctrl+U">
+                                            <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-click="vm.setTextColor('#textTitleColorSelector')" 
+                                            ng-style="{'color': vm.templateShape.instructions.fill}"
+                                            title="Text color">
+                                            <i class="glyphicon glyphicon-text-color"></i>
+                                        </button>
+                                        <input type="color" id="textTitleColorSelector" style="display: none" 
+                                            ng-model="vm.templateShape.instructions.fill">
+                                        <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'left'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'left')" 
+                                            title="Align right">
+                                            <i class="glyphicon glyphicon-align-left"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar"
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'center'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'center')" 
+                                            title="Align center">
+                                            <i class="glyphicon glyphicon-align-center"></i>
+                                        </button>
+                                        <button type="button" 
+                                            class="btn btn-default btn-xs ballot-toolbar" 
+                                            ng-class="{'active': vm.templateShape.instructions.textAlign === 'right'}"
+                                            ng-click="vm.setTextAlignment(vm.templateShape.instructions, 'right')"
+                                            title="Align left">
+                                            <i class="glyphicon glyphicon-align-right"></i>
+                                        </button>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                        <b>Shape</b>
+                                    </div>
+                                    Background color:&nbsp&nbsp 
+                                    <div class="btn-group">
+                                        <input type="color" ng-model="vm.templateShape.templateContainer.fill">
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('title')" id="btnApplyInstructions">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.filter.pageNavImage.open">
+                                    <uib-accordion-heading> Image <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.filter.pageNavImage.open, 
+                                        'fa fa-angle-right': !vm.filter.pageNavImage.open}"></i>
+                                    </uib-accordion-heading>
+                                    
+                                    <div class="custom-item">
+                                        <b>Load image</b>
+                                    </div>
+                                    <br><br>
+                                    <div class="custom-item">
+                                    </div>
+                                    <button class="btn btn-primary btn-sm pull-right" 
+                                        ng-click="vm.refreshTemplateInCanvas('instructions')" id="btnApplyInstructions">
+                                        <span style="font-size: inherit;"> Apply </span>
+                                    </button>
+                                </div>
+                            </uib-accordion> 
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

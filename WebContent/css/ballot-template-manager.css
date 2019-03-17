@@ -1,0 +1,126 @@
+html {
+    height: 100%;
+}
+
+html, body {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+.filter-panel {
+    border-bottom: 2px solid #f3f3f3;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #eef9fc;
+}
+
+.ballot-toolbar {
+    border-width: 1px;
+    color: inherit;
+}
+
+div.panel-default a:hover {
+    text-decoration: none;
+}
+
+.custom-item {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.custom-item-detail {
+    color: #666666;
+    font-weight: 200;
+    font-size: 12px;
+}
+
+.custom-item .custom-item-title {
+    color: #666666;
+    font-weight: 600;
+}
+
+.custom-item .custom-item-body {
+    padding: 10px 0;
+}
+
+.images-item-upload {
+  width: 80%;
+  cursor: pointer;
+  padding-bottom: 10px;
+  -webkit-transition: .5s ease;
+  -webkit-transition: .5s ease;
+}
+
+.ballot-template-manager hr {
+    margin-top: 23px;
+    margin-bottom: 23px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+}
+
+canvas {
+    border: 1px solid #0c7b95;
+}
+
+.fabric-container {
+    letter-spacing: normal;
+}
+
+.panel-title {
+    font-size: 14px;
+}
+
+.panel-group .panel + .panel {
+  margin-top: 2px;
+}
+
+.panel-title>a, .panel-title>small, .panel-title>small>a {
+    text-decoration: none;
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
+	border-top: none;
+    background-color: #e6e6e6;
+}
+
+.ballot-design-gen-preview-body {
+    padding-top: 10px;
+    background-color: #fff;
+}
+
+.ballot-design-gen-sidebar-header, .ballot-design-gen-preview-header {
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ballot-design-no-side-padding {
+    padding: 0px;
+    min-height: calc(100vh);
+    margin-bottom: 15px;
+}
+
+.template-designer-modal .modal-lg {
+    height: calc(100%);
+    width: calc(100% - 200px);
+}
+
+.template-designer-wizard-container {
+    margin-top: 10px;
+}
+
+.template-designer-wizard-container .btn-cancel {
+    font-size: 1.5em;
+}
+

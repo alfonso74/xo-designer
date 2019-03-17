@@ -1,0 +1,12 @@
+<div class="row ssp-general-overview-container" data-ng-class="{'ssp-general-overview-margin-bottom' : !elementsAmount}">
+    <div class="col-sm-6 col-md-8 no-padding">
+        <p class="h7">
+            {{title | translate}}
+        </p>
+        <p class="h10">{{description | translate}}</p>
+    </div>
+    <div class="col-sm-6 col-md-4 no-padding ssp-general-overview-right-column" style="margin-top:5px">
+        <ssp-search-box ng-if="searchAdapter" adapter="searchAdapter"></ssp-search-box>
+        <p class="h13 ssp-general-overview-counter" data-ng-class="{'ssp-general-overview-counter-no-search' : !searchAdapter}">{{elementsAmount}}</p>
+    </div>
+</div>

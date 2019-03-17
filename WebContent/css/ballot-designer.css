@@ -1,0 +1,591 @@
+.bo-border {
+    border: 1px solid #999;
+    overflow: auto;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #888;
+}
+
+.bo-border:hover {
+    cursor: move;
+    /*background: #eee;*/
+}
+
+.bo-delete {
+    background: #ccc;
+}
+
+.bo-candidate{
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    height: 75px;
+    float: left;
+    width: 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #CECDCB;
+}
+
+.bo-party{
+    border-right: 1px solid #999;
+    height: 75px;
+    float:left;
+    width:25%;
+    overflow: hidden;
+}
+
+.bo-party-name {
+    font-size: 8px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+
+.bo-info{
+    height: 150px;
+    padding-left:20px;
+    padding-right:20px;
+    float:right;
+    width:75%;
+    position: relative;
+}
+
+.bo-info input {
+    width: 100%!important;
+    margin-top: 5px;
+}
+
+.bo-card{
+    margin-bottom:20px;
+}
+
+.bo-card-select{
+    background:#EEE;
+}
+
+.bo-image{
+    width:100%;
+    height:100%;
+}
+
+.bo-ballot-name{
+    margin-top: 5px;
+    min-height: 30px;
+    font-size: 16px!important;
+/*    cursor: pointer;*/
+}
+/*
+.bo-ballot-name:hover {
+    border: solid 1px #777;
+    border-radius: 4px;
+    margin-right: 5px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAAAAAADRMNWAAAAcklEQVQI12P4Dwf/ppod//+fASHwKcYYKAIX+LfsNFBkKlzg31Sg9Kctf2ACQL6xsfWd/zAzwHzj7j8wASQ+WACZDxJA4YMEntkg8YECp9+et0Lw/zP8jQl9c3EBnP+f4aGFcdgnhPv/M6wInPUIif8fAHSJth5sjTjaAAAAAElFTkSuQmCC') no-repeat 97% 65%;
+    padding-left: 5px;
+    cursor: pointer;
+}
+*/
+.bo-party-title{
+    margin-top: 5px;
+    min-height: 20px;
+    font-size: 12px!important;
+}
+/*
+.bo-party-title:hover{
+    margin-top: 5px;
+    cursor: pointer;
+    border: solid 1px #777;
+    border-radius: 4px;
+    margin-right: 5px;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAAAAAADRMNWAAAAcklEQVQI12P4Dwf/ppod//+fASHwKcYYKAIX+LfsNFBkKlzg31Sg9Kctf2ACQL6xsfWd/zAzwHzj7j8wASQ+WACZDxJA4YMEntkg8YECp9+et0Lw/zP8jQl9c3EBnP+f4aGFcdgnhPv/M6wInPUIif8fAHSJth5sjTjaAAAAAElFTkSuQmCC') no-repeat 97% 65%;
+    padding-left: 5px;
+}
+*/
+.bo-order{
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    width: 110px;
+    height: 45px;
+    bottom: 7px;
+    position: absolute;
+    right: -5px;
+}
+
+.bo-border:hover button {
+    visibility: visible;
+}
+
+.bo-border button {
+    visibility: hidden;
+}
+
+.bo-border:hover button.hidden-trash {
+    opacity: 0;
+}
+
+.bo-order input[type="text"]:read-only{
+    border: 2px solid #999;
+    width: 47px;
+    height: 47px;
+    padding: 5px;
+    border-radius: 50%;
+    text-align:center;
+}
+
+ .bo-order input[type="text"]:-moz-read-only{
+    border: 2px solid #999;
+    width: 47px;
+    height: 47px;
+    padding: 5px;
+    border-radius: 50%;
+    text-align:center;
+    cursor:default;
+}
+
+.bo-order input[type="text"]:read-write{
+    border: 2px solid rgba(0,175,219, 1);
+    width: 47px;
+    height: 47px;
+    padding: 5px;
+    border-radius: 50%;
+    text-align:center;
+    font-weight:normal;
+}
+
+.bo-order input[type="text"]:-moz-read-write{
+    border: 2px solid rgba(0,175,219, 1);
+    width: 47px;
+    height: 47px;
+    padding: 5px;
+    border-radius: 50%;
+    text-align:center;
+    font-weight:normal;
+}
+
+.bo-order:hover{
+    border:0;
+}
+
+.contest-box {
+    height: calc(100vh - 235px);
+    border-bottom: 1px solid #999;
+    box-shadow: inset -1px 2px 10px #888;
+    overflow: hidden;
+}
+
+/* module-key = 'com.atlassian.confluence.plugins.confluence-page-layout:editor-pagelayout-content-styles', location = 'css/pagelayout/page-layout-editor-content.css' */
+.wiki-content .columnLayout {
+    border-spacing: 8px
+}
+
+.wiki-content .header, .wiki-content .footer, .wiki-content .cell {
+    border: 2px dashed #ccc;
+    margin: 8px;
+    padding: 4px 8px
+}
+
+.wiki-content .header, .wiki-content .header .innerCell {
+    margin-bottom: 0
+}
+
+.wiki-content .footer, .wiki-content .footer .innerCell {
+    margin-top: 0
+}
+
+.wiki-content .innerCell {
+    outline: 0;
+    overflow: auto;
+    overflow-y: hidden;
+    height: 100%
+}
+
+.wiki-content .wysiwyg-macro {
+    *width: 99.46%
+}
+
+.wiki-content .sidebars .wysiwyg-macro {
+    *width: 98.88%
+}
+
+.columnLayout {
+    *margin-right: 10px
+}
+
+.section-decorator {
+    display: table-cell;
+    width: 14px;
+    overflow: visible;
+    *display: block;
+    *overflow: hidden;
+    *position: absolute;
+    *right: 0
+}
+
+.section-decorator button {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 7px 0 7px 0;
+    text-align: center;
+    width: 14px;
+    height: 20px;
+    color: #aaa;
+    *padding: 0
+}
+
+.show-property-panel .icon {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #333;
+    *display: inline-block
+}
+
+.section-decorator .move-section {
+    cursor: move;
+    cursor: -moz-grab;
+    cursor: -webkit-grab
+}
+
+body.mceContentBody.pl2-contextual {
+    margin: 0;
+    padding: 0;
+    *margin-right: 15px
+}
+
+.wiki-content .contentLayout2 .columnLayout {
+    border-spacing: 4px 2px;
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.wiki-content .contentLayout2 .columnLayout[draggable="true"] {
+    cursor: move;
+}
+
+.wiki-content .contentLayout2 .cell {
+    border: 1px dashed #999;
+    border-radius: 5px;
+    *border: 0;
+    padding: 0;
+    cursor: default;
+}
+
+.wiki-content .contentLayout2 .innerCell {
+    padding: 5px;
+    min-height: 20px;
+    *border: 1px dashed #999
+}
+
+.wiki-content .contentLayout2 .columnLayout>:first-child {
+    *padding-left: 0
+}
+
+.wiki-content .contentLayout2>:first-child {
+    margin-top: 5px
+}
+
+/* module-key = 'confluence.web.resources:content-styles', location = '/includes/css/wiki-content.less' */
+.wiki-content .header, .wiki-content .footer, .wiki-content .cell {
+    margin: 8px 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px
+}
+
+.wiki-content .columnLayout {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    *clear: both;
+}
+
+.wiki-content .columnLayout .cell {
+    vertical-align: top
+}
+
+.wiki-content .columnLayout .cell.aside {
+    width: 29.9%
+}
+
+.wiki-content .columnLayout .cell.sidebars {
+    width: 19.9%
+}
+
+.wiki-content .cell {
+    display: table-cell;
+    padding: 0 10px
+}
+
+.wiki-content .innerCell {
+    overflow-x: auto
+}
+
+.wiki-content .placeholder {
+    background: #f5f5f5;
+    border: 1px dotted #ccc;
+    color: #707070;
+    font-style: italic;
+    margin: 0;
+    padding: 10px
+}
+
+.wiki-content .placeholder .activation-content {
+    display: none
+}
+
+.wiki-content .placeholder .display-content {
+    display: inherit
+}
+
+.wiki-content li>ul, .wiki-content li>ol, .wiki-content ul>ul,
+    .wiki-content ol>ol {
+    margin-top: 0
+}
+
+.wiki-content ol, .wiki-content ol ol ol ol, .wiki-content ol ol ol ol ol ol ol,
+    .wiki-content ol ol ol ol ol ol ol ol ol ol {
+    list-style-type: decimal
+}
+
+.wiki-content ol ol, .wiki-content ol ol ol ol ol, .wiki-content ol ol ol ol ol ol ol ol,
+    .wiki-content ol ol ol ol ol ol ol ol ol ol ol {
+    list-style-type: lower-alpha
+}
+
+.wiki-content ol ol ol, .wiki-content ol ol ol ol ol ol, .wiki-content ol ol ol ol ol ol ol ol ol,
+    .wiki-content ol ol ol ol ol ol ol ol ol ol ol ol {
+    list-style-type: lower-roman
+}
+
+.wiki-content h1 {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.25;
+    margin: 30px 0 0 0
+}
+
+.wiki-content h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 30px 0 0 0
+}
+
+.wiki-content h3 {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 30px 0 0 0
+}
+
+.wiki-content h4 {
+    font-size: 14px;
+    line-height: 1.42857142857143;
+    margin: 20px 0 0 0
+}
+
+.wiki-content h5 {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 20px 0 0 0;
+    text-transform: uppercase
+}
+
+.wiki-content h6 {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 20px 0 0 0
+}
+
+.wiki-content h1:first-child, .wiki-content h2:first-child,
+    .wiki-content h3:first-child, .wiki-content h4:first-child,
+    .wiki-content h5:first-child, .wiki-content h6:first-child {
+    margin-top: 0
+}
+
+.wiki-content h1+h2, .wiki-content h2+h3, .wiki-content h3+h4,
+    .wiki-content h4+h5, .wiki-content h5+h6 {
+    margin-top: 10px
+}
+
+.wiki-content h3 {
+    font-weight: bold
+}
+
+.wiki-content h5 {
+    font-size: 14px
+}
+
+.wiki-content h5, .wiki-content h6 {
+    text-transform: none
+}
+
+.wiki-content h1+h1, .wiki-content h2+h2, .wiki-content h3+h3,
+    .wiki-content h4+h4, .wiki-content h5+h5, .wiki-content h6+h6 {
+    margin-top: 10px
+}
+
+.wiki-content .confluence-content-image-border {
+    border: 1px solid black
+}
+
+.wiki-content div.error>span.error {
+    color: #333;
+    padding: 6px 10px;
+    position: relative;
+    background: #fffdf6;
+    border: 1px solid #ffeaae;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px
+}
+
+.wiki-content .columnLayout, .wiki-content .cell, .wiki-content .header,
+    .wiki-content .footer {
+    *display: block;
+    *float: left;
+    *width: 100%
+}
+
+.wiki-content .innerCell {
+    *border: 2px dashed #ccc;
+    *margin: 8px 4px;
+    *padding: 4px 8px
+}
+
+.wiki-content .text-placeholder {
+    background: #f5f5f5;
+    color: #707070;
+    font-style: italic;
+    min-width: 10px;
+    display: block
+}
+
+.wiki-content .text-placeholder.selected {
+    color: #333
+}
+
+.wiki-content .aui-lozenge {
+    padding: 3px 5px 2px 5px
+}
+
+.contentLayout .innerCell>*:first-child .innerCell>*:first-child,
+    .contentLayout2 .innerCell>*:first-child {
+    margin-top: 0
+}
+
+.contentLayout2 .columnLayout {
+    margin-bottom: 8px
+}
+
+.view .wiki-content .cell:first-child, .content-preview .wiki-content .cell:first-child
+    {
+    padding: 0
+}
+
+li[style*='text-align: center'], li[style*='text-align: right'] {
+    list-style-position: inside
+}
+
+#main .wiki-content .footer p, #main .wiki-content .footer a {
+    font-family: arial, sans-serif;
+    font-size: 14px
+}
+
+.wiki-content .cell, .mceContentBody.wiki-content .cell, .twoColumns .cell,
+    .threeColumns .cell, .twoColumns .large, .mceContentBody.wiki-content .header,
+    .mceContentBody.wiki-content .footer, .threeColumns .large {
+    *border: 0;
+    *margin: 0;
+    *padding: 0;
+    *overflow: hidden
+}
+
+.twoColumns .cell {
+    *width: 49.9%
+}
+
+.threeColumns .cell {
+    *width: 33.3%
+}
+
+.twoColumns .large {
+    *width: 69.9%
+}
+
+.threeColumns .large {
+    *width: 59.9%
+}
+
+div.aside+div.large, div.large+div.aside, div.large+div.sidebars,
+    .twoColumns div.cell+div.cell, .threeColumns div.cell+div.cell+div.cell
+    {
+    *float: right
+}
+
+.two-equal .normal {
+    *width: 49.9%
+}
+
+.two-left-sidebar .normal, .two-right-sidebar .normal {
+    *width: 69.9%
+}
+
+.three-equal .cell {
+    *width: 33.3%
+}
+
+.three-with-sidebars .normal {
+    *width: 59.9%
+}
+
+.two-equal div.cell+div.cell {
+    *float: right
+}
+
+.three-equal div.cell+div.cell+div.cell, .three-with-sidebars div.cell+div.cell+div.cell
+    {
+    *float: right
+}
+
+#mw-container div.mw-no-notifications div.subheading p {
+    line-height: 24px;
+    margin-top: 8px;
+    margin-bottom: 8px
+}
+
+.thumbnail {
+    height: 50px;
+    width: 50px;
+    cursor: move;
+}
+
+.thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.fa {
+    font-size: inherit;
+}
+
+.ballot-toolbar {
+    border-width: 1px;
+    color: inherit;
+}
+
+canvas {
+    border: 1px solid #ccc;
+}
+
+.fabric-container {
+    letter-spacing: normal;
+}

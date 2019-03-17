@@ -1,0 +1,12 @@
+<button 
+    type="button" class="btn btn-sm" style="{{buttonStyle}}"
+    data-ng-disabled="disabledOn" 
+    data-ng-class="buttonType"
+    popover-is-open="sspPopoverOpen"
+    uib-popover-template="popoverContentTemplate"
+    popover-append-to-body="true"
+    popover-class="ssp-popover-modal"
+    popover-placement="{{popoverPosition}}"
+>
+    <i data-ng-if="icon != null" data-ng-class="icon"></i>{{ buttonTitle | translate }}
+</button>

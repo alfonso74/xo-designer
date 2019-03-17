@@ -1,0 +1,148 @@
+.ssp-wizard-ul {
+    padding-left: 0;
+}
+.ssp-wizard-li {
+    width: 2.5em;
+    height: 2.5em;
+    text-align: center;
+    line-height: 2.5em;
+    border-radius: 2em;
+    background: #0c7b95;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 3em;
+    margin-right: 0;
+    display: inline-block;
+    color: white;
+    position: relative;
+}
+.ssp-wizard-li-page {
+    width: 2.5em;
+    height: 2.5em;
+    text-align: center;
+    line-height: 2.5em;
+    border-radius: 2em;
+    background: #0c7b95;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 1.5em;
+    display: inline-block;
+    color: white;
+    position: relative;
+}
+
+.ssp-wizard-float-left {
+    float: left;
+}
+
+.ssp-wizard-li::before{
+    content: '';
+    position: absolute;
+    left: -4em;
+    width: 4em;
+    height: .2em;
+    background: #0c7b95;
+    z-index: -1;
+    top: 1.2em;
+}
+
+.ssp-wizard-li-active {
+    background: white;
+    color: #FFF;
+    background: #0c7b95;
+}
+
+.ssp-wizard-li-active::before{
+    background: #0c7b95;
+}
+
+
+ssp-wizard .li-text {
+    font-weight: bolder;
+    font-size: 1.3em;
+}
+
+.ssp-wizard-li:first-child::before {
+    display: none;
+}
+
+.ssp-wizard-li-done {
+    width: 1em;
+    height: 1em;
+    margin-right: 1em;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+.ssp-wizard-li-done::before {
+    top: 5px;
+}
+
+.ssp-wizard-li-to-do {
+    background-color: #FFFFFF;
+    color: #0c7b95;
+}
+
+.ssp-wizard-li-to-do::before{
+    background: white;
+}
+
+ssp-wizard .start {
+    background: white;
+}
+
+.ssp-wizard-li.start {
+    width: 2em;
+    height: 2em;
+    color: #0c7b95;
+    line-height: 2em;
+    font-size: 20pt;
+    margin: 0 2em;
+    font-weight: bold;
+}
+
+.ssp-wizard-li.start::before{
+    background: white;
+    top: 0.9em;
+    left: -5em;
+    width: 5em;
+}
+.ssp-wizard-header-item {
+    position: absolute;
+    top: 6em;
+    left: -3em;
+    width: 11em;
+    line-height: initial;
+    display: inline-block;
+    color: black;
+    font-size: .42em;
+    word-break: keep-all;
+}
+
+ssp-wizard .start-btn {
+    margin-top: 6em;
+}
+
+.wizard-btn {
+    min-width: 7em;
+}
+
+.lime-green {
+    color: #34ba45;
+}
+
+ssp-wizard .btn-cancel{
+    border: 0px solid transparent;
+    background: transparent;
+    color: #738a8f;
+    font-size: 2em;
+}
+
+.ssp-wizard-finish-title {
+    margin-left: 15px;
+    margin-top: 5px;
+    color: #03576b;
+}
+
+.ssp-wizard-finish-message {
+    font-size: 16px;
+}

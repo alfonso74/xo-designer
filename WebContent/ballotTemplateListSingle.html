@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ui-grid/4.0.6/ui-grid.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="css/ssp.css" type="text/css" />
+<link rel="stylesheet" href="css/ballot-template-manager.css" type="text/css" />
+<link rel="stylesheet" href="ssp/table-view/css/ssp-table-view.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular/1.5.8/angular-sanitize.js"></script>
+<script src="vendor/angular/1.5.8/angular-route.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="vendor/angular-translate/2.15.1/angular-translate.min.js"></script>
+<script src="vendor/angular-translate/2.15.1/angular-translate-loader-partial.min.js"></script>
+
+<script src="vendor/ui-grid/4.0.6/ui-grid.js"></script>
+
+<script src="ssp/table-view/js/apps/ssp-table-view-app.js"></script>
+<script src="ssp/table-view/js/controllers/ssp-table-view-controller.js"></script>
+
+<script src="js/app/ballot-template-list-app.js"></script>
+<script src="js/controller/ballot-template-list-controller.js"></script>
+
+<script src="js/services/ballot-template-mgr-services.js"></script>
+
+
+</head>
+<body id="ballotDesignerApp" ng-app="ballotTemplateDesigner">
+    <div class="container-fluid" ng-controller="ballotTemplateListController as vm" style="padding-top: 10px">
+
+        <div class="row">
+            <div class="col-sm-12 ballot-template-manager">
+                <div id="main-view">
+
+                    <div style="margin-top: -20px;">
+                        <ssp-table-view on-table-ready="vm.onTableReady"></ssp-table-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="centered">
+            <button id="cancel" type="button" class="btn btn-xs"
+                ng-click="$event.stopPropagation(); vm.deleteBallotStyle(row, row.entity.custom_code)">
+                <span class="ssp-icon ssp-sm-icon ssp-delete-icon"></span>
+            </button>
+        </div>
+        <div class = "centered" ng-if="row.isSelected && grid.appScope.apiAdapter.getSelectedElements().length === 1">
+            <a href="" ng-click="grid.appScope.$parent.vm.deleteBallotStyle(row.entity.code)">
+                <i class="ssp-icon ssp-sm-icon ssp-delete-icon"></i>
+            </a>
+            &nbsp
+            <a href="" ng-click="grid.appScope.$parent.vm.duplicateBallotStyle(row.entity.code)">
+                <i class="ssp-icon ssp-sm-icon ssp-duplicate-icon"></i>
+            </a>
+        </div>
+        {{vm.tableAdapter.getSelectedElements()}}
+    </div>
+</body>
+</html>

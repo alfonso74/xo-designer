@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="5px" height="9px" viewBox="0 0 5 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>xhdpi/Icons/Chevron rigth</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="@Elements/Go-to-report" transform="translate(-131.000000, -8.000000)" fill="#FFFFFF">
+            <path d="M134.503055,8.2195122 L131.188391,11.9743261 C131.071283,12.1129653 131,12.3035944 131,12.5 C131,12.6964056 131.071283,12.8870347 131.188391,13.0198973 L134.503055,16.7804878 C134.625255,16.9191271 134.793279,17 134.966395,17 C135.139511,17 135.307536,16.9191271 135.424644,16.7804878 L135.806517,16.3472401 C135.928717,16.2143774 136,16.0237484 136,15.8273427 C136,15.6309371 135.928717,15.4403081 135.806517,15.3074454 L133.337067,12.5 L135.806517,9.69255456 C135.928717,9.55969191 136,9.3690629 136,9.17265725 C136,8.9762516 135.928717,8.78562259 135.806517,8.64698331 L135.424644,8.21373556 C135.307536,8.08087291 135.139511,8 134.966395,8" id="Icons/Chevron-rigth" transform="translate(133.500000, 12.500000) rotate(180.000000) translate(-133.500000, -12.500000) "></path>
+        </g>
+    </g>
+</svg>

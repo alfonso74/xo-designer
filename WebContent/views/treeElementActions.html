@@ -1,0 +1,21 @@
+<div ng-controller="rowController">
+    <div>Your name is : {{name}}</div>
+    Change your name : <input type='text' ng-model='name' />
+    <br>
+    <br>
+    <button type="button" ng-click="cancelEdit()">Cancel</button>
+    <button type="button" ng-click="ja()">JA!!</button>
+</div>
+
+<!-- 
+<div>
+    <div>Your name is : {{name}}</div>
+    Change your name : <input type='text' ng-model='name' />
+    <br>
+    <br>
+    <button type="button" ng-click="reverseName()">A</button>
+    <button type="button" ng-click="$scope.$parent.cancelEdit()">B</button>
+    <button type="button" ng-click="$parent.unSelectAllNodes()">C</button>
+    <button type="button" ng-click="scope.$parent.unSelectAllNodes()">D</button>
+</div>
+ -->

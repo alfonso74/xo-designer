@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-12 ballot-template-manager" ng-controller="ballotTemplateListController as vm">
+        <div id="main-view">
+
+            <!-- Title and search widget -->
+            <ssp-general-overview title="ems.ballot.template.manager.title" description="ems.ballot.template.manager.instructions" elements="{{elementsCounter}}">
+            </ssp-general-overview>
+            
+            <top-action-bar>
+                <actions>
+                    <div class="pull-right">
+                        <button class="btn btn-sm ssp-top-action-bar-button" 
+                            style="outline: 0"
+                            ng-click="vm.goToView('ballot-template-wizard')">
+                            <i class="ssp-icon ssp-md-icon ssp-add-icon with-right-margin"></i>
+                            <span translate="ems.ballot.template.manager.action.newTemplate"></span>
+                        </button>
+                    </div>
+                </actions>
+            </top-action-bar>
+            <div style="margin-top: -20px;">
+                <ssp-table-view on-table-ready="vm.onTableReady"></ssp-table-view>
+            </div>
+            {{vm.tableAdapter.getSelectedElements()}}
+        </div>
+    </div>
+</div>

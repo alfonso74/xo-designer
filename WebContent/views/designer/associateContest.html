@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Contest association</h3>
+</div>
+<div class="modal-body" id="modal-body">
+<!-- 
+    <ul>
+        <li ng-repeat="item in $ctrl.items">
+            <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+        </li>
+    </ul>
+    Selected: <b>{{ $ctrl.selected.item }}</b>
+ -->
+    
+    <div id="form-container">
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="modalCtrl.validationError">
+            <ul class="validation-errors" ng-bind-html="modalCtrl.validationError">
+            </ul>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal">
+        <label for="contest-class-select" class="col-xs-4 control-label">Contest class:</label>
+        <div class="col-xs-8">
+            <select id="contest-class-select" class="form-control form-content"
+                ng-options="contestClass as contestClass.name for contestClass 
+                in modalCtrl.contestClasses track by contestClass.code"
+                ng-model="modalCtrl.selected.contestClass"></select>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal">
+        <label for="eligible-options" class="col-xs-4 control-label">Eligible options:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="number"
+                value="" ng-model="modalCtrl.selected.previewData.eligibleOptions"
+                name="eligible-options" max-length="3"
+                id="eligible-options" required>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal">
+        <label for="vote-for" class="col-xs-4 control-label">Vote for:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="number"
+                value="" ng-model="modalCtrl.selected.previewData.voteFor"
+                name="write-in-options" max-length="3"
+                id="vote-for" required>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal" ng-show="modalCtrl.writeInEnabled">
+        <label for="write-in" class="col-xs-4 control-label">Write-in:</label>
+        <div class="col-xs-8">
+            <select id="write-in-select" class="form-control form-content"
+                ng-options="writeIn as writeIn.text for writeIn in modalCtrl.writeInOptions track by writeIn.code"
+                ng-model="modalCtrl.writeInOption"
+                ></select>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal">
+        <label for="columns-number" class="col-xs-4 control-label">Contest columns:</label>
+        <div class="col-xs-8">
+            <input class="form-control" type="number"
+                value="" ng-model="modalCtrl.selected.previewData.columns"
+                name="write-in-options" max-length="3"
+                id="columns-number" required>
+        </div>
+    </div>
+    <div class="form-group row form-horizontal" ng-show="!modalCtrl.writeInEnabled">
+        <label for="write-in" class="col-xs-12 control-label">* This ballot template doesn't have support for a write-in section.</label>
+    </div>
+    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="modalCtrl.cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="modalCtrl.ok()">OK</button>
+</div>

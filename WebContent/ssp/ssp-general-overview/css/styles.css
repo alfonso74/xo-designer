@@ -1,0 +1,19 @@
+.ssp-general-overview-container {
+    border-bottom: solid 1px #cedbdf;
+    margin: 0;
+    margin-top: 35px;
+    height: 65px;
+}
+
+.ssp-general-overview-counter {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.ssp-general-overview-counter-no-search {
+    margin-top: 40px;
+}
+
+.ssp-general-overview-margin-bottom {
+    margin-bottom: 20px;
+}

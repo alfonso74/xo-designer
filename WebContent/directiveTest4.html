@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-tooltip/css/ssp-tooltip.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="ssp/ssp-tooltip/js/apps/ssp-tooltip-app.js"></script>
+<script src="ssp/ssp-tooltip/js/controllers/ssp-tooltip-controller.js"></script>
+
+
+
+</head>
+<body ng-app="SspTooltip" ng-controller="PopoverDemoCtrl">
+    <hr/>
+
+    {{dynamicPopover}}
+    <hr/>
+    
+    <div>
+        <span ssp-tooltip-old="System modules" tooltip-type=1 tooltip-placement="top">SSP Tooltip test (type 1 - top)</span>
+    </div>
+    <div>
+        <span ssp-tooltip-old="System modules" tooltip-type=1 tooltip-placement="right">SSP Tooltip test (type 1 - right)</span>
+    </div>
+    <div>
+        <span ssp-tooltip-old="System modules" tooltip-type=1 tooltip-placement="bottom">SSP Tooltip test (type 1 - bottom)</span>
+    </div>
+    <div>
+        <span ssp-tooltip-old="System modules" tooltip-type=1 tooltip-placement="auto">SSP Tooltip test (type 1 - auto)</span>
+    </div>
+
+    </div>
+    <div>
+        <span ssp-tooltip="Tooltip directive V6" tooltip-type=1 tooltip-placement="right" tooltip-trigger="'click'">SSP Tooltip test (type 1 - new testing tt6)</span>
+    </div>
+    <div>
+        <span ssp-tooltip="Tooltip directive V6" tooltip-append-to-body="true" tooltip-type=2 tooltip-placement="right">SSP Tooltip test (type 2 - new testing tt6)</span>
+    </div>
+    <div>
+        <span ssp-tooltip="Tooltip directive" tooltip-append-to-body="true" tooltip-type=3 tooltip-placement="right" tooltip-title="THIS IS OPTIONAL" tooltip-trigger="'click'">SSP Tooltip test (type 3 - new testing tt6)</span>
+    </div>
+    <hr/>
+    
+    <span uib-tooltip="Hello!" tooltip-trigger="'click'" tooltip-placement="top">UIB-Tooltip test (using click)</span>
+    <br>
+    <span uib-popover="Hello de tamaño largo!" popover-trigger="'click'" popover-placement="auto">UIB-Popover test (using click)</span>
+    <br>
+    
+    <hr/>
+    
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." 
+        tooltip-type=2 tooltip-trigger="'click'" tooltip-placement="top">SSP Tooltip test (type 2 - top)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." 
+        tooltip-type=2 tooltip-trigger="'click'" tooltip-placement="right">SSP Tooltip test (type 2 - right)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." 
+        tooltip-type=2 tooltip-trigger="'click'" tooltip-placement="bottom">SSP Tooltip test (type 2 - bottom)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." 
+        tooltip-type=2 tooltip-trigger="'click'" tooltip-placement="auto">SSP Tooltip test (type 2 - auto)</h5>
+    </div>
+    
+    <hr/>
+    
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." tooltip-title="THIS IS OPTIONAL" 
+        tooltip-type=3 tooltip-trigger="'click'" tooltip-placement="top">SSP Tooltip test (type 3 - top)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." tooltip-title="THIS IS OPTIONAL" 
+        tooltip-type=3 tooltip-trigger="'click'" tooltip-placement="right">SSP Tooltip test (type 3 - right)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="Popover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." tooltip-title="THIS IS OPTIONAL" 
+        tooltip-type=3 tooltip-trigger="'click'" tooltip-placement="bottom">SSP Tooltip test (type 3 - bottom)</h5>
+    </div>
+    <div>
+        <h5 ssp-tooltip="xPopover heading asdlkaj aspeoifuaspoi asel kfajsñelkj fin3." tooltip-title="THIS IS OPTIONAL" 
+        tooltip-type=3 tooltip-trigger="'click'" tooltip-placement="auto">SSP Tooltip test (type 3 - auto)</h5>
+    </div>
+    
+    <button ng-click="popover.message='X!'">X</button>
+    <button ng-click="$window.console.log(popover.message)">Z</button>
+    <button ng-click="count = count + 1" ng-init="count=0">
+  Increment
+</button>
+<span>
+  count: {{count}}
+</span>
+<span>
+  message: {{popover.message}}
+</span>
+    
+</body>
+</html>

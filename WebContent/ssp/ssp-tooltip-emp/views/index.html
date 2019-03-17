@@ -1,0 +1,7 @@
+<div class="arrow" data-ng-if="originScope().popover.message"></div>
+
+<div class="popover-inner" data-ng-if="originScope().popover.message">
+    <div class="popover-content"
+      uib-tooltip-template-transclude="contentExp()"
+      tooltip-template-transclude-scope="originScope()"></div>
+</div>

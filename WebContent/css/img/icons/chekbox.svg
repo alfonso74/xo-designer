@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>xhdpi/chekbox</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="20" height="20" rx="3"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="@Checkbox/Checked">
+            <g id="Checbox-&amp;-radiobox/checkbox-(Unchecked)-Copy-7">
+                <g id="chekbox">
+                    <g id="default-checkbox">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke="#03576B" stroke-width="1" x="0.5" y="0.5" width="19" height="19" rx="3"></rect>
+                    </g>
+                    <path d="M16.8049536,6.8816231 C16.8049536,6.67886199 16.722341,6.47610088 16.5736383,6.33011288 L15.4501069,5.22709244 C15.3014042,5.08110444 15.0948727,5 14.8883412,5 C14.6818096,5 14.4752781,5.08110444 14.3265755,5.22709244 L8.90718865,10.5556544 L6.47837811,8.16307331 C6.32967542,8.01708531 6.12314391,7.93598087 5.9166124,7.93598087 C5.71008089,7.93598087 5.50354939,8.01708531 5.3548467,8.16307331 L4.23131529,9.26609375 C4.0826126,9.41208175 4,9.61484286 4,9.81760397 C4,10.0203651 4.0826126,10.2231262 4.23131529,10.3691142 L7.22189154,13.3050951 L8.34542295,14.4081155 C8.49412564,14.5541035 8.70065715,14.6352079 8.90718865,14.6352079 C9.11372016,14.6352079 9.32025167,14.5541035 9.46895436,14.4081155 L10.5924858,13.3050951 L16.5736383,7.43313332 C16.722341,7.28714532 16.8049536,7.08438421 16.8049536,6.8816231 L16.8049536,6.8816231 Z" id="Icons/Check_blue" fill="#03576B"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

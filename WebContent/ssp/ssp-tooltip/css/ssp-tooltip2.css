@@ -1,0 +1,137 @@
+/*
+.tooltip.top .tooltip-arrow {
+    border-top-color: red!important;
+}
+
+.ssp-wait {
+    content: url('../../img/wait.png')
+}
+.ssp-info-card-grey-icon {
+    content: url('../../img/icons/info-card-grey.svg')
+}
+.ssp-xs-icon {
+    display:        inline-block;
+    height:         10px;
+    vertical-align: middle;
+    width:          10px;
+}
+.ssp-sm-icon {
+    display:        inline-block;
+    height:         15px;
+    vertical-align: middle;
+    width:          15px;
+}
+*/
+/************************ Styles used for all the popovers ************************/
+[ssp-tooltip-popup].popover, [ssp-tooltip2-popup].popover, [ssp-tooltip3-popup].popover, 
+[ssp-tooltip4-popup].popover, [ssp-tooltip5-popup].popover, [ssp-tooltip6-popup].popover {
+    display: block !important;
+}
+
+.popover {
+    font-size: 12px;
+}
+
+.popover-content {
+    padding: 3px 8px;
+}
+
+.popover>.arrow {
+    border-width: 5px;
+}
+
+.popover.top {
+    margin-top: -7px;
+}
+.popover.top>.arrow {
+    bottom: -5px;
+    margin-left: -5px;
+}
+
+.popover.bottom {
+    margin-bottom: -7px;
+}
+.popover.bottom>.arrow {
+    top: -5px;
+    margin-left: -5px;
+}
+
+.popover.left {
+    margin-left: -7px;
+}
+.popover.left>.arrow {
+    right: -5px;
+    margin-top: -5px;
+}
+
+.popover.right {
+    margin-right: -7px;
+}
+.popover.right>.arrow {
+    left: -5px;
+    margin-top: -5px;
+}
+
+
+/******************************* Styles for popovers type "2" ***************************/
+
+[ssp-tooltip][tooltip-type="2"] .popover {
+    background-color: rgb(223, 244, 249);
+    border: 1px solid rgba(46, 92, 102,.7);
+}
+[ssp-tooltip][tooltip-type="2"] .popover.top>.arrow:after {
+    border-top-color: rgb(223, 244, 249);
+}
+[ssp-tooltip][tooltip-type="2"] .popover.bottom>.arrow:after {
+    border-bottom-color: rgb(223, 244, 249);
+}
+[ssp-tooltip][tooltip-type="2"] .popover.left>.arrow:after {
+    border-left-color: rgb(223, 244, 249);
+}
+[ssp-tooltip][tooltip-type="2"] .popover.right>.arrow:after {
+    border-right-color: rgb(223, 244, 249);
+}
+[ssp-tooltip][tooltip-type="2"] .popover.right>.arrow {
+    border-right-color: rgb(46, 92, 102);
+}
+
+/******************************* Styles for popovers type "3" ***************************/
+
+[ssp-tooltip][tooltip-type="3"] .popover {
+    background-color: rgb(238, 238, 238);
+}
+[ssp-tooltip][tooltip-type="3"] .popover-content {
+    padding: 0px 0px 10px 0px;
+}
+[ssp-tooltip][tooltip-type="3"] .popover.top>.arrow:after {
+    border-top-color: rgb(238, 238, 238);
+}
+[ssp-tooltip][tooltip-type="3"] .popover.bottom>.arrow:after {
+    border-bottom-color: rgb(238, 238, 238);
+}
+[ssp-tooltip][tooltip-type="3"] .popover.left>.arrow:after {
+    border-left-color: rgb(238, 238, 238);
+}
+[ssp-tooltip][tooltip-type="3"] .popover.right>.arrow:after {
+    border-right-color: rgb(238, 238, 238);
+}
+
+#title.row {
+  display: flex;
+  background: rgb(223, 244, 249);
+  padding: 0px 0px 0px 5px;
+}
+#title.row > div {
+  height:30px;
+  padding: 5px;
+}
+.fixed-column {
+  width:25px;
+}
+.fluid-column {
+  flex-grow: 1;
+}
+#details.row {
+  padding: 5px 0px 0px 10px;
+  font-size: 14px;
+}

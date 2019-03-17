@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-sm-12 ballot-template-manager" ng-controller="ballotTemplateListController as vm">
+        <div id="main-view">
+
+            <!-- Title and search widget -->
+            <ssp-general-overview overview-title="ems.ballot.template.manager.title" description="ems.ballot.template.manager.instructions" elements="{{elementsCounter}}">
+            </ssp-general-overview>
+            
+            <top-action-bar>
+                <actions>
+                    <div class="pull-right">
+                        <div class="btn-group" data-ng-if="vm.tableAdapter.getSelectedElements().length > 1">
+                            <ssp-popover-modal-button
+                                id="deleteBallotStylesButton"
+                                button-type="ssp-top-action-bar-button"
+                                button-style="padding: 5px 10px"
+                                popover-position="bottom-right"
+                                adapter="vm.tableAdapter"
+                                button-title="ems.ballot.template.manager.action.deleteTemplate"
+                                popover-content-template="ballot-template-manager/views/dialogs/deleteBallotStyleDialog.html"
+                                icon="ssp-icon ssp-md-icon ssp-delete-icon with-right-margin"
+                            ></ssp-popover-modal-button>
+                        </div>
+                        <button class="btn btn-sm ssp-top-action-bar-button" 
+                            style="outline: 0"
+                            ng-click="vm.goToView('ballot-template-wizard')">
+                            <i class="ssp-icon ssp-md-icon ssp-add-icon with-right-margin"></i>
+                            <span translate="ems.ballot.template.manager.action.newTemplate"></span>
+                        </button>
+                    </div>
+                </actions>
+            </top-action-bar>
+            <div style="margin-top: -20px;">
+                <ssp-list-view on-list-ready="vm.onTableReady"></ssp-list-view>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>Ballot orientation</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Footer-templates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="14.EA.-F-temp.3" transform="translate(-31.000000, -245.000000)" stroke="#4A4A4A">
+            <g id="Ballot-orientation" transform="translate(32.000000, 246.000000)">
+                <g id="Group">
+                    <g transform="translate(7.000000, 0.000000)">
+                        <g id="icon-ballot-orientation">
+                            <g id="portrait">
+                                <path d="M9.95469277,15.956216 C10.9093855,15.912432 11.2577837,15.1928485 11.2577837,14.6531251 L11.2577837,0.976875007 C11.2577837,0.437151566 10.8370152,0 10.3196155,0 L4.22175682,0 C3.83757695,0 3.36122206,0.205143752 3.08938783,0.488437504 L0.469318634,3.21636096 C0.197249861,3.49965471 -2.84217094e-14,3.99541878 -2.84217094e-14,4.39593753 L-2.84217094e-14,6" id="82"></path>
+                            </g>
+                        </g>
+                        <polygon id="82-path" stroke-linejoin="round" points="4 4 0 4 4 0"></polygon>
+                    </g>
+                    <g transform="translate(8.000000, 13.000000) rotate(-270.000000) translate(-8.000000, -13.000000) translate(2.000000, 5.000000)">
+                        <g id="icon-ballot-orientation">
+                            <g id="portrait">
+                                <path d="M11.2577837,14.6531251 L11.2577837,0.976875007 C11.2577837,0.437151566 10.8370152,0 10.3196155,0 L4.22175682,0 C3.83757695,0 3.36122206,0.205143752 3.08938783,0.488437504 L0.469318634,3.21636096 C0.197249861,3.49965471 -2.84217094e-14,3.99541878 -2.84217094e-14,4.39593753 L-2.84217094e-14,6 L-2.84217094e-14,14.6531251 C-2.84217094e-14,15.1928485 0.42076843,15.6300001 0.938168183,15.6300001 L10.3196155,15.6300001 C10.8370152,15.6300001 11.2577837,15.1928485 11.2577837,14.6531251 Z" id="82"></path>
+                            </g>
+                        </g>
+                        <polygon id="82-path" stroke-linejoin="round" points="4 4 0 4 4 0"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

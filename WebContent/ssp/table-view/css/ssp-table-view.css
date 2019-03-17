@@ -1,0 +1,99 @@
+ssp-table-view .ui-grid {
+    height: 450px;
+    background: none;
+}
+
+ssp-table-view .ui-grid-header {
+    padding: 0;
+}
+ssp-table-view .ui-grid-top-panel {
+    background: #e6e6e6;
+    height: 30px;
+}
+
+ssp-table-view .ui-grid-header-cell {
+    border: none !important;
+    font-size: 11px;
+    color: #464859;
+    padding-top: 3px;
+    padding-left: 5px;
+}
+
+ssp-table-view .ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-cell:last-child {
+    border-right: none;
+    top:-5px;
+}
+
+ssp-table-view .ui-grid-row {
+    border-radius: 3px;
+    box-shadow: 0 10px 5px 0 rgba(26, 102, 153, 0.2);
+    margin-bottom: 10px;
+}
+
+ssp-table-view .ui-grid-column-menu-button {
+    top: 3px;
+}
+
+ssp-table-view .ui-grid-cell {
+    border: solid 1px #e6e6e6;
+    border-right: solid 1px #e6e6e6 !important;
+    border-left: solid 1px #e6e6e6 !important;
+    padding: 3px;
+}
+
+ssp-table-view .ui-grid-row>.ui-grid-cell:last-child {
+    width:97%;
+}
+
+ssp-table-view .ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-cell:last-child {
+    border-right: none;
+    background-color: white;
+    padding-left: 0;
+}
+
+ssp-table-view .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell {
+    background-color: white;
+    border: solid 2px #00a2c7;
+}
+
+ssp-table-view .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-row-header-cell {
+    border-right: none;
+    border-left: solid 2px #00a2c7 !important;
+}
+
+ssp-table-view .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell:last-child:not(.ui-grid-row-header-cell) {
+    border-right: solid 2px #00a2c7 !important;
+}
+
+ssp-table-view .ui-grid-icon-ok {
+    font-size: 16px;
+    margin-top: -3px;
+    margin-left: -2px;
+}
+
+ssp-table-view .ui-grid-header-cell .ui-grid-icon-ok {
+    width: 20px;
+    height: 20px;
+    left: -5px;
+    top: -4px;
+    margin: 0;
+    position: relative;
+    color: #dedede;
+    opacity: 1;
+    text-shadow: -1px 0 #0c7b95, 0 1px #0c7b95, 1px 0 #0c7b95, 0 -1px #0c7b95;
+}
+
+ssp-table-view .ui-grid-selection-row-header-buttons.ui-grid-all-selected:before,
+ssp-table-view .ui-grid-selection-row-header-buttons.ui-grid-row-selected:before {
+    color: #00a2c7;
+}
+
+ssp-table-view .ssp-table-view-title {
+    font-size: 10px;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.ssp-table-title {
+    margin-left: 35px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-tooltip/css/ssp-tooltip.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="ssp/ssp-tooltip/js/apps/ssp-tooltip-app.js"></script>
+
+
+
+</head>
+<body ng-app="SspTooltip" ng-controller="TooltipDemoCtrl">
+    <div class="form-group">
+      <label>Tooltip placement</label>
+      <select class="form-control" ng-model="placement.selected" ng-options="o as o for o in placement.options"></select>
+    </div>
+    <button tooltip-placement="{{placement.selected}}" uib-tooltip="On the {{placement.selected}}" type="button" class="btn btn-default">Tooltip {{placement.selected}}</button>
+    
+    <hr/>
+    
+    {{dynamicTooltip}}
+    
+    <hr/>
+    
+    <p>
+      Pellentesque pharetra convallis posuere morbi leo urna,
+      <a href="#" uib-tooltip-template="'ssp/ssp-tooltip/popover.html'" tooltip-is-open="tooltipIsOpen2" tooltip-trigger="'click'">Custom template</a>
+      at elementum eu, facilisis sed odio morbi quis commodo odio.
+    </p>
+    
+    <br>
+    <button uib-popover-template="'myPopoverTemplate.html'" popover-title="JA2!" type="button" class="btn btn-default">Popover With Template</button>
+    
+    <hr/>
+    
+    <ssp-tooltip2>
+      Directive: ssp-tooltip2
+    </ssp-tooltip2>
+    <br>
+    <ssp-tooltip3>Custom Directive</ssp-tooltip3>
+    <hr/>
+    <p ssp-tooltip="ja">
+      Pellentesque pharetra convallis posuere morbi leo urna, at elementum eu, facilisis sed odio morbi quis commodo odio.
+    </p>
+    
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+        <div>dynamicPopover.content</div>
+        <div class="form-group">
+          <label>Popup Title:</label>
+          <input type="text" ng-model="dynamicPopover.title" class="form-control">
+        </div>
+    </script>
+</body>
+</html>

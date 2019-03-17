@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ui-select/0.19.6/select.min.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ui-select/0.18.1/selectize.default.css" type="text/css" />
+<link rel="stylesheet" href="css/ssp.css" type="text/css" />
+<link rel="stylesheet" href="css/ballot-designer.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular/1.5.8/angular-sanitize.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+<script src="vendor/ui-select/0.19.6/select.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="js/ballot-designer.js"></script>
+
+
+
+</head>
+<body id="ballotDesignerApp" ng-app="ballotDesigner">
+    <div class="wiki-content" ng-controller="ballotDesignerController as vm">
+    
+        <div class="col-xs-12" id="topPanel">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-9">
+                <button class="btn smtt-btn-default btn-sm" ng-click="vm.clearCanvas()" id="btnClearCanvas">
+                    <span class="fa fa-undo"> Clear canvas </span>
+                </button>
+                <button class="btn smtt-btn-default btn-sm" ng-click="vm.deleteCanvasObject()" id="btnDeleteObject">
+                    <span class="fa fa-eraser"> Delete element </span>
+                </button>
+                <button class="btn smtt-btn-default btn-sm" ng-click="vm.saveBallotStyle()" id="btnSaveBallotStype">
+                    <span class="fa fa-save"> Save template </span>
+                </button>
+                <button class="btn smtt-btn-default btn-sm" ng-click="vm.previewAsPdf()" id="btnPreviewPdf">
+                    <span class="fa fa-file-image-o"> Preview as PDF </span>
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.addCanvasPage()" id="btnAddCanvasPage">
+                    <span class="fa fa-file-image-o"> Add page </span>
+                </button>
+                <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.locateFreeAreas()" id="btnLocateSpace">
+                    <span class="fa fa-cog"> Locate space </span>
+                </button>
+                <!-- 
+                <button class="btn btn-default" data-target="#page-format-modal" data-toggle="modal">
+                    <span class="fa fa-cog"> Page format </span>
+                </button>
+                <button class="btn btn-default" data-target="#fiduciary-modal" data-toggle="modal">
+                    <span class="fa fa-cog"> Fiduciary marks </span>
+                </button>
+                 -->
+                <br>
+            </div>
+        </div>
+    
+        <div class="col-xs-3" id="leftPanel">
+        <!-- 
+            <div id="imageAbcd1234">
+                <img alt="" src="images/smart.logo.small.png"
+                    class="pointer">
+            </div>
+            <br>
+            -->
+            <div class="row col-xs-12">
+                <b>Ballot Style Name</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 30px">
+                <!-- /.col-lg-6 -->
+                <div>
+                    <div class="input-group">
+                        <input id="ballotStyleName" type="text" ng-model="vm.ballotStyleName" class="form-control">
+                        <div class="input-group-btn smtt-dropdown">
+                            <button type="button" title="Shows a dialog to load existing definitions"
+                                class="btn btn-default dropdown-toggle ballot-toolbar"
+                                data-toggle="dropdown">
+                                <i class="fa fa-bars" style="margin-right: 0px"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a data-target="#load-ballot-config-modal" ng-click="vm.loadBallotStyleAction()">Load ballot style</a></li>
+                                <li><a data-target="#delete-ballot-style-modal" ng-click="vm.deleteBallotStyleAction()" data-toggle="modal">Delete ballot style</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Ballot Size</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+                <select class="form-control form-content"
+                    ng-options="pageSize as pageSize.name for pageSize in vm.pageSizes track by pageSize.code"
+                    ng-model="vm.currentPageSize" ng-change="vm.resizeCanvas(vm.currentPageSize)"></select>
+            </div>
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Ballot Type</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+                <ui-select name="votingTypes" id="votingTypes" class="form-control form-content"
+                    multiple ng-model="vm.currentVotingTypes" title="Select the ballot type(s) this style applies to"
+                    remove-selected="false">
+                    <ui-select-match placeholder="Select one or more voting types...">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="votingType.code as votingType in vm.votingTypes">
+                        {{votingType.name}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Contest templates</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+            <!-- 
+                <div id="imgDummy01" class="col-xs-3 thumbnail">
+                    <img alt="" src=""
+                        class="pointer">
+                </div>
+                <div id="imgDummy02" class="col-xs-3 thumbnail">
+                    <img alt="" src=""
+                        class="pointer">
+                </div>
+                <div id="imgDummy03" class="col-xs-3 thumbnail">
+                    <img alt="" src=""
+                        class="pointer">
+                </div>
+                 -->
+                <div id="list"
+                    style="max-height: 85px; overflow-y: scroll">
+                    <button type="button" class="list-group-item"
+                        ng-repeat="template in vm.ballotTemplates.contestTemplates | filter:{type: 'CONTEST'}">
+                        <div id="BT{{template.code}}"
+                            data-type="boTemplate" draggable="true"
+                            ondragstart="vmScope.drag(event)">{{template.name}}</div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Issue templates</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+                <div id="list"
+                    style="max-height: 85px; overflow-y: scroll">
+                    <button type="button" class="list-group-item"
+                        ng-repeat="template in vm.ballotTemplates.issueTemplates | filter:{type: 'ISSUE'}">
+                        <div id="BT{{template.code}}"
+                            data-type="boTemplate" draggable="true"
+                            ondragstart="vmScope.drag(event)">{{template.name}}</div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Static templates</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+                <div id="list"
+                    style="max-height: 85px; overflow-y: scroll">
+                    <button type="button" class="list-group-item"
+                        ng-repeat="template in vm.ballotTemplates.staticTemplates | filter:{type: 'STATIC'}">
+                        <div id="BT{{template.code}}"
+                            data-type="boTemplate" draggable="true"
+                            ondragstart="vmScope.drag(event)">{{template.name}}</div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row col-xs-12" style="padding-bottom: 5px">
+                <b>Straight party templates</b>
+            </div>
+            <div class="row col-xs-12" style="padding-bottom: 20px">
+                <div id="list"
+                    style="max-height: 85px; overflow-y: scroll">
+                    <button type="button" class="list-group-item"
+                        ng-repeat="template in vm.ballotTemplates.straightPartyTemplates | filter:{type: 'STRAIGHT_PARTY'}">
+                        <div id="BT{{template.code}}"
+                            data-type="boTemplate" draggable="true"
+                            ondragstart="vmScope.drag(event)">{{template.name}}</div>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+         
+        <div class="col-xs-9" id="rightPanel">
+            <br>
+            <div>
+                <div>
+                    <button type="button" class="btn btn-default btn-xs ballot-toolbar" 
+                        ng-click="vm.viewPreviousCanvas()" id="previousCanvas">
+                        <span class="fa fa-arrow-left" aria-hidden="true"></span>
+                    </button>
+                    {{vm.canvas.currentPage + 1}} of {{vm.canvas.pages.length}}
+                    <button type="button" class="btn btn-default btn-xs ballot-toolbar"
+                        ng-click="vm.viewNextCanvas()" id="nextCanvas">
+                        <span class="fa fa-arrow-right" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs ballot-toolbar"
+                        ng-click="vm.addCanvasPage()" id="addCanvasPage">
+                        <span class="fa fa-plus-square" aria-hidden="true"> Add page </span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs ballot-toolbar"
+                        ng-click="vm.removeCanvasPage()" id="removeCanvasPage">
+                        <span class="fa fa-minus-square" aria-hidden="true"> Remove page </span>
+                    </button>
+                </div>
+                <div class="fabric-container" ondrop="vmScope.drop(event)" ondragover="vmScope.allowDrop(event)">
+                    <canvas class="fabric-canvas" fabric="fabric"></canvas>
+                </div>
+                <br>
+                <div class="row pull-left" style="padding-right: 5px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button class="btn btn-sm" title="Cancel the current modifications" ng-click="vm.clearLocalStorage()">Clear local storage</button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-xs-12">
+                    vm.shape = {{vm.shape}}
+                </div>
+                <div class="col-xs-12">
+                    selectedObject = {{fabric.selectedObject}}
+                </div>
+            </div>
+            <br>
+        </div>
+        
+        <div class="col-xs-9" id="rightPanelActionButtons">
+            
+        </div>
+        
+<!-- Fiduciary mark configuration dialog  -->
+        <div class="modal fade" id="fiduciary-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id="popup" class="container-fluid">
+                        <h1 class="modal-header header-title">Fiduciary marks definition</h1>
+                    </div>
+                    <div class="alert alert-danger" ng-show="validationError">{{vm.validationError}}</div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <h4>Mark definition (for rows)</h4>
+                                <hr style="margin-top: 0px" />
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Mark height:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="row-mark-height" required>
+                                </div>
+                                <label for="name" class="col-xs-3 control-label">Mark width:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="row-mark-width" required>
+                                </div>
+                            </div>
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Separation:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="row-mark-separation" required>
+                                </div>
+                            </div>
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Top margin:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="row-mark-top-margin" required>
+                                </div>
+                                <label for="name" class="col-xs-3 control-label">Bottom margin:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="row-mark-bottom-margin" required>
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <h4>Mark definition (for columns)</h4>
+                                <hr style="margin-top: 0px"/>
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Mark height:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="column-mark-height" required>
+                                </div>
+                                <label for="name" class="col-xs-3 control-label">Mark width:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="column-mark-width" required>
+                                </div>
+                            </div>
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Separation:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="column-mark-separation" required>
+                                </div>
+                            </div>
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Left margin:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="column-mark-left-margin" required>
+                                </div>
+                                <label for="name" class="col-xs-3 control-label">Right margin:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="column-mark-right-margin" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row modal-footer">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn btn-sm plain-round-button" title="Cancel" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-sm plain-round-button" title="Save">Ok</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<!-- Page format modal dialog  -->
+        <div class="modal fade" id="page-format-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id="popup" class="container-fluid">
+                        <h1 class="modal-header header-title">Page configuration</h1>
+                    </div>
+                    <div class="alert alert-danger" ng-show="validationError">{{vm.validationError}}</div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group row form-horizontal">
+                                <label for="name" class="col-xs-3 control-label">Page height:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="page-height" required>
+                                </div>
+                                <label for="name" class="col-xs-3 control-label">Page width:</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text"
+                                        value=""
+                                        name="name" max-length="7"
+                                        id="page-width" required>
+                                </div>
+                            </div>
+                            <div class="row modal-footer">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn btn-sm plain-round-button" title="Cancel" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-sm plain-round-button" title="Save">Ok</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<!-- Load ballot style modal dialog  -->
+        <div class="modal fade" id="load-ballot-config-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Load ballot style</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div id="list" 
+                            style="max-height: 125px; overflow-y: scroll">
+                            <button type="button" class="list-group-item"
+                                ng-repeat="ballotStyle in vm.ballotStyles" 
+                                ng-click="vm.selectBallotStyle(ballotStyle.code, ballotStyle.name)">
+                                <div id="{{ballotStyle.code}}"
+                                    data-type="ballotStyle">{{ballotStyle.name}}</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm" title="Cancel" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm" title="Ok" data-dismiss="modal" ng-click="vm.loadBallotStyle(vm.selectedBallotStyleCode)">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<!-- Delete ballot style modal dialog  -->
+        <div class="modal fade" id="delete-ballot-style-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Select the ballot style to delete</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="list" ng-show="vm.ballotStyles && vm.ballotStyles.length > 0"
+                            style="max-height: 125px; overflow-y: scroll">
+                            <button type="button" class="list-group-item"
+                                ng-repeat="ballotStyle in vm.ballotStyles" 
+                                ng-click="vm.selectBallotStyle(ballotStyle.code, ballotStyle.name)">
+                                <div id="{{ballotStyle.code}}"
+                                    data-type="ballotStyle">{{ballotStyle.name}}</div>
+                            </button>
+                        </div>
+                        <div id="list-no-styles-found" ng-show="vm.ballotStyles && vm.ballotStyles.length === 0"
+                            style="max-height: 125px; overflow-y: scroll">
+                            <button type="button" class="list-group-item">
+                                No ballot styles found
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm" title="Cancel" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm" title="Ok" data-dismiss="modal" ng-click="vm.deleteBallotStyle(vm.selectedBallotStyleCode)">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+<!-- Save ballot modal dialog  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="save-confirmation-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Save template</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>The ballot style has been saved successfully</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        
+        <!-- Validation error modal dialog  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="validation-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Ballot style validation</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{vm.errorMessage}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.errorMessage=''">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+    </div>
+</body>
+</html>

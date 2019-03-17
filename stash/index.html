@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-sm-12" id="ballot-template-manager" ng-controller="btmController as vm"
+     xmlns="http://www.w3.org/1999/html">
+        
+        <!-- Module title and search widget -->
+        <ssp-general-overview description="ballot-template-manager.header.instructions"
+                              elements="{{vm.elementsCountMessage}}"
+                              elements-tooltip="ballot-template-manager.header.total-elements.tooltip"
+                              search-adapter="vm.searchAdapter">
+            <overview-title>
+                <span ssp-tooltip="ballot-template-manager.header.title.tooltip"
+                      tooltip-type="1"
+                      tooltip-placement="auto"
+                      tooltip-append-to-body="true">
+                    {{'ballot-template-manager.header.title' | translate}}
+                </span>
+                <task-widget show-warning-message="true" task="$currentTask"></task-widget>
+            </overview-title>
+        </ssp-general-overview>
+        
+        <!-- Table global title -->
+        <div class="row" id="table-section-title">
+            <div class="col-xs-12">
+                <span class="h29" translate="ballot-template-manager.table.global.title"></span>
+            </div>
+        </div>
+        
+        <!-- Ballot template list grouped by election type -->
+        <div class="row" ng-repeat="electionType in vm.electionTypes">
+            <div class="col-xs-12">
+                <!-- Blue line section divisor -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <hr class="ssp-hr-separator section-separator"/>
+                    </div>
+                </div>
+                <!-- Section title and elements counter -->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a ng-click="vm.toggleElectionTypeDetails($index)"
+                                    ng-class="{'glyphicon glyphicon-chevron-up': vm.electionTypes[$index].showTree, 
+                                        'glyphicon glyphicon-chevron-down': !vm.electionTypes[$index].showTree}">
+                                </a>
+                                <span class="h15">{{electionType.displayName}} - {{$index}} - {{vm.electionTypes[$index].showTree}}</span>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left: 20px">
+                            <div class="col-xs-12">
+                                <span class="h31"
+                                    translate="ballot-template-manager.table.total-elements"
+                                    translate-values="{'counter' : vm.counters[vm.electionTypes[$index].customCode]}">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--TODO: replace align with bootstrap attribute!! -->
+                    <div class="col-xs-4" align="right">
+                        <div class="btn-group" style="border-left: 0.5px solid #979797">
+                            <ssp-popover-modal-button
+                                    id="addBallotTemplateBtn_{{electionType.customCode}}"
+                                    adapter="category"
+                                    button-type="ssp-top-action-bar-button"
+                                    button-title="ballot-template-manager.table.global.button.add-template"
+                                    button-tooltip="ballot-template-manager.table.global.button.add-template.tooltip"
+                                    popover-position="auto left"
+                                    popover-content-template="polling-place/views/create-polling-location.html"
+                                    icon="ssp-icon ssp-md-icon ssp-add-icon with-right-margin"
+                                    disabled-on="$currentTask.$isClosed"
+                            >
+                            </ssp-popover-modal-button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- The SSP tree (header and content) -->
+                <div class="ssp-tree" 
+                    style="padding-left: 35px; padding-right: 15px" 
+                    ng-show="vm.electionTypes[$index].showTree">
+                    <!-- Section embedded table header -->
+                    <div class="row table-header">
+                        <div class="col-xs-6">
+                            <span class="h28"
+                                ssp-tooltip="Language group column tooltip"
+                                tooltip-type="1"
+                                tooltip-append-to-body="true"
+                                tooltip-placemente="top">LANGUAGE GROUP
+                            </span>
+                        </div>
+                        <div class="col-xs-2">
+                            <span class="h28"
+                                ssp-tooltip="Status column tooltip"
+                                tooltip-type="1"
+                                tooltip-append-to-body="true"
+                                tooltip-placemente="top">STATUS
+                            </span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span class="h28"
+                                ssp-tooltip="Characteristics column tooltip"
+                                tooltip-type="1"
+                                tooltip-append-to-body="true"
+                                tooltip-placemente="top">CHARACTERISTICS
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Section embedded table details -->
+                    <div class="row table-body">
+                        <!-- Message to display while loading data in the table -->
+                        <div ng-if="vm.isLoading" class="row bottom-border no-padding">
+                            <span translate="ssp.loading.message"></span>
+                        </div>
+                        
+                        <ssp-tree on-tree-ready="vm.onTreeReady" show-menu="!$currentTask.$isClosed">
+                            <node>
+                                JA!
+                            </node>
+                        </ssp-tree>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div ng-if="row.isSelected && grid.appScope.apiAdapter.getSelectedElements().length === 1" style="text-align: center;">
+    <a href="" ng-click="grid.appScope.$parent.vm.duplicateBallotStyle(row.entity.code)"
+        title="Duplicate">
+        <i class="ssp-icon ssp-sm-icon ssp-duplicate-icon"></i>
+    </a>
+    &nbsp
+    <a href="" ng-click="grid.appScope.$parent.vm.deleteBallotStyle(row.entity.code)"
+        title="Delete ballot template">
+        <i class="ssp-icon ssp-sm-icon ssp-delete-icon"></i>
+    </a>
+    &nbsp
+    <ssp-popover-modal-button
+            id="deleteBallotStyleButton"
+            button-type="ssp-top-action-bar-button"
+            button-style="padding: 5px 10px"
+            popover-position="bottom-right"
+            adapter="grid.appScope.apiAdapter"
+            popover-content-template="views/dialogs/deleteBallotStyleDialog.html"
+            icon="ssp-icon ssp-sm-icon ssp-delete-icon">
+    </ssp-popover-modal-button>
+</div>

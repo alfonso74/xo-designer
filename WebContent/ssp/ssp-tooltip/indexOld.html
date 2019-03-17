@@ -1,0 +1,22 @@
+<span ng-if="tooltipType == undefined || tooltipType == 1" 
+    uib-popover={{sspTooltip}}
+    popover-class="arrow-sm" 
+    popover-trigger={{tooltipTrigger}} 
+    popover-placement={{tooltipPlacement}}>
+    <ng-transclude></ng-transclude>
+</span>
+
+<span ng-if="tooltipType == 2" 
+    uib-popover-template="'ssp/ssp-tooltip/tooltipType2.html'"
+    popover-class="arrow-sm" 
+    popover-trigger={{tooltipTrigger}} 
+    popover-placement={{tooltipPlacement}}>
+    <ng-transclude></ng-transclude>
+</span>
+
+<span ng-if="tooltipType == 3" 
+    uib-popover-template="'ssp/ssp-tooltip/tooltipType3.html'" 
+    popover-trigger={{tooltipTrigger}} 
+    popover-placement={{tooltipPlacement}}>
+    <ng-transclude></ng-transclude>
+</span>

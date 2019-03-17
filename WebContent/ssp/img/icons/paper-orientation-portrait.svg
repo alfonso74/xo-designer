@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="20px" viewBox="0 0 16 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="140" y="322" width="15.625" height="20"></rect>
+    </defs>
+    <g id="Footer-templates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="19.EA.-F-temp.3.5" transform="translate(-140.000000, -322.000000)">
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#787778" stroke-width="1" x="140.5" y="322.5" width="14.625" height="19"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

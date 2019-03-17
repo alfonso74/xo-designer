@@ -1,0 +1,76 @@
+/**
+ * styles.css
+ *
+ * Copyright (c) 2016 Smartmatic Intl.
+ * 1001 Broken Sound Parkway NW, Suite D
+ * Boca Raton FL 33487, U.S.A.
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * Smartmatic Intl. ("Confidential Information"). You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered
+ * into with Smartmatic Intl.
+ */
+
+.ssp-contextual-box {
+    align-items:     center;
+    display:         flex;
+    justify-content: center;
+    padding:         5px 15px;
+}
+.ssp-contextual-box.info {
+    background-color: #0c7b9514;
+    border-top:       1px solid #0c7b95;
+    border-bottom:    1px solid #0c7b95;
+}
+.ssp-contextual-box.success {
+    background-color: #88c44114;
+    border-top:       1px solid #88c441;
+    border-bottom:    1px solid #88c441;
+}
+.ssp-contextual-box.warning {
+    background-color: #ffc20014;
+    border-top:       1px solid #ffc200;
+    border-bottom:    1px solid #ffc200;
+}
+.ssp-contextual-box.failure {
+    background-color: #ed222414;
+    border-top:       1px solid #ed2224;
+    border-bottom:    1px solid #ed2224;
+}
+
+.ssp-contextual-box > div {
+    margin: 0;
+}
+.ssp-contextual-box > div.image-container {
+    height:     20px;
+    max-height: 20px;
+    max-width:  20px;
+    width:      20px;
+}
+.ssp-contextual-box > div.image-container > .the-icon {
+    background-color:       transparent;
+    background-attachment:  scroll;
+    background-position:    center;
+    background-repeat:      no-repeat;
+    background-size:        contain;
+    height:                 100%;
+    width:                  100%;
+}
+.ssp-contextual-box.info > div.image-container > .the-icon {
+    background-image: url('img/icons/info-small.svg');
+}
+.ssp-contextual-box.success > div.image-container > .the-icon {
+    background-image: url('img/icons/success-small.svg');
+}
+.ssp-contextual-box.warning > div.image-container > .the-icon {
+    background-image: url('img/icons/warning-small.svg');
+}
+.ssp-contextual-box.failure > div.image-container > .the-icon {
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2LjIgKDQ0NDk2KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5lcnJvciBzbWFsbDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJlcnJvci1zbWFsbCI+CiAgICAgICAgICAgIDxjaXJjbGUgaWQ9Ik92YWwiIHN0cm9rZT0iI0VEMjIyNCIgZmlsbD0iI0VEMjIyNCIgY3g9IjkiIGN5PSI5IiByPSI4Ij48L2NpcmNsZT4KICAgICAgICAgICAgPHBhdGggZD0iTTEwLjMxNTc4OTUsMTIuNTI0MjIxOCBDMTAuMzE1Nzg5NSwxMy4yNjEwMjE1IDkuNzU1MjY5MzMsMTMuODI0NTYxNCA5LjAwMDAyMDk4LDEzLjgyNDU2MTQgQzguMjQ0NzcyNjMsMTMuODI0NTYxNCA3LjY4NDIxMDUzLDEzLjI2MTAyMTUgNy42ODQyMTA1MywxMi41MjQyMjE4IEw3LjY4NDIxMDUzLDEyLjQ5MzUzNDIgQzcuNjg0MjEwNTMsMTEuNzYwMjE1MSA4LjI0NDc3MjYzLDExLjE5Mjk4MjUgOS4wMDAwMjA5OCwxMS4xOTI5ODI1IEM5Ljc1NTI2OTMzLDExLjE5Mjk4MjUgMTAuMzE1Nzg5NSwxMS43NTY3MzQ2IDEwLjMxNTc4OTUsMTIuNDkzNTM0MiBMMTAuMzE1Nzg5NSwxMi41MjQyMjE4IFoiIGlkPSJQYXRoLUNvcHktMyIgZmlsbD0iI0ZBRkFGQSI+PC9wYXRoPgogICAgICAgICAgICA8cGF0aCBkPSJNMTAuMzEwODcyNyw0Ljg5MTI4NjgzIEw5LjY3NjU0NDMsMTAuMTQwODQwNSBDOS42MzQwODk1NywxMC41MTg5NDYzIDkuMzY5MzA5MzUsMTAuNzU0Mzg2IDguOTk5OTY1NDUsMTAuNzU0Mzg2IEM4LjYzMDYyMTU1LDEwLjc1NDM4NiA4LjM2NTgwMDQ3LDEwLjUxNTc2OTkgOC4zMjMzNDU3MywxMC4xNDA4NDA1IEw3LjY4OTIyMTYxLDQuODg4MjY1MzkgQzcuNjQ2NjAzNDQsNC40ODIyNjk0MyA3Ljg3ODY1Mzg4LDQuMTc1NDM4NiA4LjI3NzU0MDM5LDQuMTc1NDM4NiBMOS43MTkxNjI0OCw0LjE3NTQzODYgQzEwLjExNzg4NTUsNC4xNzg2MTQ5OCAxMC4zNTMzMjc1LDQuNDg1MzI5NiAxMC4zMTA4NzI3LDQuODkxMjg2ODMgWiIgaWQ9IlBhdGgtQ29weS00IiBmaWxsPSIjRkFGQUZBIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=');
+}
+.ssp-contextual-box > div.message-container {
+    flex:         1;
+    padding-left: 10px;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>xhdpi/devices</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="11.5652174" height="8.26086957" rx="1"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="@Icon/admin_Devices">
+            <g id="devices">
+                <circle id="Oval-2" fill="#00A2C7" cx="17" cy="17" r="17"></circle>
+                <g id="Group-3" transform="translate(9.000000, 6.000000)">
+                    <g id="Group">
+                        <rect id="Rectangle-6" fill="#FFFFFF" x="0" y="0" width="12.3913043" height="19.826087" rx="1"></rect>
+                        <path d="M4.54347826,1.23913043 L7.84782609,1.23913043" id="Line" stroke="#00A2C7" stroke-linecap="square"></path>
+                        <path d="M5.36956522,18.5869565 L7.02173913,18.5869565" id="Line-Copy" stroke="#00A2C7" stroke-linecap="square"></path>
+                        <rect id="Rectangle-6" fill="#00A2C7" x="0.826086957" y="2.47826087" width="10.7391304" height="14.8695652" rx="1"></rect>
+                    </g>
+                    <g id="Group-2" transform="translate(7.434783, 9.086957)">
+                        <g id="Rectangle-7">
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            <rect stroke="#00A2C7" stroke-width="1" x="-0.5" y="-0.5" width="12.5652174" height="9.26086957" rx="1"></rect>
+                        </g>
+                        <rect id="Rectangle-7" fill="#00A2C7" x="0.826086957" y="0.826086957" width="9.91304348" height="6.60869565" rx="1"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

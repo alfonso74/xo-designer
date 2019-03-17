@@ -1,0 +1,35 @@
+.custom-item {
+    border-bottom: 2px solid #f3f3f3;
+}
+
+.custom-item .custom-item-title {
+    color: #666666;
+    font-weight: 600;
+}
+
+.custom-item .custom-item-body {
+    padding: 10px 0;
+}
+
+.images-item-upload {
+  width: 80%;
+  cursor: pointer;
+  padding-bottom: 10px;
+  -webkit-transition: .5s ease;
+  -webkit-transition: .5s ease;
+}
+
+hr {
+    margin-top: 23px;
+    margin-bottom: 23px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+}
+
+canvas {
+    border: 1px solid #ccc;
+}
+
+.fabric-container {
+    letter-spacing: normal;
+}

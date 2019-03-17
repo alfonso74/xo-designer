@@ -1,0 +1,30 @@
+<form name="forms.saveBallotTemplateForm" novalidate>
+    <div div class="container-fluid">
+        <div class="form-group">
+            <small>TEMPLATE NAME:</small>
+            <input id="template_name" name="template_name" class="form-control"
+                placeholder="Type name"
+                ng-model="vm.templateName"
+                ng-required="true"
+                ng-trim="true"
+                data-ng-class="{'ng-invalid-validation-error' : forms.saveBallotTemplateForm.template_name.$validationError.length > 0}">
+            <br>
+            <small>TEMPLATE DESCRIPTION:</small>
+            <textarea id="template_description" name="template_description" class="form-control" rows="5"
+                      placeholder="{{'ems.ballot.template.manager.save.dialog.description.placeholder' | translate}}"
+                      ng-model="vm.templateDescription"
+                      ng-required="false"
+                      ng-trim="true"
+                      data-ng-class="{'ng-invalid-validation-error' : forms.saveBallotTemplateForm.template_description.$validationError.length > 0}">
+            </textarea>
+            <br>
+            <div class="text-right"
+                 data-ng-if="vm.formHasInvalidData()">
+                <small class="text-danger" translate="ssp.error.required"></small>
+            </div>
+            <div class="text-right" data-ng-if="forms.saveBallotTemplateForm.template_name.$validationError">
+                <small class="text-danger" data-ng-repeat="error in forms.saveBallotTemplateForm.template_name.$validationError">{{error.message | translate:error}}<br /></small>
+            </div>
+        </div>
+    </div>
+</form>

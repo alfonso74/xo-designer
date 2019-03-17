@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="css/ssp.css" type="text/css" />
+<link rel="stylesheet" href="css/ballot-template-manager.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-general-overview/css/styles.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular/1.5.8/angular-sanitize.js"></script>
+<script src="vendor/angular/1.5.8/angular-route.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="vendor/angular-translate/2.15.1/angular-translate.min.js"></script>
+<script src="vendor/angular-translate/2.15.1/angular-translate-loader-partial.min.js"></script>
+
+<script src="vendor/angular-ui-router/1.0.5/angular-ui-router.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="ssp/ssp-general-overview/js/apps/ssp-general-overview-app.js"></script>
+<script src="ssp/ssp-general-overview/js/controllers/ssp-general-overview-controller.js"></script>
+<script src="ssp/wizard/js/apps/ssp-wizard-app.js"></script>
+<script src="ssp/wizard/js/controllers/ssp-wizard-controller.js"></script>
+
+<script src="js/app/ballot-template-mgr-app.js"></script>
+<script src="js/controller/ballot-template-wizard-controller0.js"></script>
+<script src="js/controller/ballot-template-designer-controller.js"></script>
+<script src="js/services/ballot-template-mgr-services.js"></script>
+
+
+
+</head>
+<body id="ballotDesignerApp" ng-app="ballotTemplateDesigner">
+    <div class="col-lg-10 col-lg-offset-1 col-md-12 wizard-election-container ng-scope" data-ng-controller="electoralEventController">
+        <ssp-wizard on-wizard-ready="onWizardReady">
+        </ssp-wizard>
+    </div>
+</body>
+</html>

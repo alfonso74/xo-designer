@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="19px" viewBox="0 0 16 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>ballot style generation copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Design-from-template" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="9.EA.-Des-temp.1" transform="translate(-34.000000, -414.000000)">
+            <g id="instruction-template" transform="translate(34.000000, 415.000000)">
+                <g id="ballot-style-generation" transform="translate(1.000000, 0.000000)">
+                    <path d="M12.9972287,0.0420412347 L1.00350451,8.8592175e-06 L1.00350451,8.8592175e-06 C0.451223151,-0.00192662779 0.00194162782,0.444216851 6.14081168e-06,0.996498209 C2.04694058e-06,0.997666374 3.23764754e-13,0.998834546 3.23741034e-13,1.00000272 L2.00093622e-14,15.9993276 L-5.55111512e-16,15.9993276 C-1.12790789e-14,16.5516124 0.44771525,16.9993276 1,16.9993276 L13,16.9993276 L13,16.9997208 C13.5522847,16.9997208 14,16.5520056 14,15.9997208 C14,15.9995898 14,15.9994587 13.9999999,15.9993276 L13.9937241,1.04164181 L13.9937241,1.04164181 C13.9935075,0.490878677 13.5479885,0.0439713893 12.9972287,0.0420412347 Z" id="82-copy" stroke="#4A4A4A"></path>
+                    <path d="M7,7 L12,7" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                    <path d="M7,5 L12,5" id="Line-3-Copy" stroke="#4A4A4A" stroke-linecap="square"></path>
+                    <path d="M7,3 L12,3" id="Line-3-Copy-2" stroke="#4A4A4A" stroke-linecap="square"></path>
+                    <path d="M2,8.5 L12,8.5" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                    <rect id="Rectangle-5" fill="#4A4A4A" x="2" y="2" width="3" height="5"></rect>
+                    <rect id="Rectangle-5-Copy" fill="#4A4A4A" x="2" y="12" width="10" height="3"></rect>
+                    <path d="M2,10.5 L12,10.5" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

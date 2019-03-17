@@ -1,0 +1,22 @@
+<div class="row">
+    <h3 class="text-center">
+        <strong translate="{{startMessageTitle}}"
+                translate-values="{translateValues: wizardScope.translateValues}">
+        </strong>
+    </h3>
+
+    <div class="text-center margin-bottom col-xs-12"
+         style="margin-top: 3em;margin-bottom: 2em;">
+        <p translate="{{startMessage}}"></p>
+    </div>
+
+    <div class="text-center margin-bottom">
+        <ul class="ssp-wizard-ul">
+            <li class="ssp-wizard-li start" data-ng-repeat="step in steps"
+                data-ng-if="step.displayStepOnHeader">
+                {{ step.index }}
+                <span class="text-center ssp-wizard-header-item text-uppercase">{{ step.shortTitle | translate }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

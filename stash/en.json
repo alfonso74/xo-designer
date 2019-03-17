@@ -1,0 +1,159 @@
+{
+  "ems.ballot.template.manager.task.name": "Manage ballot templates",
+
+  "ems.ballot.template.task.translate.text.precondition.message" : "Manage ballot templates task must be complete",
+  
+  "btm.electionType.GENERAL": "GENERAL ELECTION",
+  "btm.electionType.OPEN_PRIMARY": "OPEN PRIMARY ELECTION",
+  "btm.electionType.CLOSED_PRIMARY": "CLOSED PRIMARY ELECTION",
+  
+  "ballot-template-manager.header.title": "Manage ballot templates",
+  "ballot-template-manager.header.instructions": "To create a ballot template, click on \"Add template\"",
+  "ballot-template-manager.header.total-elements": "{{counters.ballotTemplates}} ballot templates",
+  "ballot-template-manager.header.title.tooltip": "Title tooltip text",
+  "ballot-template-manager.header.search.tooltip": "Search tooltip text",
+  "ballot-template-manager.header.total-elements.tooltip": "Total elements tooltip text",
+  
+  "ballot-template-manager.table.global.title": "BALLOT TEMPLATE",
+  "ballot-template-manager.table.global.button.add-template": "Add ballot template",
+  "ballot-template-manager.table.global.button.add-template.tooltip": "Add ballot template button tooltip",
+  
+  "ballot-template-manager.table.category.general-election.title": "GENERAL ELECTION",
+  "ballot-template-manager.table.total-elements": "{{counter.ballotTemplates}} template(s) - {{counter.languageGroups}} language group(s)",
+  "ballot-template-manager.table.column.language-group": "LANGUAGE GROUP",
+  "ballot-template-manager.table.column.status": "STATUS",
+  "ballot-template-manager.table.column.characteristics": "CHARACTERISTICS",
+  "ballot-template-manager.table.column.language-group.tooltip": "Language group tooltip",
+  "ballot-template-manager.table.column.status.tooltip": "Status tooltip",
+  "ballot-template-manager.table.column.characteristics.tooltip": "Characteristics tooltip",
+  
+  "btm.modal.create-ballot-template.title": "ADD BALLOT TEMPLATE",
+  "btm.modal.create-ballot-template.information": "To create a ballot template, set the ballot characteristics and click on \"Add\"",
+  "btm.modal.create-ballot-template.name": "TEMPLATE NAME",
+  "btm.modal.create-ballot-template.name.tooltip": "The template name tooltip :)",
+  
+  "btm.modal.create-ballot-template.common-properties.warning": "These properties are common to all language groups in this ballot templates.  To modify these properties, you need to edit the ballot template.",
+  
+  "btm.modal.create-ballot-template.success.title": "1 TEMPLATE WAS CREATED",
+  "btm.modal.create-ballot-template.success": "Template <b>{{ballotTemplate.name}}</b> was successfully created",
+  
+  "btm.modal.create-ballot-template.button.add": "Add",
+  "btm.modal.create-ballot-template.button.add.tooltip": "Tooltip for the 'Add' button",
+  
+  "btm.modal.create-ballot-template.validation.invalid-characters": "The following characters are not allowed: {{invalidChars}}",
+  "btm.modal.create-ballot-template.validation.min-characters": "Must be at least {{minChars}} characters long",
+  
+  "btm.modal.edit-ballot-template.title": "EDIT BALLOT TEMPLATE",
+  "btm.modal.edit-ballot-template.information": "To edit a ballot template, set the ballot characteristics and click on \"Save\"",
+  "btm.modal.edit-ballot-template.common-properties.warning": "These properties are common to all language groups in this ballot templates.  To modify these properties, you need to edit the ballot template.",
+  "btm.modal.edit-ballot-template.button.save": "Save",
+  "btm.modal.edit-ballot-template.button.save.tooltip": "Tooltip for the 'Save' button",
+  "btm.modal.edit-ballot-template.success.title": "1 TEMPLATE WAS EDITED",
+  "btm.modal.edit-ballot-template.success": "Template <b>{{ballotTemplate.name}}</b> was successfully edited",
+  
+  "btm.modal.edit-ballot-style.button.save.tooltip" : "Click here to apply changes",
+  "btm.modal.edit-ballot-style.button.cancel.tooltip" : "Click here to cancel the process",
+  
+  "btm.modal.copy-ballot-template.title": "COPY STYLES FROM...",
+  "btm.modal.copy-ballot-template.information": "To copy styles from a previously completed ballot template, select the template from which you want to copy and click on \"Copy styles\"",
+  "btm.modal.copy-ballot-template.source-name.tooltip": "Template name tooltip",
+  "btm.modal.copy-ballot-template.source-name": "TEMPLATE NAME",
+  "btm.modal.copy-ballot-template.button.copy": "Copy styles",
+  "btm.modal.copy-ballot-template.button.copy.tooltip": "Copy styles button tooltip",
+  "btm.modal.copy-ballot-template.success.title": "THE TEMPLATE STYLE WAS COPIED SUCCESSFULLY",
+  "btm.modal.copy-ballot-template.success": "The template style was copied from <b>{{ballotTemplate.name}}</b>. You need to complete the <b>{{languages}}</b> language(s) to finish the ballot template.",
+  
+  "btm.layout-designer.properties-section.title": "BALLOT PROPERTIES",
+  "btm.layout-designer.properties-section.information": "To design an area in the ballot, double click on the area",
+  
+  "btm.messages.delete.single-element.title" : "Are you sure you want to delete this item?",
+  "btm.messages.delete.single-element.message" : "This action will delete the selected element. Do you want to proceed?",
+  "btm.messages.delete.single-element.success" : "The item with name \"{{name}}\" was successfully deleted.",
+  "btm.messages.delete.single-element.failure" : "The item with name \"{{name}}\" could not be deleted.",
+  
+  "btm.buttons.ssp-confirm-dialog.ok.label" : "Delete",
+  "btm.buttons.table-row.delete.tooltip" : "Delete selected item",
+  "btm.buttons.table-row.edit.tooltip" : "Edit selected item",
+  "btm.buttons.table-row.copy.tooltip" : "Copy from...",
+  
+  "btm.ballot-area-editor.tools-section.information": "To edit the ballot properties, select the property in the template display and apply the desired styles to the text",
+  
+  "btm.messages.error.ballot-style-name.duplicated" : "Name is being used by another ballot template",
+  
+  
+  
+  
+  
+  "ems.ballot.template.manager.title": "Manage your ballot templates",
+  "ems.ballot.template.manager.instructions": "Please, create your ballot templates or edit the existing ones",
+  "ems.ballot.template.manager.templates.total": "{{totalBallotTemplates}} Templates",
+  "ems.ballot.template.manager.action.newTemplate": "Design new template",
+  "ems.ballot.template.manager.action.deleteTemplate": "Delete selected",
+  
+  "ems.ballot.template.manager.delete.ballot.style.confirm" : "This action will delete the selected ballot style. Do you want to proceed?",
+  "ems.ballot.template.manager.delete.ballot.styles.confirm" : "This action will delete {{amount}} ballot styles. Do you want to proceed?",
+  
+  "ems.ballot.template.manager.delete.ballot.style.success" : "The ballot style '{{name}}' was deleted",
+  "ems.ballot.template.manager.delete.ballot.style.failed" : "The ballot style \"{{name}}\" could not be deleted",
+  "ems.ballot.template.manager.delete.ballot.styles.failed" : "{{amount}} ballot styles could not be deleted",
+  "ems.ballot.template.manager.delete.ballot.styles.success" : "{{amount}} ballot styles were deleted",
+
+  "ems.ballot.template.manager.list.column.name": "Ballot template name",
+  "ems.ballot.template.manager.list.column.type": "Type",
+  "ems.ballot.template.manager.list.column.size": "Ballot size",
+  "ems.ballot.template.manager.list.column.orientation": "Ballot orientation",
+  "ems.ballot.template.manager.list.column.columns": "Columns",
+
+  "ems.ballot.template.designer.common.specifications": "SELECT SPECIFICATIONS",
+  "ems.ballot.template.designer.common.instructions": "Please, select the specifications to create a template",
+  
+  "ems.ballot.template.designer.newTemplate.title": "Set up general specifications and design ballot areas",
+  "ems.ballot.template.designer.newTemplate.instructions": "Here goes the instruction of this step of the wizard.",
+  "ems.ballot.template.designer.newTemplate.canvas.title": "PREVIEW",
+
+  "ems.ballot.template.designer.header.title": "HEADER TEMPLATE DESIGN",
+  "ems.ballot.template.designer.header.controls.title": "HEADER CONTROLS",
+  "ems.ballot.template.designer.header.canvas.title": "DESIGN AREA - HEADER",
+  
+  "ems.ballot.template.designer.footer.title": "FOOTER TEMPLATE DESIGN",
+  "ems.ballot.template.designer.footer.controls.title": "FOOTER CONTROLS",
+  "ems.ballot.template.designer.footer.canvas.title": "DESIGN AREA - FOOTER",
+  
+  "ems.ballot.template.designer.instructions.title": "SPECIAL INSTRUCTIONS TEMPLATE DESIGN",
+  "ems.ballot.template.designer.instructions.controls.title": "INSTRUCTION CONTROLS",
+  "ems.ballot.template.designer.instructions.canvas.title": "DESIGN AREA - SPECIAL INSTRUCTIONS",
+  
+  "ems.ballot.template.designer.contest.title": "CONTEST TEMPLATE DESIGN",
+  "ems.ballot.template.designer.contest.canvas.title": "CONTEST TEMPLATE",
+  
+  "ems.ballot.template.designer.pageNavigation.title": "PAGE NAVIGATION TEMPLATE DESIGN",
+  "ems.ballot.template.designer.pageNavigation.canvas.title": "PAGE NAVIGATION TEMPLATE",
+  
+  "ems.ballot.template.manager.button.cancel": "Cancel",
+  "ems.ballot.template.manager.button.saveBallotTemplate": "Save template",
+  
+  "ems.ballot.template.manager.save.dialog.title": "SAVE HEADER TEMPLATE",
+  "ems.ballot.template.manager.save.dialog.instructions": "Type a name and description for your template.",
+  "ems.ballot.template.manager.save.dialog.description.placeholder": "Type description",
+  "ems.ballot.template.manager.save.dialog.button.cancel": "Cancel",
+  "ems.ballot.template.manager.save.dialog.button.save": "Save",
+  
+  "ballot.wizard.start.title": "DESIGNING A NEW TEMPLATE",
+  "ballot.wizard.start.text": "Follow the steps below to design a new template",
+  
+  "ballot.wizard.general.short.title": "SET UP GENERAL SPECIFICATIONS\nAND DESIGN BALLOT AREAS",
+  "ballot.wizard.data.short.title": "REVIEW LANGUAGE GROUP TEMPLATES",
+  "ballot.wizard.review.short.title": "SAVE TEMPLATE",
+  
+  "ballot.wizard.general.title": "Set up general specifications and design ballot areas",
+  "ballot.wizard.data.title": "Review language groups template",
+  "ballot.wizard.review.title": "Save your template",
+  
+  "ballot.wizard.finish.title": "Template saved",
+  "ballot.wizard.finish.text": "The template '{{templateName}}' has been saved successfully",
+  "ballot.wizard.finish.button": "OK",
+  
+  "ballot.wizard.save.error": "Error saving the ballot template.",
+  "ballot.wizard.save.error.missing.name": "Please enter a name for the ballot style."
+}
+

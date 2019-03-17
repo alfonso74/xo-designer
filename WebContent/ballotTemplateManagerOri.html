@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ui-grid/4.0.6/ui-grid.css" type="text/css" />
+<link rel="stylesheet" href="vendor/ngToast/2.0.0/ngToast.min.css" type="text/css" />
+<link rel="stylesheet"
+    href="vendor/font-awesome/4.6.3/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="css/ssp.css" type="text/css" />
+<link rel="stylesheet" href="css/ballot-template-manager.css" type="text/css" />
+<link rel="stylesheet" href="ssp/ssp-general-overview/css/styles.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular/1.5.8/angular-sanitize.js"></script>
+<script src="vendor/angular/1.5.8/angular-route.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="vendor/angular-translate/2.15.1/angular-translate.min.js"></script>
+<script src="vendor/angular-translate/2.15.1/angular-translate-loader-partial.min.js"></script>
+
+<script src="vendor/angular-ui-router/1.0.5/angular-ui-router.min.js"></script>
+
+<script src="vendor/ui-grid/4.0.6/ui-grid.js"></script>
+
+<script src="vendor/ngToast/2.0.0/ngToast.min.js"></script>
+
+<script src="vendor/fabric/1.7.9/fabric.js"></script>
+
+<script src="js/ui-fabric/fabric-module.js"></script>
+<script src="js/ui-fabric/fabric-directive.js"></script>
+<script src="js/ui-fabric/fabric-factory.js"></script>
+<script src="js/ui-fabric/fabric-canvas-service.js"></script>
+<script src="js/ui-fabric/fabric-dirty-service.js"></script>
+<script src="js/ui-fabric/fabric-constants-service.js"></script>
+<script src="js/ui-fabric/window-factory.js"></script>
+
+<script src="ssp/ssp-general-overview/js/apps/ssp-general-overview-app.js"></script>
+<script src="ssp/ssp-general-overview/js/controllers/ssp-general-overview-controller.js"></script>
+<script src="ssp/wizard/js/apps/ssp-wizard-app.js"></script>
+<script src="ssp/wizard/js/controllers/ssp-wizard-controller.js"></script>
+<script src="ssp/table-view/js/apps/ssp-table-view-app.js"></script>
+<script src="ssp/table-view/js/controllers/ssp-table-view-controller.js"></script>
+
+<script src="js/app/ballot-template-mgr-app.js"></script>
+<script src="js/controller/ballot-template-mgr-controller-ori.js"></script>
+<script src="js/services/ballot-template-mgr-services.js"></script>
+
+
+
+</head>
+<body id="ballotDesignerApp" ng-app="ballotTemplateDesigner">
+    <div class="container-fluid" ng-controller="ballotTemplateManagerController as vm" style="padding-top: 10px">
+        <div id="mainView" ng-show="vm.currentView === 'main'">
+            <br />
+                
+            <!-- Title and search widget -->
+            <div class="row" id="topPanel">
+                <div class="col-xs-3">
+                    <div class="row">
+                        <h4>Template Designer</h4>
+                    </div>
+                </div>
+                <div class="col-xs-9" align="right">
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.goToWizard()" id="btnWizard">
+                        Wizard
+                    </button>
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('newTemplate')" id="btnHeaderTemplate">
+                        Design new template
+                    </button>
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('header')" id="btnHeaderTemplate">
+                        <span class="fa fa-save"> Header </span>
+                    </button>
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('footer')" id="btnFooterTemplate">
+                        <span class="fa fa-undo"> Footer </span>
+                    </button>
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('instructions')" id="btnInstructionsTemplate">
+                        <span class="fa fa-trash"> Instructions </span>
+                    </button>
+                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.changeView('contest')" id="btnContestTemplate">
+                        <span class="fa fa-bomb"> Contest </span>
+                    </button>
+                    <button
+                        uib-popover-template="'views/designer/popupNewBallotTemplate.html'"
+                        popover-placement="auto bottom"
+                        type="button" class="btn btn-default smtt-btn-default btn-sm">New ballot
+                        template</button>
+                    <!-- Single button -->
+                    <div class="btn-group">
+                        <button type="button"
+                            class="btn btn-default smtt-btn-default btn-sm"
+                            data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" style="outline: 0">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="" ng-click="vm.changeView('header')">Header template</a></li>
+                            <li><a href="" ng-click="vm.changeView('footer')">Footer template</a></li>
+                            <li><a href="" ng-click="vm.changeView('instructions')">Instructions template</a></li>
+                            <li><a href="" ng-click="vm.changeView('pageNavigation')">Page nav template</a></li>
+                            <li><a href="" ng-click="vm.changeView('contest')">Contest template</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <hr>
+                <hr>
+            </div>
+            
+            <div class="col-xs-3" id="leftPanel">
+                <small>FILTER</small>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row col-xs-12">
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.templateType.open">
+                                    <uib-accordion-heading> <span class="ssp-icon ssp-sm-icon ssp-gear"></span>Template Type <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.accordion.templateType.open, 
+                                        'fa fa-angle-right': !vm.accordion.templateType.open}"></i>
+                                    </uib-accordion-heading> 
+                                    <div ng-repeat="pageSize in vm.pageSizes track by pageSize.code">
+                                        <input type="radio" 
+                                            ng-model="vm.currentPageSize" 
+                                            ng-value="pageSize"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbsp{{pageSize.name}}</input>
+                                            <span class="ssp-icon ssp-sm-icon ssp-gear"></span>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotSize.open">
+                                    <uib-accordion-heading> Ballot Size <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.accordion.ballotSize.open, 
+                                        'fa fa-angle-right': !vm.accordion.ballotSize.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Portrait"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbspPortrait</input>
+                                            <span class="ssp-icon ssp-sm-icon ssp-gear"></span>
+                                    </div>
+                                    <div>
+                                        <input type="radio" ng-model="vm.currentOrientation" value="Landscape"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">&nbsp&nbspLandscape</input>
+                                            <span class="ssp-icon ssp-sm-icon ssp-gear"></span>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotOrientation.open">
+                                    <uib-accordion-heading> Ballot Orientation <i
+                                        class="pull-right"
+                                        ng-class="{'fa fa-angle-down': vm.accordion.ballotOrientation.open, 
+                                        'fa fa-angle-right': !vm.accordion.ballotOrientation.open}"></i>
+                                    </uib-accordion-heading>
+                                    This is just some content to illustrate fancy
+                                    headings.
+                                </div>
+                            </uib-accordion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="ballot-designer-view" ng-show="vm.currentView !== 'main'">
+            <div id="ballot-designer-header">
+                <!-- Title and general instructions widget -->
+                <ssp-general-overview title="{{'ems.ballot.template.designer.' + vm.currentView + '.title'}}" 
+                    description="ems.ballot.template.designer.newTemplate.instructions">
+                </ssp-general-overview>
+                
+                <div id="bottomPanel" class="row">
+                    <div id="leftPanel" class="col-xs-3 ballot-design-no-side-padding">
+                        <div class="col-xs-12 ballot-design-gen-sidebar-header">
+                            <span translate="ems.ballot.template.designer.common.specifications"
+                                  class="text-uppercase"></span>
+                        </div>
+                        <div class="col-xs-12">
+                            <uib-accordion close-others="true">
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotSize.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-paper-size"></span> 
+                                        Ballot size
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.accordion.ballotSize.open, 
+                                            'fa fa-angle-down': !vm.accordion.ballotSize.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="pageSize in vm.pageSizes track by pageSize.code">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentPageSize" 
+                                            ng-value="pageSize"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{pageSize.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="pageSize.iconClass"></span>
+                                        </input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotOrientation.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-paper-orientation"></span> 
+                                        Ballot orientation
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.accordion.ballotOrientation.open, 
+                                            'fa fa-angle-down': !vm.accordion.ballotOrientation.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="element in vm.ballotOrientation">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentOrientation" 
+                                            ng-value="element"
+                                            ng-change="vm.resizeCanvas(vm.currentPageSize, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{element}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon ssp-paper-orientation-{{element}}"></span>
+                                        </input>
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotColumns.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-ballot-columns"></span>
+                                        Ballot columns
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.accordion.ballotColumns.open, 
+                                            'fa fa-angle-down': !vm.accordion.ballotColumns.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div class="custom-item"><b>Front</b></div>
+                                    <div ng-repeat="ballotColumn in vm.ballotColumns track by ballotColumn.id">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentBallotColumns" 
+                                            ng-value="ballotColumn"
+                                            ng-change="vm.displayColumnSeparators(ballotColumn)">
+                                            <span class="custom-item-detail">{{ballotColumn.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="ballotColumn.iconClass"></span>
+                                        </input>
+                                    </div>
+                                    <br>
+                                    <div class="custom-item"><b>Back</b></div>
+                                    <div ng-repeat="element in vm.ballotColumns track by element.id">
+                                        <input disabled type="checkbox" value={{element.name}} ng-model="element.selected"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-click=vm.drawElement(element)>
+                                            <span class="custom-item-detail">{{element.name}}</span>&nbsp&nbsp
+                                            <span class="ssp-icon" ng-class="element.iconClass"></span> 
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotAreas.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-ballot-areas"></span>
+                                        Ballot areas
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.accordion.ballotAreas.open, 
+                                            'fa fa-angle-down': !vm.accordion.ballotAreas.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="element in vm.ballotAreas track by element.id">
+                                        <input type="checkbox" value={{element.name}} ng-model="element.selected"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;"
+                                            ng-click=vm.drawElement(element)>
+                                            <span class="custom-item-detail">{{element.name}}</span> 
+                                    </div>
+                                </div>
+                                
+                                <div uib-accordion-group class="panel-default"
+                                    is-open="vm.accordion.ballotPages.open">
+                                    <uib-accordion-heading>
+                                        <span class="ssp-icon ssp-md-icon ssp-ballot-pages"></span>
+                                        Ballot pages
+                                        <i class="pull-right"
+                                            ng-class="{'fa fa-angle-up': vm.accordion.ballotPages.open, 
+                                            'fa fa-angle-down': !vm.accordion.ballotPages.open}">
+                                        </i>
+                                    </uib-accordion-heading>
+                                    <div ng-repeat="ballotPage in vm.ballotPages track by ballotPage.id">
+                                        <input type="radio"
+                                            style="margin: 0px; margin-left: 15px; vertical-align: middle; position: inherit;" 
+                                            ng-model="vm.currentBallotPage" 
+                                            ng-value="ballotPage"
+                                            ng-change="vm.resizeCanvas(vm.currentballotPage, vm.currentOrientation)">
+                                            <span class="custom-item-detail">{{ballotPage.name}}</span>
+                                        </input>
+                                    </div>
+                                </div>
+                            </uib-accordion>
+                        </div>
+                        
+                    </div>
+                        
+                    <div id="canvasPanel" class="col-xs-9">
+                        <div id="canvas-title" class="row">
+                            <small class="ballot-design-gen-preview-header" style="margin-bottom: 0px; margin-left: 10px; display: block;"
+                                translate="{{'ems.ballot.template.designer.' + vm.currentView + '.canvas.title'}}">HEADER TEMPLATE
+                            </small>
+                        </div>
+                        <!-- 
+                        <div class="cos-xs-12 fabric-container" style="background-color: white; height: calc(100vh - 275px);">
+                         -->
+                        <div id="canvas-body" class="col-xs-12 fabric-container ballot-design-gen-preview-body">
+                            <div class="row" id="canvas-section">
+                                <canvas class="fabric-canvas" fabric="fabric" name="canvasX" id="canvasX"></canvas>
+                            </div>
+                            <div class="row" id="actions-section" ng-style="{'width': fabric.grid.width}">
+                                <div class="pull-right" style="margin-top: 5px">
+                                    <button id="template-cancel" type="button" ng-click="vm.saveBallotStyle('BS33')"
+                                        class="btn btn-default smtt-btn-default btn-sm text-capitalize with-inner-padding"
+                                        >BS33
+                                    </button>
+                                    <button id="template-cancel" type="button" ng-click="vm.reloadPage()"
+                                        class="btn btn-default smtt-btn-default btn-sm text-capitalize with-inner-padding"
+                                        translate="ems.ballot.template.manager.button.cancel">Cancel
+                                    </button>
+                                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.zoomIn()" id="btnZoomIn">
+                                        <span class="fa fa-save" style="font-size: inherit;"> Zoom in </span>
+                                    </button>
+                                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.zoomOut()" id="btnZoomOut">
+                                        <span class="fa fa-save" style="font-size: inherit;"> Zoom out </span>
+                                    </button>
+                                    <button class="btn btn-default smtt-btn-default btn-sm" ng-click="vm.saveTemplateTmp()" id="btnSaveTemplate">
+                                        <span class="fa fa-save" style="font-size: inherit;"> Save </span>
+                                    </button>
+                                    <ssp-popover-modal-button disabled-on="false"
+                                              ng-if="true"
+                                              id="template-save"
+                                              adapter=""
+                                              button-type="btn-primary"
+                                              button-title="ems.ballot.template.manager.button.saveBallotTemplate"
+                                              popover-position="top-right"
+                                              popover-content-template="views/dialogs/saveBallotTemplate.html">
+                                    </ssp-popover-modal-button>
+                                    <!-- 
+                                    <ssp-popover-modal-button
+                                              id="template-save2"
+                                              adapter=""
+                                              button-type="btn btn-default btn-xs"
+                                              button-title=""
+                                              popover-position="top-right"
+                                              popover-content-template="views/dialogs/saveBallotTemplate.html"
+                                              icon="glyphicon glyphicon-floppy-disk">
+                                    </ssp-popover-modal-button>
+                                     -->
+                                </div>
+                                <br>
+                                <br>
+                                <div class="well well-sm">
+                                    Shape: {{vm.shape | json}}
+                                </div>
+                                A: {{fabric.grid.width}} - B: {{$scope.fabric.grid.width}} - C: {{$scope.$id}} - D: {{$parent.$id}} - E: {{$id}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-view></ng-view>
+    </div>
+</body>
+</html>

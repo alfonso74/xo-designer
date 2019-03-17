@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="20px" viewBox="0 0 16 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>ballots sizes@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Footer-templates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="14.EA.-F-temp.3" transform="translate(-37.000000, -203.000000)" fill="#4A4A4A">
+            <g id="ballots-sizes" transform="translate(37.000000, 203.000000)">
+                <g id="Group-8">
+                    <g>
+                        <g id="Paper" transform="translate(0.000000, 4.292818)">
+                            <path d="M11.7743423,14.4039223 L11.7743423,0.960261487 C11.7743423,0.429717015 11.3342671,0 10.7931267,0 L4.41547035,0 C4.01366255,0 3.51545031,0.201654912 3.23114308,0.480130743 L0.49085312,3.16166094 C0.206300587,3.44013678 -2.84217094e-14,3.92746948 -2.84217094e-14,4.32117669 L-2.84217094e-14,14.4039223 C-2.84217094e-14,14.9344668 0.440075211,15.3641838 0.981215633,15.3641838 L10.7931267,15.3641838 C11.3342671,15.3641838 11.7743423,14.9344668 11.7743423,14.4039223 Z M10.793372,14.4039223 L10.7931267,0.960261487 L4.41547035,0.960261487 L4.41547035,3.3609152 C4.41547035,3.89145967 3.97514983,4.32117669 3.43425471,4.32117669 L0.981215633,4.32117669 L0.981215633,14.4039223 L10.793372,14.4039223 Z M3.43425471,3.3609152 L1.67493509,3.3609152 L3.43425471,1.63964649 L3.43425471,3.3609152 Z" id="82"></path>
+                        </g>
+                        <g id="Group-5">
+                            <rect id="Rectangle-10" x="0.981215633" y="1.14475157" width="10.3027641" height="1.14475157"></rect>
+                            <rect id="Rectangle-10" x="11.2839798" y="0" width="1" height="3.43425471" rx="0.5"></rect>
+                            <rect id="Rectangle-10" x="0" y="0" width="1" height="3.43425471" rx="0.5"></rect>
+                        </g>
+                        <g id="Group-5" transform="translate(12.755803, 4.292818)">
+                            <rect id="Rectangle-10" x="0.981215633" y="0.957404178" width="1" height="13.1643074"></rect>
+                            <rect id="Rectangle-10" x="0" y="14.1217116" width="2.9436469" height="1" rx="0.5"></rect>
+                            <rect id="Rectangle-10" x="0" y="0" width="2.9436469" height="1" rx="0.5"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

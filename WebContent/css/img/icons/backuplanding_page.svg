@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="35px" viewBox="0 0 34 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>xhdpi/backup</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="@Icon/admin_Backup">
+            <g id="backup">
+                <circle id="Oval-2" fill="#00A2C7" cx="17" cy="17.1993958" r="17"></circle>
+                <g id="Group-4" transform="translate(9.000000, 8.000000)">
+                    <g id="Group-3">
+                        <g id="Group" stroke="#FFFFFF">
+                            <g id="Data">
+                                <path d="M14.4,14.4 C14.4,12.030037 14.4,3.83980486 14.4,2.54117647 C14.4,0.979676949 10.9775689,0 7.23363282,0 C3.48969672,0 0.067265639,0.979676949 0.067265639,2.54117647" id="Oval-5" stroke-width="2"></path>
+                                <path d="M14.4,5.08235294 C14.4,3.52717528 10.9624113,2.54117647 7.23363282,2.54117647 C3.50485436,2.54117647 0.067265639,3.52717528 0.067265639,5.08235294 L0.067265639,16.9411765" id="Oval-5" stroke-width="2" transform="translate(7.233633, 9.741176) scale(1, -1) translate(-7.233633, -9.741176) "></path>
+                                <path d="M14.126331,4.51769328 C13.5349028,2.9215863 10.353874,2.54117647 6.99067712,2.54117647 C3.75879487,2.54117647 0.745665604,2.89246034 3.08553183e-12,4.33624545" id="Oval-5" transform="translate(7.063165, 3.529435) scale(1, -1) translate(-7.063165, -3.529435) "></path>
+                                <path d="M14.126331,8.47063446 C13.5349028,6.87452748 10.353874,6.49411765 6.99067712,6.49411765 C3.75879487,6.49411765 0.745665604,6.84540152 3.08553183e-12,8.28918663" id="Oval-5-Copy" transform="translate(7.063165, 7.482376) scale(1, -1) translate(-7.063165, -7.482376) "></path>
+                                <path d="M14.126331,12.4235756 C13.5349028,10.8274687 10.353874,10.4470588 6.99067712,10.4470588 C3.75879487,10.4470588 0.745665604,10.7983427 3.08553183e-12,12.2421278" id="Oval-5-Copy-2" transform="translate(7.063165, 11.435317) scale(1, -1) translate(-7.063165, -11.435317) "></path>
+                            </g>
+                        </g>
+                        <circle id="Oval-7" stroke="#00A2C7" stroke-width="2" fill="#00A2C7" cx="13.5" cy="14.4" r="4.5"></circle>
+                        <polygon id="Triangle" stroke="#00A2C7" stroke-width="2" points="9.9 18 7.2 14.4 12.6 14.4"></polygon>
+                        <g id="Group-2" transform="translate(7.200000, 10.800000)">
+                            <path d="M6.3,7.2 C8.2882251,7.2 9.9,5.5882251 9.9,3.6 C9.9,1.6117749 8.2882251,0 6.3,0 C4.3117749,0 2.7,1.6117749 2.7,3.6" id="Oval-6" stroke="#FFFFFF" stroke-width="2"></path>
+                            <polygon id="Triangle" fill="#FFFFFF" points="2.7 7.2 0 3.6 5.4 3.6"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

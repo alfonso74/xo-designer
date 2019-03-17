@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="refresh">
+
+<link rel="stylesheet" href="css/directive-test.css" type="text/css" />
+
+<script src="vendor/jquery/3.1.0/jquery-3.1.0.min.js"></script>
+<script src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="vendor/angular/1.5.8/angular.min.js"></script>
+<script src="vendor/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+
+<script src="js/app/directive-test-app2.js"></script>
+
+
+
+</head>
+<body id="directiveTestApp2" ng-app="test">
+    
+    <div ng-controller="Ctrl1">
+        <h2 ng-click="reverseName()">Hey {{name}}, Click me to reverse your name</h2>
+        <div my-directive class='directive'></div>
+        <br>
+        <a href="#" ng-click="reverseName()">ICON</a>
+    </div>
+</body>
+</html>

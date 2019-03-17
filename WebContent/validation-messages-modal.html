@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ selectedEntity.name | translate }}</h3>
+    <h3 class="modal-title">{{ validationStep | translate }}</h3>
+</div>
+<div class="modal-body modal-body-scroll">
+    <div class="modal-body-smtt">
+        <div data-ng-if="selectedEntity.validationErrors.length > 0">
+            <div>
+                <i data-ng-click="showErrors = !showErrors" style="cursor: pointer;" class="fa" data-ng-class="{'fa-caret-down' : showErrors, 'fa-caret-right' : !showErrors }"></i>
+                <i data-ng-click="showErrors = !showErrors" class="fa fa-times-circle" style="color: red;font-size: 20px;"></i>
+                <span translate="bulk.load.errors" translate-values="{amount : selectedEntity.validationErrors.length}"></span>
+            </div>
+            <div data-ng-show="showErrors" data-ng-repeat="error in selectedEntity.validationErrors" class="col-xs-12" data-ng-class-odd="'odd'">
+                <span>{{ 'line.message' | translate:{line: error.line} }}</span>
+                <span>{{ error.messageKey | translate:{parameter: error.params} }}</span>
+            </div>
+        </div>
+        <div data-ng-if="selectedEntity.validationWarnings.length > 0">
+            <div>
+                <i data-ng-click="showWarnings = !showWarnings" style="cursor: pointer;" class="fa" data-ng-class="{'fa-caret-down' : showWarnings, 'fa-caret-right' : !showWarnings }"></i>
+                <i data-ng-click="showWarnings = !showWarnings" class="fa fa-exclamation-triangle" style="color: rgb(241, 196, 15);font-size: 20px;"></i>
+                <span translate="bulk.load.warnings" translate-values="{amount : selectedEntity.validationWarnings.length}"></span>
+            </div>
+            <div data-ng-show="showWarnings" data-ng-repeat="warnings in selectedEntity.validationWarnings" class="col-xs-12" data-ng-class-odd="'odd'">
+                <span>{{ 'line.message' | translate:{line: warnings.line} }}</span>
+                <span>{{ warnings.messageKey | translate:{parameter: warnings.params} }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button class="btn btn-sm plain-round-button" data--disabled="savingDistrict" data-ng-click="closeModal()" translate="ssp.cancel"></button>
+    </div>
+</div>

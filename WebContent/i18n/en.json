@@ -1,0 +1,72 @@
+{
+  "ems.ballot.template.manager.task.name": "Ballot templates manager",
+  
+  "ems.ballot.template.manager.title": "Manage your ballot templates",
+  "ems.ballot.template.manager.instructions": "Please, create your ballot templates or edit the existing ones",
+  "ems.ballot.template.manager.templates.total": "{{totalBallotTemplates}} Templates",
+  "ems.ballot.template.manager.action.newTemplate": "Design new template",
+
+  "ems.ballot.template.manager.list.column.name": "Ballot template name",
+  "ems.ballot.template.manager.list.column.type": "Type",
+  "ems.ballot.template.manager.list.column.size": "Ballot size",
+  "ems.ballot.template.manager.list.column.orientation": "Ballot orientation",
+  "ems.ballot.template.manager.list.column.columns": "No. of columns",
+
+  "ems.ballot.template.designer.common.specifications": "SELECT SPECIFICATIONS",
+  "ems.ballot.template.designer.common.instructions": "Please, select the specifications to create a template",
+  
+  "ems.ballot.template.designer.newTemplate.title": "Set up general specifications and design ballot areas",
+  "ems.ballot.template.designer.newTemplate.instructions": "Here goes the instruction of this step of the wizard.",
+  "ems.ballot.template.designer.newTemplate.canvas.title": "PREVIEW",
+
+  "ems.ballot.template.designer.header.title": "HEADER TEMPLATE DESIGN",
+  "ems.ballot.template.designer.header.controls.title": "HEADER CONTROLS",
+  "ems.ballot.template.designer.header.canvas.title": "DESIGN AREA - HEADER",
+  
+  "ems.ballot.template.designer.footer.title": "FOOTER TEMPLATE DESIGN",
+  "ems.ballot.template.designer.footer.controls.title": "FOOTER CONTROLS",
+  "ems.ballot.template.designer.footer.canvas.title": "DESIGN AREA - FOOTER",
+  
+  "ems.ballot.template.designer.instructions.title": "SPECIAL INSTRUCTIONS TEMPLATE DESIGN",
+  "ems.ballot.template.designer.instructions.controls.title": "INSTRUCTION CONTROLS",
+  "ems.ballot.template.designer.instructions.canvas.title": "DESIGN AREA - SPECIAL INSTRUCTIONS",
+  
+  "ems.ballot.template.designer.contest.title": "CONTEST TEMPLATE DESIGN",
+  "ems.ballot.template.designer.contest.canvas.title": "CONTEST TEMPLATE",
+  
+  "ems.ballot.template.designer.pageNavigation.title": "PAGE NAVIGATION TEMPLATE DESIGN",
+  "ems.ballot.template.designer.pageNavigation.canvas.title": "PAGE NAVIGATION TEMPLATE",
+  
+  "ems.ballot.template.manager.button.cancel": "Cancel",
+  "ems.ballot.template.manager.button.saveBallotTemplate": "Save template",
+  
+  "ems.ballot.template.manager.save.dialog.title": "SAVE HEADER TEMPLATE",
+  "ems.ballot.template.manager.save.dialog.instructions": "Type a name and description for your template.",
+  "ems.ballot.template.manager.save.dialog.description.placeholder": "Type description",
+  "ems.ballot.template.manager.save.dialog.button.cancel": "Cancel",
+  "ems.ballot.template.manager.save.dialog.button.save": "Save",
+  
+  "ballot.wizard.start.title": "DESIGNING A NEW TEMPLATE",
+  "ballot.wizard.start.text": "Follow the steps below to design a new template",
+  
+  "ballot.wizard.general.short.title": "SET UP GENERAL SPECIFICATIONS\nAND DESIGN BALLOT AREAS",
+  "ballot.wizard.data.short.title": "REVIEW LANGUAGE GROUP TEMPLATES",
+  "ballot.wizard.review.short.title": "SAVE TEMPLATE",
+  
+  "ballot.wizard.general.title": "Set up general specifications and design ballot areas",
+  "ballot.wizard.data.title": "Review language groups template",
+  "ballot.wizard.review.title": "Save your template",
+  
+  "ballot.wizard.finish.title": "Template saved",
+  "ballot.wizard.finish.text": "The template '{{templateName}}' has been saved successfully",
+  "ballot.wizard.finish.button": "OK",
+  
+  "ballot.wizard.save.error": "Error saving the ballot template.",
+  "ballot.wizard.save.error.missing.name": "Please enter a name for the ballot style.",
+  
+  "btm.ballot-area-editor.tools-section.title": "HEADER PROPERTIES",
+  "btm.ballot-area-editor.tools-section.information": "To edit the ballot properties, select the property in the template display and apply the desired styles to the text",
+  
+  "FINAL": "FINAL"
+}
+

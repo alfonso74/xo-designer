@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="14px" viewBox="0 0 19 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 12</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Ballot-layout-generation-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="19.BL-Gen.3.3" transform="translate(-33.000000, -436.000000)">
+            <g id="Group-12" transform="translate(33.000000, 436.000000)">
+                <path d="M14,9.375 L14,0.625 C14,0.2796875 13.4767391,5.33210628e-15 12.833309,5.33210628e-15 L5.25010938,5.33210628e-15 C5.14264976,5.33210628e-15 1.16669097,0 1.16669097,0 C0.508183387,0 -2.24892829e-15,0.277554065 3.73534537e-13,0.597882143 C3.73534537e-13,0.597882143 1.33226763e-14,2.75056681 1.33226763e-14,2.8125 L1.33226763e-14,9.375 C1.33226763e-14,9.7203125 0.523260901,10 1.16669097,10 L12.833309,10 C13.4767391,10 14,9.7203125 14,9.375 Z" id="82" fill="#4A4A4A"></path>
+                <polygon id="82-path" fill="#E9EAEB" points="13 9 12.9997 1 1 1 1 9"></polygon>
+                <path d="M7,4 L12,4" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <path d="M7,6 L12,6" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <rect id="Rectangle-5" fill="#4A4A4A" x="2" y="3" width="3" height="4"></rect>
+                <g id="portrait" transform="translate(2.000000, 2.000000)" fill="#4A4A4A">
+                    <path d="M14,9.375 L14,0.625 C14,0.2796875 13.4767391,5.33210628e-15 12.833309,5.33210628e-15 L5.25010938,5.33210628e-15 C5.14264976,5.33210628e-15 1.16669097,0 1.16669097,0 C0.508183387,0 -2.24892829e-15,0.277554065 3.73534537e-13,0.597882143 C3.73534537e-13,0.597882143 1.33226763e-14,2.75056681 1.33226763e-14,2.8125 L1.33226763e-14,9.375 C1.33226763e-14,9.7203125 0.523260901,10 1.16669097,10 L12.833309,10 C13.4767391,10 14,9.7203125 14,9.375 Z" id="82"></path>
+                </g>
+                <polygon id="82-path" fill="#E9EAEB" points="15 11 14.9997 3 3 3 3 11"></polygon>
+                <path d="M9,6 L14,6" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <path d="M9,8 L14,8" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <rect id="Rectangle-5" fill="#4A4A4A" x="4" y="5" width="3" height="4"></rect>
+                <path d="M19,13.375 L19,4.625 C19,4.2796875 18.4767391,4 17.833309,4 L10.2501094,4 C10.1426498,4 6.16669097,4 6.16669097,4 C5.50818339,4 5,4.27755406 5,4.59788214 C5,4.59788214 5,6.75056681 5,6.8125 L5,13.375 C5,13.7203125 5.5232609,14 6.16669097,14 L17.833309,14 C18.4767391,14 19,13.7203125 19,13.375 Z" id="82" fill="#4A4A4A"></path>
+                <polygon id="82-path" fill="#E9EAEB" points="18 13 17.9997 5 6 5 6 13"></polygon>
+                <path d="M12,8 L17,8" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <path d="M12,10 L17,10" id="Line-3" stroke="#4A4A4A" stroke-linecap="square"></path>
+                <rect id="Rectangle-5" fill="#4A4A4A" x="7" y="7" width="3" height="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

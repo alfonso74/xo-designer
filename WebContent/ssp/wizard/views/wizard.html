@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="wizard-header text-right" data-ng-if="cancel">
+            <button data-ng-click="cancel()" class="btn-cancel text-uppercase">
+                X
+            </button>
+        </div>
+        <div class="form-group row wizard-header text-right" data-ng-if="activeStep.displayHeader">
+            <div class="col-xs-6">
+                <div class="ssp-wizard-float-left">
+                    <ul class="ssp-wizard-ul">
+                        <li class="ssp-wizard-li-page">
+                            <span class="li-text">{{activeStep.index + indexOffset}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-left">
+                    <h4><strong>{{ activeStep.title | translate}}</strong></h4>
+                </div>
+            </div>
+            <div class="col-xs-6 text-right">
+                <ul class="ssp-wizard-ul">
+                    <li class="ssp-wizard-li" data-ng-repeat="step in steps" data-ng-if="step.displayStepOnHeader" data-ng-class="{'ssp-wizard-li-active' : step.stage == 'active', 'ssp-wizard-li-done' : step.stage == 'done', 'ssp-wizard-li-to-do' : step.stage == 'to-do'}">
+                        <span class="li-text" data-ng-if="step.stage == 'active' || step.stage == 'to-do'">{{step.index + indexOffset}}</span>
+                        <span data-ng-if="step.stage == 'done'">&nbsp;</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12" id="form-views">
+                <ui-view></ui-view>
+            </div>
+        </div>
+        <div data-ng-if="!hideDefaultButtons">
+            <div class="form-group row" data-ng-if="!activeStep.onlyCenterButton">
+                <div class="col-xs-12 text-right">
+                    <button ng-click="previous()" class="btn smtt-btn-default wizard-btn" data-ng-show="!loadingStep" data-ng-if="activeStep.prevText != null">
+                        <span class="text-uppercase">{{ activeStep.prevText | translate }}</span>
+                    </button>
+                    <button data-ng-disabled="loadingStep || (activeStep.disableNextBtn != null && activeStep.disableNextBtn())" data-ng-show="!loadingStep" data-ng-click="next()" class="btn btn-primary wizard-btn" data-ng-if="activeStep.nextText != null">
+                        <span class="text-uppercase">{{ activeStep.nextText | translate }}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row start-btn" data-ng-if="activeStep.onlyCenterButton">
+                <div class="col-xs-4 col-xs-offset-4 text-center">
+                    <button data-ng-click="next()" data-ng-disabled="loadingStep" class="btn btn-primary wizard-btn text-uppercase" translate="ssp.start"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div
+    id="delete-ballot-style-dialog"
+    data-ng-controller="DeleteBallotStyleController as vm"
+    ng-init="vm.init(apiAdapter)"
+>
+    <div class="row">
+        <div class="col-xs-12 text-right">
+            <a
+                class="close-popover"
+                data-ng-click="vm.cancel()"
+                data-ng-disabled="vm.isDeleting()"
+            >
+                X
+            </a>
+        </div>
+    </div>
+    <p>
+        {{ "district.messages.delete.district.confirm" | translate }}
+    </p>
+    <div style="text-align:center;">
+        <button
+            class="btn btn-default smtt-btn-default btn-sm with-inner-padding"
+            style="margin-right:20px"
+            data-ng-click="vm.cancel()"
+            data-ng-disabled="vm.isDeleting()"
+        >
+            {{ "ssp.delete-confirmation-dialog.noButton" | translate }}
+        </button>
+        <button
+            class="btn btn-sm with-inner-padding btn-primary"
+            data-ng-click="vm.ok()"
+            data-ng-disabled="vm.isDeleting()"
+        >
+            {{ "ssp.delete-confirmation-dialog.yesButton" | translate }}
+        </button>
+    </div>
+</div>

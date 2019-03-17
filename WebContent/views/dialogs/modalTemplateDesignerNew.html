@@ -1,0 +1,220 @@
+<div class="modal-header">
+    <p class="h6"><span>Design {{vm.currentView}}</span></p>
+    <h10 class="modal-title">To design the {{vm.currentView}} area of the ballot, select the items that you want to include (images, texts, variables) and click on Save</h10>
+</div>
+
+<style>
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
+    border-top: none;
+    background-color: #ffffff;
+}
+
+canvas {
+    border: inherit;
+}
+
+.template-designer-modal .modal-lg {
+    height: calc(100%);
+    width: 1150px;
+}
+.list-group-item {
+    padding: 3px 5px;
+}
+
+</style>
+
+<div class="modal-body row" id="modal-template-designer">
+
+    <div id="canvasPanel" class="col-xs-8" style="padding-left: 50px;">
+        <div id="canvas-title" class="row">
+            <small class="ballot-design-gen-preview-header" style="margin-bottom: 0px; margin-left: 10px; display: block;"
+                translate="{{'ems.ballot.template.designer.' + vm.currentView + '.canvas.title'}}">HEADER TEMPLATE
+            </small>
+            
+        </div>
+
+        <div id="canvas-section" class="row" ondrop="vmScope.drop(event)" ondragover="vmScope.allowDrop(event)">
+            <canvas class="fabric-canvas" fabric="fabric" name="canvasY" ng-style="{'border': '1px solid ' + vm.designerData.canvas.borderColor}"></canvas>
+        </div>
+    </div>
+    
+    <div id="right-panel" class="col-xs-4">
+    <!-- 
+        <small style="margin-bottom: 10px; display: block;"
+            translate="ems.ballot.template.designer.common.specifications">SELECT SPECIFICATIONS
+        </small>
+         -->
+        <div id="left-panel-title" class="ballot-design-gen-sidebar-header row col-xs-12" style="padding-top: 20px;">
+            <span class="h25">{{'ems.ballot.template.designer.' + vm.currentView + '.controls.title' | translate}}</span>
+            <ssp-contextual-box mode="{{vm.infoBox.mode}}">
+                <span translate="{{vm.infoBox.message}}"></span>
+            </ssp-contextual-box>
+        </div>
+        
+        <div id="right-panel-controls" class="row col-xs-12">
+            <form>
+                <div class="form-group text-right">
+                    <button type="button" class="btn btn-sm ssp-top-action-bar-button" 
+                        ng-click="vm.drawElement(vm.templateManager.genericElements[1])">
+                        <span style="padding: 5px 10px;">
+                          <a class="ssp-icon ssp-sm-icon ssp-add-icon-png"></a>&nbsp Add Text
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-sm ssp-top-action-bar-button" 
+                        ng-click="vm.drawElement(vm.templateManager.genericElements[0])">
+                        <span style="padding: 5px 10px;">
+                          <a class="ssp-icon ssp-sm-icon ssp-add-icon-png"></a>&nbsp Add Image
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                
+                    <label>Field controls</label>
+                    <!-- Inicio de toolbar -->
+                    <div id="toolbar-section" style="background-color: #ecedee; padding: 5px">
+                        <div class="btn-toolbar" role="group" style="margin-bottom: 4px">
+                            <div id="text-font" class="btn-group">
+                                <div class="btn-group">
+                                    <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.shape.fontFamily">
+                                    <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="font in vm.fontFamilies track by font.name">
+                                            <a href="" ng-click="vm.shape.fontFamily = font.name">{{font.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="text-size" class="btn-group">
+                                <div class="btn-group">
+                                    <input type="text" class="btn btn-default btn-xs ballot-toolbar" readonly="true" ng-model="vm.shape.fontSize" size="2">
+                                    <button type="button" class="btn btn-default btn-xs ballot-toolbar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="size in vm.fontSizes track by size.value">
+                                            <a href="" ng-click="vm.shape.fontSize = size.value">{{size.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="text-style" class="btn-group">
+                                <button type="button"
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.toggleBold(vm.shape)"
+                                    ng-model="vm.shape.styleBold"
+                                    title="Bold - Ctrl+B">
+                                    <i class="glyphicon glyphicon-bold"></i>
+                                </button>
+                                <button type="button"
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.toggleItalic(vm.shape)"
+                                    ng-model="vm.shape.styleItalic" 
+                                    title="Italic - Ctrl+I">
+                                    <i class="glyphicon glyphicon-italic"></i>
+                                </button>
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.toggleUnderline(vm.shape)" 
+                                    title="Underline - Ctrl+U">
+                                    <i class="fa fa-underline" style="font-size: 10pt"></i>
+                                </button>
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.setTextColor('#textColorSelector')" 
+                                    ng-style="{'color': vm.shape.fill}"
+                                    title="Text color">
+                                    <i class="glyphicon glyphicon-text-color"></i>
+                                </button>
+                                <input type="color" id="textColorSelector" style="display: none" 
+                                    ng-model="vm.shape.fill">
+                                <button class="btn btn-default btn-xs ballot-toolbar disabled" style="display: none" title="Insert image"><i class="glyphicon glyphicon-picture"></i></button>
+                            </div>
+                            <div id="text-alignment" class="btn-group">
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.setTextAlignment(vm.shape, 'left')" 
+                                    title="Align right">
+                                    <i class="glyphicon glyphicon-align-left"></i>
+                                </button>
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.setTextAlignment(vm.shape, 'center')" 
+                                    title="Align center">
+                                    <i class="glyphicon glyphicon-align-center"></i>
+                                </button>
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar" 
+                                    ng-click="vm.setTextAlignment(vm.shape, 'right')"
+                                    title="Align left">
+                                    <i class="glyphicon glyphicon-align-right"></i>
+                                </button>
+                            </div>
+                            <div id="ballot-variables" class="btn-group" style="display:none">
+                                <button type="button" 
+                                class="btn btn-default btn-xs ballot-toolbar" 
+                                ng-click="vm.insertVariable('${election.datex}')" 
+                                title="Insert ballot template variable"><b>{ }</b>
+                                </button>
+                            </div>
+                            <div id="misc-actions" class="btn-group">
+                                <button type="button" 
+                                    class="btn btn-default btn-xs ballot-toolbar"
+                                    ng-click="vm.deleteCanvasObject()" 
+                                    title="Delete canvas object">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  Fin de toolbar -->
+                </div>
+                
+                <div class="form-group">
+                    <label>Variables</label>
+                    <div style="padding-bottom: 20px">
+                        <div id="list"
+                            style="max-height: 85px; overflow-y: scroll">
+                            <button type="button" class="list-group-item"
+                                ng-repeat="element in vm.templateManager.variables track by element.name">
+                                <div class="media" style="margin-top: 5px">
+                                    <h5 class="media-heading" ng-class="{disabled: vm.shape.type !== 'textbox'}">
+                                        <a href=""
+                                            ng-class="{disabled: vm.shape.type !== 'textbox'}"
+                                            ng-click="vm.insertVariable(element.value)">
+                                            {{element.name}} </a>
+                                    </h5>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="language" class="col-sm-3 no-padding" style="padding-top: 10px;">Language:</label>
+                    <div class="col-sm-9 no-padding">  
+                        <select class="form-control" id="language" ng-model="vm.shape.language">
+                            <option ng-repeat="x in vm.languages" value="{{x.code}}">{{x.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                    
+            </form>
+        </div>
+        
+        
+        <div id="select-file-dialog" style="display: none;">
+            <input type="file" id="inputSelectFile" accept=".png, .jpg" custom-on-change="vm.readUrlAsync">
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default smtt-btn-default btn-sm" type="button" ng-click="vm.cancel()">Cancel</button>
+    <button class="btn btn-primary btn-sm" type="button" ng-click="vm.ok()">OK</button>
+</div>
