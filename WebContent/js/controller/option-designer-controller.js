@@ -16,7 +16,7 @@
         
         var usingLocalStorage = true;
         
-        const optionDesignerCustomProperties = ['id', 'subtype'];
+        const optionDesignerCustomProperties = ['stackable', 'subtype', 'customData', 'id'];
         
         const canvasProperties = fabricConstants.canvasDefaults;
         const gridSpacing = canvasProperties.grid.rowSeparation;
