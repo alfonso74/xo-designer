@@ -554,7 +554,8 @@
             } else if (elementType === 'image') {
                 $log.info("Adding image!!!");
                 let options = angular.extend({hasRotatingPoint: false, cornerSize: 6}, data);
-                $scope.fabric.addImage(data.renderOptions.imageUrl, options);
+//                $scope.fabric.addImage(data.imageUrl, options);
+                $scope.fabric.addImageBase64(data.imageUrl, options);
             } else if (elementType === 'mark') {
                 $log.info("Adding ballot option mark!!!");
                 let options = angular.extend({hasRotatingPoint: false, cornerSize: 6, fill: 'rgba(0,0,0,0)',

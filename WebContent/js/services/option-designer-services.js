@@ -256,6 +256,39 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
             },
             {
                 "id"              : n++,
+                "name"            : "Next page",
+                "value"           : "contestTemplate",
+                "src"             : "http://placehold.it/32x32/F7D08A",
+                "renderOptions"   : [
+                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6 - 1, height: gridSpacing * 2 - 1, stackable: true,
+                    	opacity: 1, fill: "#e6f8fd"},
+                    {ctype: 'image', left: gridSpacing * 4 + 9, top: 9, width: 32, height: 32,
+                    	hoverCursor: "not-allowed", hasRotatingPoint: false, hasControls: false, 
+                        name: 'image',
+                        imageUrl: 'images/CircledRight.svg'
+                    },
+                    {ctype: 'textbox', left: 2, top: 10, width: 93, height: 30, fontSize: 12, 
+                        textAlign: 'left', fontFamily: 'Arial', fontWeight: 'bold',
+                        text: 'Continue voting\nnext side'}
+                ],
+                "backgroundColor" : "#F7D08A"
+            },
+            {
+                "id"              : n++,
+                "name"            : "Last page",
+                "value"           : "contestTemplate",
+                "src"             : "http://placehold.it/32x32/F7D08A",
+                "renderOptions"   : [
+                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6, height: gridSpacing * 2 - 1, stackable: true,
+                        opacity: 1, fill: "#e6f8fd"},
+                    {ctype: 'textbox', left: 14, top: 3, width: 126, height: 45, fontSize: 12, 
+                        textAlign: 'left', fontFamily: 'Arial', fontWeight: 'bold',
+                        text: 'Thank you for voting!\nPlease turn in\nyour finished ballot'}
+                ],
+                "backgroundColor" : "#F7D08A"
+            },
+            {
+                "id"              : n++,
                 "name"            : "Contest Header",
                 "value"           : "contestClass",
                 "src"             : "http://placehold.it/32x32/F7D08A",
