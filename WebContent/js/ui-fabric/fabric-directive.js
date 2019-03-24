@@ -49,7 +49,7 @@
                     addWatcherForStringProperty('fontStyle');   // italic
                     addWatcherForStringProperty('textDecoration');  // underline
                     addWatcherForStringProperty('textAlign');   // left, center, right
-//                    addWatcherForObjectProperty('strokeDashArray');
+                	addWatcherForObjectProperty('strokeDashArray');
                 }
                 
                 /**

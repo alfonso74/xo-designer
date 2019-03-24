@@ -17,16 +17,16 @@
      * dependencies. If ng-annotate detects injection has already been made, it will not duplicate it.
      */
 
-    fabric.$inject = [ '$log', '$rootScope', '$timeout', 'fabricWindow', 'fabricCanvas', 'canvasDirtyStatus'];
+fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabricCanvas', 'canvasDirtyStatus'];
 
-    function fabric($log, $rootScope, $timeout, fabricWindow, fabricCanvas, canvasDirtyStatus) {
+	function fabric($log, $rootScope, $timeout, $q, fabricWindow, fabricCanvas, canvasDirtyStatus) {
 
         return function(options) {
 
             var service = this;
             
             var canvasName = options.canvasName;
-            console.log("Initializing canvas with name: " + canvasName);
+        	$log.info("Initializing canvas with name: " + canvasName);
             
             service.grid = {};
             
@@ -35,6 +35,9 @@
             service.getCanvas = getCanvas;
             service.setCanvasSize = setCanvasSize;
             
+        	service.parseFabricObjectsFromJsonObjectAsync = parseFabricObjectsFromJsonObjectAsync;
+        	service.createFabricObjectAsync = createFabricObjectAsync;
+        
             service.cog = {};
             service.showCog = false;
             
@@ -209,9 +212,6 @@
                 contestBorders.push(new fabricWindow.Line(
                         [ left, top + height, left + width, top + height],
                         { stroke: 'rgb(0,0,0)', strokeWidth: 1, selectable: false}));
-//                contestBorders.push(new fabricWindow.Line(
-//                        [ left + width, top, left + width, top + height],
-//                        { stroke: 'rgb(0,0,0)', strokeWidth: 1, selectable: false}));
                 
                 var group = new fabricWindow.Group(contestBorders);
                 group.subtype = "contestBorders";
@@ -252,7 +252,7 @@
             // Image
             // ==============================================================
             service.addImage = function(imageURL, options) {
-                console.log("IMG: " + imageURL);
+                $log.info("IMG: " + imageURL);
                 fabricWindow.Image.fromURL(imageURL, function(object) {
                     object.id = service.createId();
                     service.addObjectToCanvas(object);
@@ -261,7 +261,7 @@
             };
             
             service.addImageBase64 = function(imageURL, options) {
-                console.log("IMG: " + imageURL);
+                $log.info("IMG: " + imageURL);
                 let elementId = service.createId();
                 getDataUri(imageURL, function(dataUri) {
                     $log.info("IMG data URI: " + dataUri);
@@ -274,7 +274,7 @@
             };
             
             service.addCogImage = function(imageURL, options) {
-                console.log("COG IMG: " + imageURL);
+                $log.info("COG IMG: " + imageURL);
                 fabricWindow.Image.fromURL(imageURL, function(object) {
                     object.id = service.createId();
                     service.addObjectToCanvas(object);
@@ -457,7 +457,40 @@
                 return object;
             }
             
+        /**
+         * A Fabric canvas follows the next definition:
+         * '{objects:[arrayWithFabricObjects], background:""}'
+         */
+        function parseFabricObjectsFromJsonObjectAsync(jsonBallotStyleDefinition) {
+            let deferred = $q.defer();
+            if (jsonBallotStyleDefinition.objects) {  // seems to be a fabric canvas with N objects
+                let fabricObjects = jsonBallotStyleDefinition.objects.map(createFabricObjectAsync);
+                $q.all(fabricObjects)
+                .then(function(data) {
+                    return deferred.resolve(data);
+                });
+            }
+            return deferred.promise;
+        }
             
+        function createFabricObjectAsync(jsonObject) {
+            let deferred = $q.defer();
+            let fabricObject = null;
+//            var klass = new fabricWindow.util.getKlass(jsonObject.type);
+            let klass = window.fabric.util.getKlass(jsonObject.type);
+            if (klass.async) {
+                klass.fromObject(jsonObject, function (img) {
+                    fabricObject = img;
+                    deferred.resolve(fabricObject);
+                });
+            } else {
+                fabricObject = klass.fromObject(jsonObject);
+                deferred.resolve(fabricObject);
+            }
+            return deferred.promise;
+        }
+        
+        
             //
             // Active Object
             // ==============================================================
@@ -640,55 +673,34 @@
 //                    });
 //                });
                 
-                /*
-                if (options.json.templateType === 'STATIC') {
-                    service.getCanvas().on('object:moving', function(options) {
-                        keepObjectInsideCanvas(options.target);
-                        $log.info("Top: " + options.target.top + ', height ' + options.target.height);
-                        grayOutAndHighlightOnObjectCollision(options.target, false);
-                    });
-                } else {
-                    service.getCanvas().on('object:moving', function(options) {
-                        keepObjectInsideCanvas(options.target);
-                        $log.info("Top: " + options.target.top + ', height ' + options.target.height);
-                        if (options.target.type != 'text' && options.target.type != 'textbox'  
-                            && options.target.subtype != 'separationLine') {
-                            options.target.set({
-                                left: Math.round(options.target.left / service.grid.space) * service.grid.space,
-                                top: Math.round(options.target.top / service.grid.space) * service.grid.space
-                            });
-                            if (service.showCog) {
-                                var cog = service.getTemplatePropertiesImage();
-                                cog.set({left: options.target.left + options.target.width - cog.width, top: options.target.top, opacity: 0.8});
-                            }
-//                          objectIsInsideBallotOption(options.target);
-                            if (options.target.type === 'group') {
-                                grayOutAndHighlightOnObjectCollision(options.target, true);
-                            }
-                        }
-                    });
+                function getAvailable(object) {
+                	service.getCanvas().forEachObject(function(obj) {
+                		if (obj.selectable) {
+                			if (obj != object) {
+                				$log.info("O: " + obj.type + "s: " + obj.selectable);
+                			}
+                		}
+                	});
                 }
-                */
                 
                 service.getCanvas().on('object:moving', function(options) {
-                    keepObjectInsideCanvas(options.target);
-                    $log.info("Top: " + options.target.top + ', height ' + options.target.height);
+            	let object = options.target;
+            	//getAvailable(object);
+                keepObjectInsideCanvas(object);
+                $log.info("Top: " + object.top + ', height ' + object.height);
                     let usingGridLines = false;
-                    if ((options.target.snapToGrid !== undefined && options.target.snapToGrid) ||
-                        (options.target.snapToGrid === undefined && 
-                        options.target.type != 'text' && options.target.type != 'textbox' &&  
-                        options.target.subtype != 'separationLine')) {
-                            usingGridLines = true;
-                            options.target.set({
-                                left: Math.round(options.target.left / service.grid.space) * service.grid.space,
-                                top: Math.round(options.target.top / service.grid.space) * service.grid.space
+	                if (shouldAdjustToGrid(object)) {
+                        usingGridLines = true;
+                        object.set({
+                            left: Math.round(object.left / service.grid.space) * service.grid.space,
+                            top: Math.round(object.top / service.grid.space) * service.grid.space
                         });
                         if (service.showCog) {
                             var cog = service.getTemplatePropertiesImage();
-                            cog.set({left: options.target.left + options.target.width - cog.width, top: options.target.top, opacity: 0.8});
+    	                    cog.set({left: object.left + object.width - cog.width, top: object.top, opacity: 0.8});
                         }
                     }
-                    grayOutAndHighlightOnObjectCollision(options.target, usingGridLines);
+        	        grayOutAndHighlightOnObjectCollision(object, usingGridLines);
                 });
                 
                 function keepObjectInsideCanvas(obj) {
@@ -698,11 +710,11 @@
                     if (obj.top < 0) {
                         obj.set({top: 0});
                     }
-                    if (obj.left + obj.width > service.grid.width) {
-                        obj.set({left: service.grid.width - obj.width});
+           		    if (obj.left + obj.getWidth() > service.grid.width) {
+                	    obj.set({left: service.grid.width - obj.getWidth()});
                     }
-                    if (obj.top + obj.height > service.grid.height) {
-                        obj.set({top: service.grid.height - obj.height});
+	                if (obj.top + obj.getHeight() > service.grid.height) {
+    	                obj.set({top: service.grid.height - obj.getHeight()});
                     }
                 }
                 
@@ -734,7 +746,7 @@
                     if (hasCollision) {
                         target.set({'borderColor': 'red'});
                     } else {
-//                        delete target.borderColor;
+                    	delete target.borderColor;
                     }
 
                     target.hasCollision = hasCollision;
@@ -759,13 +771,11 @@
                 }
 
                 service.getCanvas().on('object:scaling', function(options) {
-                    if (options.target.type != 'text' && options.target.type != 'textbox') {
-                        options.target.set({
-                            width: Math.round(options.target.getWidth() / service.grid.space) * service.grid.space,
-                            height: Math.round(options.target.getHeight() / service.grid.space) * service.grid.space,
-                            scaleX: 1,
-                            scaleY: 1
-                        });
+            		let object = options.target;
+	            	$log.info("Type: " + object.type + ", width: " + object.getWidth() + 
+    	        		", height: " + object.getHeight() + ", snapToGrid: " + object.snapToGrid);
+        	        if (shouldAdjustToGrid(object))  {
+            	        scaleByGridsize(object);
                     }
                 });
                 
@@ -787,6 +797,23 @@
                     }
                 });
             }
+            
+        	function shouldAdjustToGrid(object) {
+        		return (object.snapToGrid !== undefined && object.snapToGrid) ||
+                	(object.snapToGrid === undefined && 
+                		object.type != 'text' && object.type != 'textbox' && object.type != 'image' &&
+	                	object.subtype != 'separationLine'
+    	        	);
+        	}
+        
+	        function scaleByGridsize(target) {
+    	    	target.set({
+        	        width: Math.round(target.getWidth() / service.grid.space) * service.grid.space,
+            	    height: Math.round(target.getHeight() / service.grid.space) * service.grid.space,
+                	scaleX: 1,
+	                scaleY: 1
+    	        });
+        	}
             
             function enablePropertiesDialog() {
                 service.addCogImage("images/gear24.png", 

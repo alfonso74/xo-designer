@@ -14,29 +14,35 @@
         service.pageSizes = [
             { name: '8.5" x 11"', code: 'LETTER', width: 612, height: 792, dpi: 72, columns: 24, rows: 26},
             { name: '8.5" x 14"', code: 'LEGAL', width: 612, height: 1008, dpi: 72, columns: 24, rows: 36},
-            { name: '8.5" x 17"', code: 'VVSG17', width: 612, height: 1224, dpi: 72, columns: 24, rows: 46},
-            { name: '8.5" x 19"', code: 'VVSG19', width: 612, height: 1368, dpi: 72, columns: 24, rows: 53}
+        { name: '8.5" x 17"', code: 'LEDGER', width: 612, height: 1224, dpi: 72, columns: 24, rows: 46},
+        { name: '8.5" x 19"', code: 'BIG', width: 612, height: 1368, dpi: 72, columns: 24, rows: 53}
         ];
         
+    service.pageOrientation = [
+        { name: 'Portrait', code: 'PORTRAIT'},
+        { name: 'Landscape', code: 'LANDSCAPE'}
+    ]
+
+    service.algorithm = [
+        { name: 'btm.layout-designer.columns', code: 'COLUMNS'},
+        { name: 'btm.layout-designer.rows', code: 'ROWS'}
+    ]
+    
         service.fonts = [
             { name: 'Arial' },
             { name: 'Times New Roman' },
-            { name: 'Helvetica' },
-            { name: 'Courier' },
-            { name: 'Comic Sans MS' },
-            { name: 'Mi fuente CSS' }
+        { name: 'Courier' }
         ];
         
         service.fontSizes = [
-            {id: 1, value: 10},
-            {id: 2, value: 12},
-            {id: 3, value: 14},
-            {id: 4, value: 16},
-            {id: 5, value: 18},
-            {id: 6, value: 20},
-            {id: 7, value: 24},
-            {id: 8, value: 28},
-            {id: 9, value: 36}
+        {id: 1, value: 8},
+        {id: 2, value: 9},
+        {id: 3, value: 10},
+        {id: 4, value: 11},
+        {id: 5, value: 12},
+        {id: 6, value: 14},
+        {id: 7, value: 16},
+        {id: 8, value: 18}
         ];
         
         service.markTypes = [
