@@ -166,7 +166,7 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "renderOptions"   : [
                 	{ctype: 'rect', left: 0, top: 0, width: gridSpacing * 7, height: gridSpacing * 1, fill: '#e3e3e3', stackable: true, subtype: 'header'},
                 	{ctype: 'textbox', left: 2, top: 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contestHeader.text}', 
-                    	customData: {display: 'Contest group header', contentType: 'header'}},
+                    	textAlign: 'center', customData: {display: 'Contest group header', contentType: 'header'}},
                     {ctype: 'rect', left: 0, top: gridSpacing * 1, width: gridSpacing * 7, height: gridSpacing * 1, fill: '#f3f3f3', stackable: true, subtype: 'title'},
                     {ctype: 'textbox', left: 2, top: (gridSpacing * 1) + 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contest.name}', 
                     	customData: {display: 'Contest title', contentType: 'title'}},
@@ -260,14 +260,14 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "value"           : "contestTemplate",
                 "src"             : "http://placehold.it/32x32/F7D08A",
                 "renderOptions"   : [
-                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6 - 1, height: gridSpacing * 2 - 1, stackable: true,
+                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6 - 1, height: gridSpacing * 3 - 1, stackable: true,
                     	opacity: 1, fill: "#e6f8fd"},
-                    {ctype: 'image', left: gridSpacing * 4 + 9, top: 9, width: 32, height: 32,
+                    {ctype: 'image', left: gridSpacing * 4 + 9, top: 22, width: 32, height: 32,
                     	hoverCursor: "not-allowed", hasRotatingPoint: false, hasControls: false, 
                         name: 'image',
                         imageUrl: 'images/CircledRight.svg'
                     },
-                    {ctype: 'textbox', left: 2, top: 10, width: 93, height: 30, fontSize: 12, 
+                    {ctype: 'textbox', left: 4, top: 23, width: 93, height: 30, fontSize: 12, 
                         textAlign: 'left', fontFamily: 'Arial', fontWeight: 'bold',
                         text: 'Continue voting\nnext side'}
                 ],
@@ -279,9 +279,9 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "value"           : "contestTemplate",
                 "src"             : "http://placehold.it/32x32/F7D08A",
                 "renderOptions"   : [
-                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6, height: gridSpacing * 2 - 1, stackable: true,
+                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 6 - 1, height: gridSpacing * 3 - 1, stackable: true,
                         opacity: 1, fill: "#e6f8fd"},
-                    {ctype: 'textbox', left: 14, top: 3, width: 126, height: 45, fontSize: 12, 
+                    {ctype: 'textbox', left: 14, top: 15, width: 126, height: 45, fontSize: 12, 
                         textAlign: 'left', fontFamily: 'Arial', fontWeight: 'bold',
                         text: 'Thank you for voting!\nPlease turn in\nyour finished ballot'}
                 ],

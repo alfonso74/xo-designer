@@ -186,6 +186,25 @@
             <div id="sidebar-right-container"
                 class="col-md-3 col-md-offset-9 sidebar-right">
                 <div>
+                	<div id="container-properties"
+                        ng-show="main.shape.type === 'image'">
+                        <!-- 
+                        <div ng-include="'app/main/templates/format-diagram.html'"></div>
+                         -->
+                        <form name="containerPropertiesForm"
+                            class="col-md-9">
+                            <h4>Container Properties</h4>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-default" 
+                                        ng-click="main.toggleSnapToGrid()" 
+                                        ng-model="main.shape.snapToGrid"
+                                        uib-btn-checkbox>Snap to grid</button>
+                            </div>
+                            STG: {{main.shape.snapToGrid}}
+                        </form>
+
+                    </div>
+                    
                     <div id="container-properties"
                         ng-show="main.shape.type === 'rect' && main.shape.subtype !== 'mark'">
                         <!-- 
