@@ -258,6 +258,34 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
             },
             {
                 "id"              : n++,
+                "name"            : "Issue template R",
+                "value"           : "contestTemplate",
+                "src"             : "http://placehold.it/32x32/F7D08A",
+                "renderOptions"   : [
+                    {ctype: 'rect', left: 0, top: 0, width: gridSpacing * 8, height: gridSpacing * 1, fill: "#f8f8f8", subtype: 'title'},
+                    {ctype: 'textbox', left: 2, top: 4, width: gridSpacing * 8 - 4, fontSize: 12, fontWeight: 'bold', 
+                        text: '${contest.name.EN}', customData: {display: 'Contest title', contentType: 'title'}},
+                    {ctype: 'rect', left: 0, top: gridSpacing * 1, width: gridSpacing * 8, height: gridSpacing * 1, 
+                        fill: "#ecf5ff", subtype: 'instructions'},
+                    {ctype: 'textbox', left: 2, top: (gridSpacing * 1) + 5, width: gridSpacing * 8 - 4, fontSize: 12, fontWeight: 'bold', 
+                        text: 'Vote yes or no', customData: {display: 'Template instructions', contentType: 'instructions'}},
+                    {ctype: 'rect', left: 0, top: gridSpacing * 2, width: gridSpacing * 8, height: gridSpacing * 1,
+                        fill: "#ffffff", subtype: 'contents'},
+                    {ctype: 'textbox', left: 2, top: (gridSpacing * 2) + 5, width: gridSpacing * 8 - 4, fontSize: 12,  
+                        text: '${contest.contestAbstract.EN}', customData: {display: 'Template contents', contentType: 'contents'}},
+                    {ctype: 'rect', left: 0, top: gridSpacing * 3, width: gridSpacing * 8, height: gridSpacing * 1, 
+                        fill: "#ffffff", subtype: "ballotOption"},
+                    {ctype: 'mark', left: 0, top: gridSpacing * 3, width: gridSpacing, height: gridSpacing, subtype: "mark", markStyle: "Circle"},
+                    {ctype: 'textbox', left: (gridSpacing * 1) + 2, top: gridSpacing * 3 + 4, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', 
+                        text: '${nomination.name.EN}', customData: {display: 'Candidate name', contentType: 'candidate'}},
+                    {ctype: 'separationLine', left: gridSpacing, top: gridSpacing * 4 - 5, width: gridSpacing * 7 - 1, 
+                        stroke: "rgb(0,0,0)", strokeWidth:1, subtype: "separationLine"}
+                ],
+                "backgroundColor" : "#F7D08A"
+                
+            },
+            {
+                "id"              : n++,
                 "name"            : "Next page",
                 "value"           : "contestTemplate",
                 "src"             : "http://placehold.it/32x32/F7D08A",
