@@ -26,7 +26,7 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
             var service = this;
             
             var canvasName = options.canvasName;
-        	$log.info("Initializing canvas with name: " + canvasName);
+            $log.info("Initializing canvas with name: " + canvasName);
             
             service.grid = {};
             
@@ -673,34 +673,57 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
 //                    });
 //                });
                 
-                function getAvailable(object) {
+                function grabHorizontalSpace(object) {
+                	let canvasWidth = 600;
+                	let leftLimitObject = {top: 0, left: 0, width: 0, height: 0};
+                	let rightLimitObject = {top: 0, left: canvasWidth, width: 0, height: 0};
                 	service.getCanvas().forEachObject(function(obj) {
                 		if (obj.selectable) {
                 			if (obj != object) {
-                				$log.info("O: " + obj.type + "s: " + obj.selectable);
+                				$log.info("Type: " + obj.type + ", selectable: " + obj.selectable);
+                				// locate an object to the left of the user selection
+                				if ((obj.top + obj.getHeight() > object.top && 
+                						obj.top + obj.getHeight() < object.top + object.getHeight()) ||
+                					(obj.top > object.top && 
+                						obj.top < object.top + object.getHeight()) ||
+                					(obj.top < object.top &&
+                						obj.top + obj.getHeight() > object.top + object.getHeight())
+                					) {
+                					if (obj.left < object.left) {
+                						leftLimitObject = obj;
+                					}
+                					if (obj.left > object.left) {
+                						rightLimitObject = obj;
+                					}
+                				}
                 			}
                 		}
                 	});
+                	$log.info("LBO: " + leftLimitObject.left + " vs " + object.left);
+                	object.left = leftLimitObject.left + leftLimitObject.width;
+                	object.width = rightLimitObject.left - object.left;
                 }
                 
                 service.getCanvas().on('object:moving', function(options) {
-            	let object = options.target;
-            	//getAvailable(object);
-                keepObjectInsideCanvas(object);
-                $log.info("Top: " + object.top + ', height ' + object.height);
+                	let object = options.target;
+                	if (object.type === 'textbox' && object.grabHorizontalSpace) {
+                		grabHorizontalSpace(object);
+                	}
+                    keepObjectInsideCanvas(object);
+                    $log.info("Top: " + object.top + ', height ' + object.height);
                     let usingGridLines = false;
-	                if (shouldAdjustToGrid(object)) {
-                        usingGridLines = true;
-                        object.set({
-                            left: Math.round(object.left / service.grid.space) * service.grid.space,
-                            top: Math.round(object.top / service.grid.space) * service.grid.space
+                    if (shouldAdjustToGrid(object)) {
+                            usingGridLines = true;
+                            object.set({
+                                left: Math.round(object.left / service.grid.space) * service.grid.space,
+                                top: Math.round(object.top / service.grid.space) * service.grid.space
                         });
                         if (service.showCog) {
                             var cog = service.getTemplatePropertiesImage();
-    	                    cog.set({left: object.left + object.width - cog.width, top: object.top, opacity: 0.8});
+                            cog.set({left: object.left + object.width - cog.width, top: object.top, opacity: 0.8});
                         }
                     }
-        	        grayOutAndHighlightOnObjectCollision(object, usingGridLines);
+                    grayOutAndHighlightOnObjectCollision(object, usingGridLines);
                 });
                 
                 function keepObjectInsideCanvas(obj) {
@@ -710,8 +733,8 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
                     if (obj.top < 0) {
                         obj.set({top: 0});
                     }
-           		    if (obj.left + obj.getWidth() > service.grid.width) {
-                	    obj.set({left: service.grid.width - obj.getWidth()});
+                if (obj.left + obj.getWidth() > service.grid.width) {
+                    obj.set({left: service.grid.width - obj.getWidth()});
                     }
 	                if (obj.top + obj.getHeight() > service.grid.height) {
     	                obj.set({top: service.grid.height - obj.getHeight()});
@@ -746,7 +769,7 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
                     if (hasCollision) {
                         target.set({'borderColor': 'red'});
                     } else {
-                    	delete target.borderColor;
+//                        delete target.borderColor;
                     }
 
                     target.hasCollision = hasCollision;
@@ -771,11 +794,11 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
                 }
 
                 service.getCanvas().on('object:scaling', function(options) {
-            		let object = options.target;
-	            	$log.info("Type: " + object.type + ", width: " + object.getWidth() + 
-    	        		", height: " + object.getHeight() + ", snapToGrid: " + object.snapToGrid);
-        	        if (shouldAdjustToGrid(object))  {
-            	        scaleByGridsize(object);
+                	let object = options.target;
+                	$log.info("Type: " + object.type + ", width: " + object.getWidth() + 
+            			", height: " + object.getHeight() + ", snapToGrid: " + object.snapToGrid);
+                    if (shouldAdjustToGrid(object)) {
+                        scaleByGridsize(object);
                     }
                 });
                 
@@ -798,22 +821,22 @@ fabric.$inject = [ '$log', '$rootScope', '$timeout', '$q', 'fabricWindow', 'fabr
                 });
             }
             
-        	function shouldAdjustToGrid(object) {
-        		return (object.snapToGrid !== undefined && object.snapToGrid) ||
-                	(object.snapToGrid === undefined && 
-                		object.type != 'text' && object.type != 'textbox' && object.type != 'image' &&
+            function shouldAdjustToGrid(object) {
+	        	return (object.snapToGrid !== undefined && object.snapToGrid) ||
+	                (object.snapToGrid === undefined && 
+                	object.type != 'text' && object.type != 'textbox' && object.type != 'image' &&
 	                	object.subtype != 'separationLine'
-    	        	);
-        	}
-        
+	            	);
+	        }
+	        
 	        function scaleByGridsize(target) {
-    	    	target.set({
-        	        width: Math.round(target.getWidth() / service.grid.space) * service.grid.space,
-            	    height: Math.round(target.getHeight() / service.grid.space) * service.grid.space,
-                	scaleX: 1,
+	        	target.set({
+	                width: Math.round(target.getWidth() / service.grid.space) * service.grid.space,
+	                height: Math.round(target.getHeight() / service.grid.space) * service.grid.space,
+	                scaleX: 1,
 	                scaleY: 1
-    	        });
-        	}
+	            });
+	        }
             
             function enablePropertiesDialog() {
                 service.addCogImage("images/gear24.png", 

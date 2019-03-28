@@ -165,10 +165,10 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "src"             : "http://placehold.it/32x32/F7D08A",
                 "renderOptions"   : [
                 	{ctype: 'rect', left: 0, top: 0, width: gridSpacing * 7, height: gridSpacing * 1, fill: '#e3e3e3', stackable: true, subtype: 'header'},
-                	{ctype: 'textbox', left: 2, top: 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contestHeader.text}', 
+                	{ctype: 'textbox', left: 2, top: 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contestHeader.text.EN}', 
                     	textAlign: 'center', customData: {display: 'Contest group header', contentType: 'header'}},
                     {ctype: 'rect', left: 0, top: gridSpacing * 1, width: gridSpacing * 7, height: gridSpacing * 1, fill: '#f3f3f3', stackable: true, subtype: 'title'},
-                    {ctype: 'textbox', left: 2, top: (gridSpacing * 1) + 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contest.name}', 
+                    {ctype: 'textbox', left: 2, top: (gridSpacing * 1) + 5, width: gridSpacing * 7 - 4, fontSize: 12, fontWeight: 'bold', text: '${contest.name.EN}', 
                     	customData: {display: 'Contest title', contentType: 'title'}},
                     {ctype: 'rect', left: 0, top: gridSpacing * 2, width: gridSpacing * 7, height: gridSpacing * 1, 
                         fill: "#d9ecff", stackable: true, subtype: 'instructions'},
@@ -183,12 +183,14 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                     	fontSize: 12, fontWeight: 'bold', text: '${nomination.ballotName}',
                     	customData: {display: 'Candidate name', contentType: 'candidate'}},
                     {ctype: 'textbox', left: (gridSpacing * 1) + 2, top: gridSpacing * 4, width: gridSpacing * 6 - 4, 
-                		fontSize: 12, text: '${party.name}',
+                		fontSize: 12, text: '${party.name.EN}',
                     	customData: {display: 'Party name', contentType: 'party'}},
                     {ctype: 'separationLine', left: gridSpacing, top: gridSpacing * 5 - 5, width: gridSpacing * 6 - 1, 
                         stroke: "rgb(0,0,0)", strokeWidth:1, subtype: "separationLine"},
                     {ctype: 'mark', left: 0, top: gridSpacing * 5, width: gridSpacing, height: gridSpacing, subtype: "mark", markStyle: "Oval"},
-                    {ctype: 'text', left: (gridSpacing * 1) + 2, top: gridSpacing * 5 + 5, fontSize: 12, fontWeight: 'bold', text: 'or write-in'},
+                    {ctype: 'textbox', left: (gridSpacing * 1) + 2, top: gridSpacing * 5 + 5, width: gridSpacing * 6 - 4, 
+                		fontSize: 12, fontWeight: 'bold', text: '${writeIn.name.EN}',
+                    	customData: {display: 'Write-in text', contentType: 'writeIn'}},
                     {ctype: 'separationLine', left: gridSpacing, top: gridSpacing * 7 - 5, width: gridSpacing * 6 - 1, 
                         stroke: "rgb(0,0,0)", strokeWidth:1, subtype: "separationLine"}
                 ],
@@ -302,7 +304,7 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "value"           : "ballotOption",
                 "src"             : "http://placehold.it/32x32/87B6A7",
                 "renderOptions"   : {left: 0, top: gridSpacing * 1, width: gridSpacing * 6, height: gridSpacing * 2, 
-                                    fill: "#87B6A7", subtype: "ballotOption"},
+                                    fill: "#87B6A7", subtype: "ballotOption", stackable: true},
                 "backgroundColor" : "#87B6A7"
             },
             {
@@ -311,7 +313,7 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "value"           : "writeIn",
                 "src"             : "http://placehold.it/32x32/87B6A7",
                 "renderOptions"   : {left: 0, top: gridSpacing * 3, width: gridSpacing * 6, height: gridSpacing * 2, 
-                                    fill: "#87B6A7", subtype: "writeIn"},
+                                    fill: "#87B6A7", subtype: "writeIn", stackable: true},
                 "backgroundColor" : "#87B6A7"
             }
             ];
@@ -327,7 +329,7 @@ angular.module('optionDesigner').service('optionDesignerService', ['$http', func
                 "value"           : "${nomination.name}",
                 "type"            : "textbox",
                 "src"             : "images/txt32.png",
-                "renderOptions"   : {fontSize: 12},
+                "renderOptions"   : {fontSize: 12, grabHorizontalSpace: true},
                 "backgroundColor" : "#E3F09B"
             },
             {
